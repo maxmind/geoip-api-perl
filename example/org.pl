@@ -4,7 +4,11 @@ use Test;
 
 use Geo::IP;
 
-my $gi = Geo::IP->open("/usr/local/share/GeoIP/GeoIPOrg.dat", GEOIP_STANDARD);
+# here we are using GeoIP ISP
+my $gi = Geo::IP->open("/usr/local/share/GeoIP/GeoIPISP.dat", GEOIP_STANDARD);
+
+# uncomment for GeoIP Organization
+#my $gi = Geo::IP->open("/usr/local/share/GeoIP/GeoIPOrg.dat", GEOIP_STANDARD);
 
 while (<DATA>) {
   chomp;
