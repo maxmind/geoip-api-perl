@@ -36,6 +36,24 @@ open(CLASS,filename,flags = 0)
     OUTPUT:
 	RETVAL
 
+int
+id_by_addr(gi, addr)
+	GeoIP *gi
+	char * addr
+    CODE:
+	RETVAL = GeoIP_id_by_addr(gi,addr);
+    OUTPUT:
+	RETVAL
+
+int
+id_by_name(gi, name)
+	GeoIP *gi
+	char * name
+    CODE:
+	RETVAL = GeoIP_id_by_name(gi,name);
+    OUTPUT:
+	RETVAL
+
 char *
 country_code_by_addr(gi, addr)
 	GeoIP *gi
