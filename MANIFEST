@@ -1,0 +1,12 @@
+Changes
+IP.xs
+lib/Geo/IP.pm
+lib/Geo/Mirror.pm
+Makefile.PL
+MANIFEST
+README
+t/0_base.t
+t/1_lookup.t
+t/2_namelookup.t
+t/3_mirror.t
+t/cpan_mirror.txt
