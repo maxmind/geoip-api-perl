@@ -14,7 +14,6 @@ while (<DATA>) {
 
 __DATA__
 12.10.1.4
-0.0.0.0
 66.108.94.158
 yahoo.com
 amazon.com
