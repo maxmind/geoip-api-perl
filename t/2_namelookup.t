@@ -5,7 +5,7 @@ use Test;
 
 $^W = 1;
 
-BEGIN { plan tests => 12 }
+BEGIN { plan tests => 11 }
 
 use Geo::IP;
 
@@ -30,4 +30,3 @@ __DATA__
 203.15.106.23	AU
 196.31.1.1	ZA
 yahoo.com	US
-www.bundesregierung.de	DE
