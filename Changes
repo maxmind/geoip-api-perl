@@ -1,5 +1,7 @@
 Revision history for Perl extension Geo::IP.
 
+	- Added example/netspeed.pl to MANIFEST
+
 1.24  November 30th 2004
 	- Fixed memory leak in ISP/Organization database lookups
 		by adding O_CHAR to typemap
