@@ -8,7 +8,7 @@ require DynaLoader;
 require Exporter;
 @ISA = qw(DynaLoader Exporter);
 
-$VERSION = '1.15';
+$VERSION = '1.20';
 
 bootstrap Geo::IP $VERSION;
 
@@ -59,7 +59,9 @@ well as many paid databases. It uses ARIN, RIPE, APNIC, and LACNIC whois to
 obtain the IP->Country mappings.
 
 If you require greater accuracy, MaxMind offers a Premium database on a paid 
-subscription basis. 
+subscription basis.  Also included with this is a service that updates your
+database automatically each month, by running a program called geoipupdate
+included with the C API from a cronjob.
 
 =head1 CLASS METHODS
 
@@ -124,7 +126,7 @@ http://sourceforge.net/projects/geoip/
 
 =head1 VERSION
 
-1.15
+1.20
 
 =head1 SEE ALSO
 
@@ -132,7 +134,7 @@ Geo::IP::Record
 
 =head1 AUTHOR
 
-Copyright (c) 2002, MaxMind.com
+Copyright (c) 2003, MaxMind LLC
 
 All rights reserved.  This package is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
