@@ -1,6 +1,9 @@
 Revision history for Perl extension Geo::IP.
 
-1.14
+1.15  March 4th 2003
+	- Added support for GeoIP Organization and ISP databases
+
+1.14  February 19th 2003
 	- Added support for GeoIP Region Edition
 
 1.13  December 24th 2002

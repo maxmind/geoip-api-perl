@@ -90,6 +90,24 @@ country_name_by_name(gi, name)
     OUTPUT:
 	RETVAL
 
+char *
+org_by_addr(gi, addr)
+	GeoIP *gi
+	char * addr
+    CODE:
+	RETVAL = GeoIP_org_by_addr(gi,addr);
+    OUTPUT:
+	RETVAL
+
+char *
+org_by_name(gi, name)
+	GeoIP *gi
+	char * name
+    CODE:
+	RETVAL = GeoIP_org_by_name(gi,name);
+    OUTPUT:
+	RETVAL
+
 void
 region_by_addr(gi, addr)
 	GeoIP *gi
