@@ -8,7 +8,7 @@ require DynaLoader;
 require Exporter;
 @ISA = qw(DynaLoader Exporter);
 
-$VERSION = '1.21';
+$VERSION = '1.22';
 
 bootstrap Geo::IP $VERSION;
 
@@ -16,7 +16,13 @@ sub GEOIP_STANDARD(){0;}
 sub GEOIP_MEMORY_CACHE(){1;}
 sub GEOIP_CHECK_CACHE(){2;}
 
-@EXPORT = qw( GEOIP_STANDARD GEOIP_MEMORY_CACHE GEOIP_CHECK_CACHE );
+sub GEOIP_UNKNOWN_SPEED(){0;}
+sub GEOIP_DIALUP_SPEED(){1;}
+sub GEOIP_CABLEDSL_SPEED(){2;}
+sub GEOIP_CORPORATE_SPEED(){3;}
+
+@EXPORT = qw( GEOIP_STANDARD GEOIP_MEMORY_CACHE GEOIP_CHECK_CACHE
+	GEOIP_UNKNOWN_SPEED GEOIP_DIALUP_SPEED GEOIP_CABLEDSL_SPEED GEOIP_CORPORATE_SPEED );
 
 1;
 __END__
@@ -136,7 +142,7 @@ http://sourceforge.net/projects/geoip/
 
 =head1 VERSION
 
-1.21
+1.22
 
 =head1 SEE ALSO
 
@@ -144,7 +150,7 @@ Geo::IP::Record
 
 =head1 AUTHOR
 
-Copyright (c) 2003, MaxMind LLC
+Copyright (c) 2004, MaxMind LLC
 
 All rights reserved.  This package is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
