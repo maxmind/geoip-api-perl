@@ -7,7 +7,7 @@ require DynaLoader;
 require Exporter;
 @ISA = qw(DynaLoader Exporter);
 
-$VERSION = '0.26';
+$VERSION = '1.10';
 
 bootstrap Geo::IP $VERSION;
 
