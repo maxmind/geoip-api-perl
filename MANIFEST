@@ -4,9 +4,11 @@ example/city.pl
 lib/Geo/IP.pm
 lib/Geo/Mirror.pm
 lib/Geo/IP/Record.pod
+INSTALL
 Makefile.PL
 MANIFEST
 README
+typemap
 t/0_base.t
 t/1_lookup.t
 t/2_namelookup.t
