@@ -1,4 +1,9 @@
 Revision history for Perl extension Geo::IP.
+
+1.24  November 30th 2004
+	- Fixed memory leak in ISP/Organization database lookups
+		by adding O_CHAR to typemap
+
 1.23  October 6th 2004
 	- Updated test case, removed www.bundesregierung.de
 	- Geo::Mirror: fallback to using Geo::IP::PurePerl if Geo::IP is not available
