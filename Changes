@@ -1,8 +1,11 @@
 Revision history for Perl extension Geo::IP.
 
+1.11  November 22nd 2002
+	- Forget to include typemap and INSTALL in MANIFEST
+
 1.10  November 22nd 2002
-	- Added support for GeoIP Full Edition
-	- Added more documentaion on where to get databases,
+	- Added support for GeoIP City Edition
+	- Added more documentation on where to get databases,
 	and sourceforge.
 
 0.26  July 25th 2002
