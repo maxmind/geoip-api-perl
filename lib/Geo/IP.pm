@@ -47,9 +47,18 @@ to analyze your web server logs
 to determine the countries of your visiters, for credit card fraud
 detection, and for software export controls.
 
-To find a country for an IP address, this module a Network
-that contains the IP address, then returns the country the Network is
-assigned to.
+=head1 IP ADDRESS TO COUNTRY DATABASES
+
+Free monthly updates to the database are available from 
+
+  http://www.maxmind.com/download/geoip/database/
+
+This free database is similar to the database contained in IP::Country, as 
+well as many paid databases. It uses ARIN, RIPE, APNIC, and LACNIC whois to 
+obtain the IP->Country mappings.
+
+If you require greater accuracy, MaxMind offers a Premium database on a paid 
+subscription basis. 
 
 =head1 CLASS METHODS
 
@@ -97,11 +106,28 @@ Returns the full country name for an IP address.
 
 Returns the full country name for a hostname.
 
+=item $name = $gi->record_by_addr( $ipaddr );
+
+Returns a Geo::IP::Record object containing city location for an IP address.
+
+=item $name = $gi->record_by_name( $ipname );
+
+Returns a Geo::IP::Record object containing city location for a hostname.
+
 =back
+
+=head1 MAILING LISTS AND CVS
+
+Are available from SourceForge, see
+http://sourceforge.net/projects/geoip/
 
 =head1 VERSION
 
-0.26
+1.10
+
+=head1 SEE ALSO
+
+Geo::IP::Record
 
 =head1 AUTHOR
 

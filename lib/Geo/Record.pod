@@ -1,0 +1,69 @@
+=head1 NAME
+
+  Geo::IP::Record - Contains city information for GeoIP City Edition
+
+=head1 SYNOPSIS
+
+  use Geo::IP;
+
+  my $gi = Geo::IP->open("/usr/local/share/GeoIP/GeoIPCity.dat", GEOIP_STANDARD);
+
+  my $record = $gi->record_by_addr('65.15.30.247');
+
+  print $record->country_code,
+	$record->country_code3,
+	$record->country_name,
+	$record->region,
+	$record->city,
+	$record->latitude,
+	$record->longitude;
+
+=head1 DESCRIPTION
+
+Geo::IP::Record represents objects containing location information
+returned by the GeoIP City database.
+
+=head1 OBJECT METHODS
+
+=over 4
+
+=item $code = $record->country_code;
+
+Returns the ISO 3166 country code from the location object.
+
+=item $code = $record->country_code3;
+
+Returns the ISO 3166 3 letter country code from the location object.
+
+=item $code = $record->country_name;
+
+Returns the country name from the location object.
+
+=item $code = $record->region;
+
+Returns the region from the location object.
+
+=item $code = $record->city;
+
+Returns the city from the location object.
+
+=item $code = $record->latitude;
+
+Returns the latitude from the location object.
+
+=item $code = $record->longitude;
+
+Returns the longitude from the location object.
+
+=head1 VERSION
+
+1.10
+
+=head1 AUTHOR
+
+Copyright (c) 2002, MaxMind.com
+
+All rights reserved.  This package is free software; you can redistribute it
+and/or modify it under the same terms as Perl itself.
+
+=cut
