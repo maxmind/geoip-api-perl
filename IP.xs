@@ -228,6 +228,22 @@ _longitude(gir)
     OUTPUT:
 	RETVAL
 
+int
+dma_code(gir)
+	GeoIPRecord *gir
+    CODE:
+	RETVAL = gir->dma_code;
+    OUTPUT:
+	RETVAL
+
+int
+area_code(gir)
+	GeoIPRecord *gir
+    CODE:
+	RETVAL = gir->area_code;
+    OUTPUT:
+	RETVAL
+
 void
 DESTROY(gir)
 	GeoIPRecord *gir
