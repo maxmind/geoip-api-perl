@@ -1,7 +1,5 @@
 #!/usr/bin/perl
 
-use Test;
-
 use Geo::IP;
 
 # here we are using GeoIP ISP
@@ -22,3 +20,4 @@ __DATA__
 yahoo.com
 amazon.com
 4.2.144.64
+24.24.24.24
