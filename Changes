@@ -1,5 +1,8 @@
 Revision history for Perl extension Geo::IP.
 
+1.13  December 24th 2002
+	- Added float to typemap, required to compile for Perl < 5.8
+
 1.12  December 11th 2002
 	- Added support for postal codes
 	- Removed non-portable asprintf code
