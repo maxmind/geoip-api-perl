@@ -54,6 +54,16 @@ id_by_name(gi, name)
     OUTPUT:
 	RETVAL
 
+char *
+GeoIP_database_info (gi);
+	GeoIP *gi
+    PREINIT:
+	int i = 0;  
+    CODE:
+	RETVAL = GeoIP_database_info(gi);
+    OUTPUT:
+	RETVAL
+
 const char *
 country_code_by_addr(gi, addr)
 	GeoIP *gi

@@ -65,10 +65,12 @@ This free database is similar to the database contained in IP::Country, as
 well as many paid databases. It uses ARIN, RIPE, APNIC, and LACNIC whois to 
 obtain the IP->Country mappings.
 
-If you require greater accuracy, MaxMind offers a Premium database on a paid 
+If you require greater accuracy, MaxMind offers a database on a paid 
 subscription basis.  Also included with this is a service that updates your
 database automatically each month, by running a program called geoipupdate
-included with the C API from a cronjob.
+included with the C API from a cronjob.  For more details on the differences
+between the free and paid databases, see:
+http://www.maxmind.com/app/geoip_country
 
 =head1 CLASS METHODS
 
@@ -131,7 +133,11 @@ Returns the Organization or ISP name for an IP address.
 
 =item $org = $gi->org_by_name( $hostname );
 
-Returns the Organization or ISP name for an IP address.
+Returns the Organization or ISP name for a hostname.
+
+=item $info = $gi->database_info;
+
+Returns database string, includes version, date, build number and copyright notice.
 
 =back
 
