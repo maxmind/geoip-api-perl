@@ -121,6 +121,35 @@ sub _calculate_distance {
 
 1;
 
+=head1 NAME
+
+Geo::Mirror - Find closest Mirror
+
+=head1 SYNOPSIS
+
+  use Geo::Mirror;
+
+  my $gm = Geo::Mirror->new(mirror_file => '/path/to/mirrors.txt');
+
+  my $mirror = $gm->closest_mirror_by_country('us');
+  my $mirror = $gm->closest_mirror_by_addr('65.15.30.247');
+
+=head1 DESCRIPTION
+
+This module finds the closest mirror for an IP address.  It uses L<Geo::IP>
+to identify the country that the IP address originated from.  If
+the country is not represented in the mirror list, then it finds the
+closest country using a latitude/longitude table.
+
+=head1 AUTHOR
+
+Copyright (c) 2002, T.J. Mather, tjmather@tjmather.com, New York, NY, USA
+
+All rights reserved.  This package is free software; you can redistribute it
+and/or modify it under the same terms as Perl itself.
+
+=cut
+
 __DATA__
 af:33:65
 al:41:20
@@ -354,33 +383,3 @@ yu:44:21
 zm:-15:30
 zw:-20:30
 tw:23:121
-__END__
-
-=head1 NAME
-
-Geo::Mirror - Find closest Mirror
-
-=head1 SYNOPSIS
-
-  use Geo::Mirror;
-
-  my $gm = Geo::Mirror->new(mirror_file => '/path/to/mirrors.txt');
-
-  my $mirror = $gm->closest_mirror_by_country('us');
-  my $mirror = $gm->closest_mirror_by_addr('65.15.30.247');
-
-=head1 DESCRIPTION
-
-This module finds the closest mirror for an IP address.  It uses L<Geo::IP>
-to identify the country that the IP address originated from.  If
-the country is not represented in the mirror list, then it finds the
-closest country using a latitude/longitude table.
-
-=head1 AUTHOR
-
-Copyright (c) 2002, T.J. Mather, tjmather@tjmather.com, New York, NY, USA
-
-All rights reserved.  This package is free software; you can redistribute it
-and/or modify it under the same terms as Perl itself.
-
-=cut
