@@ -15,7 +15,7 @@ is more accurate, and contains information on anonymous proxies, and satellite
 providers.  For more information see:
 http://www.maxmind.com/app/country
 
-Copyright (c) 2003, MaxMind LLC
+Copyright (c) 2004, MaxMind LLC
 
 All rights reserved.  This package is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.

@@ -1,5 +1,6 @@
 Revision history for Perl extension Geo::IP.
 
+1.22  July 29th 2004
 	- Added support for Netspeed
 	- Fixed IP address in examples
 
