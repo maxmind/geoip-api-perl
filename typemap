@@ -1,4 +1,6 @@
 TYPEMAP
+char *		O_CHAR
+const char *	T_PV
 GeoIP *		O_OBJECT
 GeoIPRecord *   O_OBJECT
 float		T_FLOAT
@@ -12,9 +14,26 @@ O_OBJECT
             XSRETURN_UNDEF;
     }
 
+# this is just here because a O_CHAR input is required to compile,
+# should be same as if O_CHAR wasn't defined
+O_CHAR
+    if( SvOK($arg) )
+       $var = (char *) SvPV($arg, PL_na);
+    else {
+       $var = NULL;
+    }
+
 OUTPUT
 
 # The Perl object is blessed into 'CLASS', which should be a
 # char* having the name of the package for the blessing.
 O_OBJECT
         sv_setref_pv( $arg, (char *)CLASS, (void*)$var );
+
+# prevent memory leaks with malloc'ed returned char * strings
+O_CHAR
+    if($var != NULL) {
+        $arg = newSVpv($var, strlen($var));
+        free($var);
+        sv_2mortal($arg);
+    }
