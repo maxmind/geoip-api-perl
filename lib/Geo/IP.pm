@@ -8,7 +8,7 @@ require DynaLoader;
 require Exporter;
 @ISA = qw(DynaLoader Exporter);
 
-$VERSION = '1.20';
+$VERSION = '1.21';
 
 bootstrap Geo::IP $VERSION;
 
@@ -31,9 +31,9 @@ Geo::IP - Look up country by IP Address
 
   my $gi = Geo::IP->new(GEOIP_STANDARD);
 
-  # look up IP address '65.15.30.247'
+  # look up IP address '24.24.24.24'
   # returns undef if country is unallocated, or not defined in our database
-  my $country = $gi->country_code_by_addr('65.15.30.247');
+  my $country = $gi->country_code_by_addr('24.24.24.24');
   $country = $gi->country_code_by_name('yahoo.com');
   # $country is equal to "US"
 
@@ -128,7 +128,7 @@ http://sourceforge.net/projects/geoip/
 
 =head1 VERSION
 
-1.20
+1.21
 
 =head1 SEE ALSO
 
