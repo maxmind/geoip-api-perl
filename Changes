@@ -1,6 +1,8 @@
 Revision history for Perl extension Geo::IP.
 
-1.20
+	- Added support for GEOIP_CHECK_CACHE
+
+1.20  June 6th 2003
 	- Added support for GeoIP City Format Rev 1, DMA Codes and area codes
 
 1.15  March 4th 2003

@@ -14,8 +14,9 @@ bootstrap Geo::IP $VERSION;
 
 sub GEOIP_STANDARD(){0;}
 sub GEOIP_MEMORY_CACHE(){1;}
+sub GEOIP_CHECK_CACHE(){2;}
 
-@EXPORT = qw( GEOIP_STANDARD GEOIP_MEMORY_CACHE );
+@EXPORT = qw( GEOIP_STANDARD GEOIP_MEMORY_CACHE GEOIP_CHECK_CACHE );
 
 1;
 __END__
@@ -73,7 +74,8 @@ Constructs a new Geo::IP object with the default database located inside your sy
 I<datadir>, typically I</usr/local/share/GeoIP/GeoIP.dat>.
 
 Flags can be set to either GEOIP_STANDARD, or for faster performance
-(at a cost of using more memory), GEOIP_MEMORY_CACHE.
+(at a cost of using more memory), GEOIP_MEMORY_CACHE.  When using memory
+cache you can force a reload if the file is updated by setting GEOIP_CHECK_CACHE.
 
 =item $gi = Geo::IP->open( $database_filename, $flags );
 
