@@ -1,5 +1,8 @@
 Revision history for Perl extension Geo::IP.
 
+1.14
+	- Added support for GeoIP Region Edition
+
 1.13  December 24th 2002
 	- Added float to typemap, required to compile for Perl < 5.8
 
