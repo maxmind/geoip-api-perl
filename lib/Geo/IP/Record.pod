@@ -24,6 +24,13 @@
 Geo::IP::Record represents objects containing location information
 returned by the GeoIP City database.
 
+Note at this time only a commercial version - GeoIP City Premium - is available
+from MaxMind.  The database that is distributed free of charge 
+is the GeoIP Standard Country, and is not compatible with this API.
+
+At some point in the future, we may offer a free version - GeoIP City Standard -
+based only on public data sources such as RIR Whois databases.
+
 =head1 OBJECT METHODS
 
 =over 4
