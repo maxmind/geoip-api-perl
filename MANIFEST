@@ -1,7 +1,9 @@
 Changes
 IP.xs
+example/city.pl
 lib/Geo/IP.pm
 lib/Geo/Mirror.pm
+lib/Geo/IP/Record.pod
 Makefile.PL
 MANIFEST
 README
