@@ -1,5 +1,6 @@
 Revision history for Perl extension Geo::IP.
 
+	- Added database_info method (Frank Mather)
 	- Added example/netspeed.pl to MANIFEST
 
 1.24  November 30th 2004
