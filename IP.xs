@@ -54,57 +54,57 @@ id_by_name(gi, name)
     OUTPUT:
 	RETVAL
 
-char *
+const char *
 country_code_by_addr(gi, addr)
 	GeoIP *gi
 	char * addr
     CODE:
-	RETVAL = (char *)GeoIP_country_code_by_addr(gi,addr);
+	RETVAL = GeoIP_country_code_by_addr(gi,addr);
     OUTPUT:
 	RETVAL
 
-char *
+const char *
 country_code_by_name(gi, name)
 	GeoIP *gi
 	char * name
     CODE:
-	RETVAL = (char *)GeoIP_country_code_by_name(gi,name);
+	RETVAL = GeoIP_country_code_by_name(gi,name);
     OUTPUT:
 	RETVAL
 
-char *
+const char *
 country_code3_by_addr(gi, addr)
 	GeoIP *gi
 	char * addr
     CODE:
-	RETVAL = (char *)GeoIP_country_code3_by_addr(gi,addr);
+	RETVAL = GeoIP_country_code3_by_addr(gi,addr);
     OUTPUT:
 	RETVAL
 
-char *
+const char *
 country_code3_by_name(gi, name)
 	GeoIP *gi
 	char * name
     CODE:
-	RETVAL = (char *)GeoIP_country_code3_by_name(gi,name);
+	RETVAL = GeoIP_country_code3_by_name(gi,name);
     OUTPUT:
 	RETVAL
 
-char *
+const char *
 country_name_by_addr(gi, addr)
 	GeoIP *gi
 	char * addr
     CODE:
-	RETVAL = (char *)GeoIP_country_name_by_addr(gi,addr);
+	RETVAL = GeoIP_country_name_by_addr(gi,addr);
     OUTPUT:
 	RETVAL
 
-char *
+const char *
 country_name_by_name(gi, name)
 	GeoIP *gi
 	char * name
     CODE:
-	RETVAL = (char *)GeoIP_country_name_by_name(gi,name);
+	RETVAL = GeoIP_country_name_by_name(gi,name);
     OUTPUT:
 	RETVAL
 
@@ -182,51 +182,51 @@ DESTROY(gi)
 
 MODULE = Geo::IP        PACKAGE = Geo::IP::Record
 
-char *
+const char *
 country_code(gir)
 	GeoIPRecord *gir
     CODE:
-	RETVAL = gir->country_code;
+	RETVAL = (const char *)gir->country_code;
     OUTPUT:
 	RETVAL
 
-char *
+const char *
 country_code3(gir)
 	GeoIPRecord *gir
     CODE:
-	RETVAL = gir->country_code3;
+	RETVAL = (const char *)gir->country_code3;
     OUTPUT:
 	RETVAL
 
-char *
+const char *
 country_name(gir)
 	GeoIPRecord *gir
     CODE:
-	RETVAL = gir->country_name;
+	RETVAL = (const char *)gir->country_name;
     OUTPUT:
 	RETVAL
 
-char *
+const char *
 region(gir)
 	GeoIPRecord *gir
     CODE:
-	RETVAL = gir->region;
+	RETVAL = (const char *)gir->region;
     OUTPUT:
 	RETVAL
 
-char *
+const char *
 city(gir)
 	GeoIPRecord *gir
     CODE:
-	RETVAL = gir->city;
+	RETVAL = (const char *)gir->city;
     OUTPUT:
 	RETVAL
 
-char *
+const char *
 postal_code(gir)
 	GeoIPRecord *gir
     CODE:
-	RETVAL = gir->postal_code;
+	RETVAL = (const char *)gir->postal_code;
     OUTPUT:
 	RETVAL
 
