@@ -138,8 +138,8 @@ Geo::Mirror - Find closest Mirror
 
   my $gm = Geo::Mirror->new(mirror_file => '/path/to/mirrors.txt');
 
-  my $mirror = $gm->closest_mirror_by_country('us');
-  my $mirror = $gm->closest_mirror_by_addr('24.24.24.24');
+  my $mirror = $gm->closest_mirror_by_country('us', $freshness);       # $freshness optional, see description below
+  my $mirror = $gm->closest_mirror_by_addr('24.24.24.24', $freshness); # $freshness optional, see description below
 
 =head1 DESCRIPTION
 
@@ -147,6 +147,10 @@ This module finds the closest mirror for an IP address.  It uses L<Geo::IP>
 to identify the country that the IP address originated from.  If
 the country is not represented in the mirror list, then it finds the
 closest country using a latitude/longitude table.
+
+The mirror file should be a space separate list of URL, Country, and mirror freshness.
+The mirror freshness is optional and can be used by user
+request a mirror with a minimum freshness.
 
 =head1 AUTHOR
 
