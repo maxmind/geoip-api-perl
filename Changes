@@ -1,5 +1,8 @@
 Revision history for Perl extension Geo::IP.
 
+	- Fixed IP address in examples
+
+1.21  July 28th 2003
 	- Added support for GEOIP_CHECK_CACHE
 
 1.20  June 6th 2003

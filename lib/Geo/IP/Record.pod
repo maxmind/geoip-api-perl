@@ -8,7 +8,7 @@
 
   my $gi = Geo::IP->open("/usr/local/share/GeoIP/GeoIPCity.dat", GEOIP_STANDARD);
 
-  my $record = $gi->record_by_addr('65.15.30.247');
+  my $record = $gi->record_by_addr('24.24.24.24');
 
   print $record->country_code,
 	$record->country_code3,

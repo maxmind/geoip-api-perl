@@ -132,7 +132,7 @@ Geo::Mirror - Find closest Mirror
   my $gm = Geo::Mirror->new(mirror_file => '/path/to/mirrors.txt');
 
   my $mirror = $gm->closest_mirror_by_country('us');
-  my $mirror = $gm->closest_mirror_by_addr('65.15.30.247');
+  my $mirror = $gm->closest_mirror_by_addr('24.24.24.24');
 
 =head1 DESCRIPTION
 
