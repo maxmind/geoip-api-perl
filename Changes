@@ -1,0 +1,84 @@
+Revision history for Perl extension Geo::IP.
+
+1.06
+	- Added support for GeoIP Full Edition
+
+0.26  July 25th 2002
+      Geo::IP
+	- Made flags optional to new and open
+	- Removed www.moinfo.gov.kw from test, domain no longer resolves.
+
+0.20  June 25th 2002
+      Geo::IP
+	- Brought up to date with latest changes for GeoIP C 0.2.0
+
+0.11  April 27th 2002
+      Geo::IP
+	- install process works for non-standard GeoIP C library installs
+
+0.10  April 21st 2002
+      Geo::IP
+	- Fixed DESTROY (Brian Grossman)
+      Geo::Mirror
+	- Set PI to more accurate value (Mike Mitchell)
+
+0.09  April 8th 2002
+      Geo::Mirror
+	- Fixed bug when no database file specified.
+	- Fixed bug in t/3_mirror.t test script
+
+0.08  April 7th 2002
+      Geo::IP
+	- This perl module is now a XS wrapper around the GeoIP C library
+	  for improved performance.  Note that the API has changed.
+	- Removed the geoip-lookup script, since GeoIP C contains a
+	  geoiplookup executable that provides the same functionality
+
+0.07  April 1st 2002
+      Geo::IP
+	- Removed dependency on Berkeley DB - requires new
+	Geo-IP data format.
+
+0.06  February 19th 2002
+
+      Geo::IP
+	- Added new method, lookup_country_by_name,
+	    performs DNS lookup of IP address for hostnames
+	- added O_RDWR option to tie DB_File for
+	    compatibility (Allen Smith)
+	- makes directory '/usr/local/geoip' (Philip Mak)
+	- added binmode for compatibility (Randy Kobes)
+
+      Geo::Mirror
+	- Mirror when doesn't find country, default to US
+	- Special handing for "EU" (European Union)
+	    treat as country with coordinates between
+	    Germany and Italy.
+
+0.05  February 15th 2002
+	- Added new option to Geo::Mirror->new, database_file
+	- Fixed test problem with t/3_mirror.t
+	- Added error handling to Makefile.PL for database download
+
+0.04  February 15th 2002
+	- Added new module, Geo::Mirror
+	- Added new default file location for database in /usr/local/geoip/Geo-IP.db
+	- Installation easier, Makefile.PL downloads and extracts database file
+	- Added geolookup script
+	- Removed old Net::Geography wrapper
+
+0.03  July 28th 2001
+	- Geo::IP now generates Berkeley DB file from
+		data file, to get around differing versions
+		of Berkeley DB.
+	- now croaks if db file can not be opened (Nick Craig-Wood)
+
+0.02  July 11th 2001
+	- renamed to Geo::IP from Net::Geography
+	- revised docs
+	- data separated from perl distribution, can
+		be downloaded from http://geo-ip.com
+
+0.01  June 30th 2001
+	- original version; created by h2xs 1.19
+
