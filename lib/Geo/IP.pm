@@ -3,6 +3,7 @@ package Geo::IP;
 use strict;
 use vars qw(@ISA $VERSION @EXPORT);
 
+require Geo::IP::Record;
 require DynaLoader;
 require Exporter;
 @ISA = qw(DynaLoader Exporter);
