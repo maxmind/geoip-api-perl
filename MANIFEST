@@ -1,6 +1,7 @@
 Changes
 IP.xs
 example/city.pl
+example/netspeed.pl
 example/region.pl
 example/org.pl
 lib/Geo/IP.pm
@@ -17,3 +18,4 @@ t/1_lookup.t
 t/2_namelookup.t
 t/3_mirror.t
 t/cpan_mirror.txt
+META.yml                                 Module meta-data (added by MakeMaker)
