@@ -161,6 +161,14 @@ city(gir)
 	RETVAL
 
 char *
+postal_code(gir)
+	GeoIPRecord *gir
+    CODE:
+	RETVAL = gir->postal_code;
+    OUTPUT:
+	RETVAL
+
+char *
 latitude(gir)
 	GeoIPRecord *gir
     PREINIT:
