@@ -91,7 +91,7 @@ Constructs a new Geo::IP object with the database located at C<$database_filenam
 
 Returns the ISO 3166 country code for an IP address.
 
-=item $code = $gi->country_code_by_name( $ipname );
+=item $code = $gi->country_code_by_name( $hostname );
 
 Returns the ISO 3166 country code for a hostname.
 
@@ -99,7 +99,7 @@ Returns the ISO 3166 country code for a hostname.
 
 Returns the 3 letter country code for an IP address.
 
-=item $code = $gi->country_code3_by_name( $ipname );
+=item $code = $gi->country_code3_by_name( $hostname );
 
 Returns the 3 letter country code for a hostname.
 
@@ -107,17 +107,25 @@ Returns the 3 letter country code for a hostname.
 
 Returns the full country name for an IP address.
 
-=item $name = $gi->country_name_by_name( $ipname );
+=item $name = $gi->country_name_by_name( $hostname );
 
 Returns the full country name for a hostname.
 
-=item $name = $gi->record_by_addr( $ipaddr );
+=item $r = $gi->record_by_addr( $ipaddr );
 
 Returns a Geo::IP::Record object containing city location for an IP address.
 
-=item $name = $gi->record_by_name( $ipname );
+=item $r = $gi->record_by_name( $hostname );
 
 Returns a Geo::IP::Record object containing city location for a hostname.
+
+=item $org = $gi->org_by_addr( $ipaddr );
+
+Returns the Organization or ISP name for an IP address.
+
+=item $org = $gi->org_by_name( $hostname );
+
+Returns the Organization or ISP name for an IP address.
 
 =back
 
