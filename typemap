@@ -1,6 +1,7 @@
 TYPEMAP
 GeoIP *		O_OBJECT
 GeoIPRecord *   O_OBJECT
+float		T_FLOAT
 
 INPUT
 O_OBJECT
