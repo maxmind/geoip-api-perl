@@ -15,6 +15,7 @@
 	$record->country_name,
 	$record->region,
 	$record->city,
+	$record->postal_code,
 	$record->latitude,
 	$record->longitude;
 
@@ -31,33 +32,37 @@ returned by the GeoIP City database.
 
 Returns the ISO 3166 country code from the location object.
 
-=item $code = $record->country_code3;
+=item $code3 = $record->country_code3;
 
 Returns the ISO 3166 3 letter country code from the location object.
 
-=item $code = $record->country_name;
+=item $name = $record->country_name;
 
 Returns the country name from the location object.
 
-=item $code = $record->region;
+=item $region = $record->region;
 
 Returns the region from the location object.
 
-=item $code = $record->city;
+=item $city = $record->city;
 
 Returns the city from the location object.
 
-=item $code = $record->latitude;
+=item $postal_code = $record->postal_code;
+
+Returns the postal code from the location object.
+
+=item $lat = $record->latitude;
 
 Returns the latitude from the location object.
 
-=item $code = $record->longitude;
+=item $lon = $record->longitude;
 
 Returns the longitude from the location object.
 
 =head1 VERSION
 
-1.10
+1.12
 
 =head1 AUTHOR
 
