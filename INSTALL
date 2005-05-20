@@ -1,5 +1,5 @@
 To install the GeoIP C library, go to
-  http://maxmind.com/geoip/api/c.shtml
+  http://www.maxmind.com/app/c
 
 Note that Geo::IP 1.13 requires GeoIP C 1.1.2 or higher
 
