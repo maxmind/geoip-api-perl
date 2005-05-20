@@ -144,10 +144,12 @@ region_by_addr(gi, addr)
 	GeoIPRegion * gir;
     PPCODE:
 	gir = GeoIP_region_by_addr(gi,addr);
-	EXTEND(SP,2);
-	PUSHs( sv_2mortal( newSVpv(gir->country_code, 2) ) );
-	PUSHs( sv_2mortal( newSVpv(gir->region, 2) ) );
-	GeoIPRegion_delete(gir);
+        if (gir){
+	  EXTEND(SP,2);
+ 	  PUSHs( sv_2mortal( newSVpv(gir->country_code, 2) ) );
+	  PUSHs( sv_2mortal( newSVpv(gir->region, 2) ) );
+	  GeoIPRegion_delete(gir);
+        }
 
 void
 region_by_name(gi, name)
@@ -157,10 +159,12 @@ region_by_name(gi, name)
 	GeoIPRegion * gir;
     PPCODE:
 	gir = GeoIP_region_by_name(gi,name);
-	EXTEND(SP,2);
-	PUSHs( sv_2mortal( newSVpv(gir->country_code, 2) ) );
-	PUSHs( sv_2mortal( newSVpv(gir->region, 2) ) );
-	GeoIPRegion_delete(gir);
+        if (gir){
+	  EXTEND(SP,2);
+	  PUSHs( sv_2mortal( newSVpv(gir->country_code, 2) ) );
+	  PUSHs( sv_2mortal( newSVpv(gir->region, 2) ) );
+	  GeoIPRegion_delete(gir);
+        }
 
 GeoIPRecord *
 record_by_addr(gi, addr)
