@@ -28,9 +28,9 @@ unless ($config{LIBS}) {
     die <<'GeoIP_Not_Installed;';
 
 GeoIP must be installed prior to building Geo::IP and I can't find
-it in the standard library directories. You can download GeoIP from:
+it in the standard library directories. You can download GeoIP C API from:
 
-http://maxmind.com/geoip/api/c.shtml
+http://www.maxmind.com/app/c
 
 If GeoIP is installed, but in a non-standard directory, then use the
 following options to Makefile.PL:
