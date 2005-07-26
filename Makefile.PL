@@ -41,6 +41,10 @@ Note that if you build against a shareable library in a non-standard location
 you may (on some platforms) also have to set your LD_LIBRARY_PATH environment
 variable at run time for perl to find the library.
 
+If you installed the GeoIP C libraries to the /usr/local/lib directory,
+then you may need to add /usr/local/lib to /etc/ld.so.conf then run
+/sbin/ldconfig /etc/ld.so.conf
+
 GeoIP_Not_Installed;
   }
 }
