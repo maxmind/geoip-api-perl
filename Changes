@@ -1,5 +1,7 @@
 Revision history for Perl extension Geo::IP.
 
+	- Added support for open_type (Frank Mather)
+
 1.26  May 19th 2005
 	- Fixed segfault issue if non-resolvable domain name is
 	  passed to region_by_addr or region_by_name
