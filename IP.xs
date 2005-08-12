@@ -27,6 +27,16 @@ new(CLASS,flags = 0)
 	RETVAL
 
 GeoIP *
+open_type(CLASS,type,flags = 0)
+	char * CLASS
+	int type
+	int flags
+    CODE:
+	RETVAL = GeoIP_open_type(type,flags);
+    OUTPUT:
+	RETVAL
+
+GeoIP *
 open(CLASS,filename,flags = 0)
 	char * CLASS
 	char * filename
