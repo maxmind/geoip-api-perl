@@ -65,7 +65,7 @@ id_by_name(gi, name)
 	RETVAL
 
 char *
-GeoIP_database_info (gi);
+GeoIP_database_info (gi)
 	GeoIP *gi
     PREINIT:
 	int i = 0;  
