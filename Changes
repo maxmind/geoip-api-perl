@@ -1,5 +1,7 @@
 Revision history for Perl extension Geo::IP.
 
+	- Fixed compilation error in Perl 5.005 with semicolon
+		in GeoIP_database_info in IP.xs		
 	- Added support for open_type (Frank Mather)
 
 1.26  May 19th 2005
