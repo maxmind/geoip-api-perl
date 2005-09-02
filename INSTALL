@@ -9,3 +9,7 @@ To install the Perl XS wrapper, run
   make
   make test
   make install
+
+(If you get a "libGeoIP.so.1: cannot open shared object  No such file or
+directory" error, add /usr/local/lib to /etc/ld.so.conf then run
+/sbin/ldconfig /etc/ld.so.conf     )
