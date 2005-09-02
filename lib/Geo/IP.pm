@@ -1,16 +1,17 @@
 package Geo::IP;
 
 use strict;
-use vars qw(@ISA $VERSION @EXPORT);
+use base qw(DynaLoader Exporter);
+use vars qw($VERSION @EXPORT);
+
+
+BEGIN {
+       $VERSION = '1.26';
+       bootstrap Geo::IP $VERSION;
+}
 
 require Geo::IP::Record;
-require DynaLoader;
-require Exporter;
-@ISA = qw(DynaLoader Exporter);
 
-$VERSION = '1.26';
-
-bootstrap Geo::IP $VERSION;
 
 sub GEOIP_STANDARD(){0;}
 sub GEOIP_MEMORY_CACHE(){1;}
