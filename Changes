@@ -1,5 +1,6 @@
 Revision history for Perl extension Geo::IP.
 
+1.27  September 8th 2005
 	- Fixed Autoloader/open issue (Alexander Vasiljev)
 	- Fixed compilation error in Perl 5.005 with semicolon
 		in GeoIP_database_info in IP.xs	(Stephen Schulte)
