@@ -6,7 +6,7 @@ use vars qw($VERSION @EXPORT);
 
 
 BEGIN {
-       $VERSION = '1.26';
+       $VERSION = '1.27';
        bootstrap Geo::IP $VERSION;
 }
 
@@ -106,6 +106,16 @@ cache you can force a reload if the file is updated by setting GEOIP_CHECK_CACHE
 
 Constructs a new Geo::IP object with the database located at C<$database_filename>.
 
+=item $gi = Geo::IP->open_type( $database_type, $flags );
+
+Constructs a new Geo::IP object with the $database_type database located in the standard
+location.  For example
+
+  $gi = Geo::IP->open_type( GEOIP_CITY_EDITION_REV1 , GEOIP_STANDARD );
+
+opens the database file in the standard location for GeoIP City, typically
+I</usr/local/share/GeoIP/GeoIPCity.dat>.
+
 =back
 
 =head1 OBJECT METHODS
@@ -165,7 +175,7 @@ http://sourceforge.net/projects/geoip/
 
 =head1 VERSION
 
-1.25
+1.27
 
 =head1 SEE ALSO
 
@@ -173,7 +183,7 @@ Geo::IP::Record
 
 =head1 AUTHOR
 
-Copyright (c) 2004, MaxMind LLC
+Copyright (c) 2005, MaxMind LLC
 
 All rights reserved.  This package is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
