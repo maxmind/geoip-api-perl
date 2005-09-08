@@ -173,6 +173,9 @@ Returns database string, includes version, date, build number and copyright noti
 Are available from SourceForge, see
 http://sourceforge.net/projects/geoip/
 
+The direct link to the mailing is
+http://lists.sourceforge.net/lists/listinfo/geoip-perl
+
 =head1 VERSION
 
 1.27
