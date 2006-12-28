@@ -10,7 +10,7 @@ while (<DATA>) {
   chomp;
   my $r = $gi->record_by_name($_);
   if ($r) {
-    print join("\t",$r->country_code,$r->country_name,$r->city,$r->region,$r->postal_code,$r->latitude,$r->longitude,
+    print join("\t",$r->country_code,$r->country_name,$r->city,$r->region,$r->region_name,$r->postal_code,$r->latitude,$r->longitude,
 	$r->dma_code,$r->area_code) . "\n";
   } else {
     print "UNDEF\n";
@@ -25,3 +25,4 @@ yahoo.com
 amazon.com
 4.2.144.64
 24.24.24.24
+80.24.24.24

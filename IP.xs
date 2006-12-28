@@ -237,6 +237,14 @@ region(gir)
 	RETVAL
 
 const char *
+region_name(gir)
+	GeoIPRecord *gir
+    CODE:
+	RETVAL = (const char *) GeoIP_region_name_by_code(gir->country_code, gir->region);
+    OUTPUT:
+	RETVAL
+
+const char *
 city(gir)
 	GeoIPRecord *gir
     CODE:
