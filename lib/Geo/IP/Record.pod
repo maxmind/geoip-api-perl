@@ -14,6 +14,7 @@
 	$record->country_code3,
 	$record->country_name,
 	$record->region,
+	$record->region_name,
 	$record->city,
 	$record->postal_code,
 	$record->latitude,
@@ -51,7 +52,11 @@ Returns the country name from the location object.
 
 =item $region = $record->region;
 
-Returns the region from the location object.
+Returns the region code from the location object.
+
+=item $region = $record->region_name;
+
+Returns the region name from the location object.
 
 =item $city = $record->city;
 
@@ -83,7 +88,7 @@ Returns the area code from the location object (for city-level US locations only
 
 =head1 AUTHOR
 
-Copyright (c) 2003, MaxMind LLC
+Copyright (c) 2006, MaxMind LLC
 
 All rights reserved.  This package is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.

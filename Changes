@@ -1,5 +1,6 @@
 Revision history for Perl extension Geo::IP.
 
+	- Added support for region name lookup in GeoIP City API
 	- Fixed database_info method (Ken Neighbors)
 
 1.27  September 8th 2005
