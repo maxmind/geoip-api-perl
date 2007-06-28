@@ -1,7 +1,5 @@
 #!/usr/bin/perl
 
-use Test;
-
 use Geo::IP;
 
 my $gi = Geo::IP->open("/usr/local/share/GeoIP/GeoIPCity.dat", GEOIP_STANDARD);
