@@ -6,7 +6,7 @@ use vars qw($VERSION @EXPORT);
 
 
 BEGIN {
-       $VERSION = '1.27';
+       $VERSION = '1.28';
        bootstrap Geo::IP $VERSION;
 }
 
@@ -173,12 +173,12 @@ Returns database string, includes version, date, build number and copyright noti
 Are available from SourceForge, see
 http://sourceforge.net/projects/geoip/
 
-The direct link to the mailing is
+The direct link to the mailing list is
 http://lists.sourceforge.net/lists/listinfo/geoip-perl
 
 =head1 VERSION
 
-1.27
+1.28
 
 =head1 SEE ALSO
 
@@ -186,7 +186,7 @@ Geo::IP::Record
 
 =head1 AUTHOR
 
-Copyright (c) 2005, MaxMind LLC
+Copyright (c) 2007, MaxMind LLC
 
 All rights reserved.  This package is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
