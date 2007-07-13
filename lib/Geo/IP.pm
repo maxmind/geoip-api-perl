@@ -101,6 +101,16 @@ I<datadir>, typically I</usr/local/share/GeoIP/GeoIP.dat>.
 Flags can be set to either GEOIP_STANDARD, or for faster performance
 (at a cost of using more memory), GEOIP_MEMORY_CACHE.  When using memory
 cache you can force a reload if the file is updated by setting GEOIP_CHECK_CACHE.
+GEOIP_INDEX_CACHE caches
+the most frequently accessed index portion of the database, resulting
+in faster lookups than GEOIP_STANDARD, but less memory usage than
+GEOIP_MEMORY_CACHE - useful for larger databases such as
+GeoIP Organization and GeoIP City.  Note, for GeoIP Country, Region
+and Netspeed databases, GEOIP_INDEX_CACHE is equivalent to GEOIP_MEMORY_CACHE
+
+To combine flags, use the bitwise OR operator, |.  For example, to cache the database
+in memory, but check for an updated GeoIP.dat file, use:
+Geo::IP->new( GEOIP_MEMORY_CACHE | GEOIP_CHECK_CACHE. );
 
 =item $gi = Geo::IP->open( $database_filename, $flags );
 
