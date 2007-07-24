@@ -1,5 +1,7 @@
 Revision history for Perl extension Geo::IP.
 
+	- Added set_charset - enables UTF8 output of city name
+
 1.28  July 4th 2007
 	- Added support for region name lookup in GeoIP City API
 	- Fixed database_info method (Ken Neighbors)
