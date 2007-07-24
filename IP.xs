@@ -196,6 +196,24 @@ record_by_name(gi, addr)
     OUTPUT:
 	RETVAL
 
+
+int
+set_charset(gi, charset)
+	GeoIP *gi
+        int charset
+    CODE:
+	RETVAL = GeoIP_set_charset(gi, charset);
+    OUTPUT:
+	RETVAL
+
+int
+charset(gi)
+	GeoIP *gi
+    CODE:
+	RETVAL = GeoIP_charset(gi);
+    OUTPUT:
+	RETVAL
+
 void
 DESTROY(gi)
 	GeoIP *gi
@@ -244,13 +262,22 @@ region_name(gir)
     OUTPUT:
 	RETVAL
 
-const char *
+void
 city(gir)
 	GeoIPRecord *gir
-    CODE:
-	RETVAL = (const char *)gir->city;
-    OUTPUT:
-	RETVAL
+    PREINIT:
+        const char * city_ptr;
+        SV * n;
+    PPCODE:
+        city_ptr = (const char *)gir->city;
+        n = newSVpv(gir->city, 0);
+#if defined(sv_utf8_decode)
+        if ( gir->charset == GEOIP_CHARSET_UTF8 )
+          SvUTF8_on(n);
+#endif
+        sv_2mortal(n);
+        ST(0) = n;
+        XSRETURN(1);
 
 const char *
 postal_code(gir)
