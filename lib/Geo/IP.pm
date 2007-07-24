@@ -34,12 +34,15 @@ sub GEOIP_PROXY_EDITION(){8;}
 sub GEOIP_ASNUM_EDITION(){9;}
 sub GEOIP_NETSPEED_EDITION(){10;}
 
+sub GEOIP_CHARSET_ISO_8859_1(){0;}
+sub GEOIP_CHARSET_UTF8(){1;}
 
 @EXPORT = qw( GEOIP_STANDARD GEOIP_MEMORY_CACHE GEOIP_CHECK_CACHE GEOIP_INDEX_CACHE
 	GEOIP_UNKNOWN_SPEED GEOIP_DIALUP_SPEED GEOIP_CABLEDSL_SPEED GEOIP_CORPORATE_SPEED 
 	GEOIP_COUNTRY_EDITION GEOIP_REGION_EDITION_REV0 GEOIP_CITY_EDITION_REV0 
 	GEOIP_ORG_EDITION GEOIP_ISP_EDITION GEOIP_CITY_EDITION_REV1 GEOIP_REGION_EDITION_REV1
-	GEOIP_PROXY_EDITION GEOIP_ASNUM_EDITION GEOIP_NETSPEED_EDITION);
+	GEOIP_PROXY_EDITION GEOIP_ASNUM_EDITION GEOIP_NETSPEED_EDITION
+	GEOIP_CHARSET_ISO_8859_1 GEOIP_CHARSET_UTF8);
 
 1;
 __END__
@@ -175,6 +178,15 @@ Returns the Organization or ISP name for a hostname.
 =item $info = $gi->database_info;
 
 Returns database string, includes version, date, build number and copyright notice.
+
+=item $old_charset = $gi->set_charset( $charset );
+
+Set the charset for the city name - defaults to GEOIP_CHARSET_ISO_8859_1.  To
+set UTF8, pass GEOIP_CHARSET_UTF8 to set_charset.
+
+=item $charset = $gi->charset;
+
+Gets the currently used charset.
 
 =back
 
