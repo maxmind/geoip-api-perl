@@ -324,3 +324,8 @@ DESTROY(gir)
 	GeoIPRecord *gir
     CODE:
 	GeoIPRecord_delete(gir);
+
+void
+_XScompiled ()
+    CODE:
+	XSRETURN_YES;
