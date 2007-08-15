@@ -27,6 +27,13 @@ unless ($config{LIBS}) {
   unless ($found) {
     die <<'GeoIP_Not_Installed;';
 
+The GeoIP CAPI is not installed you should do that. Otherwise try 
+
+    perl Makefile.PL PP=1
+    
+to install this module anyway. It uses a slower pure perl version 
+and you can rebuid it later.
+
 GeoIP must be installed prior to building Geo::IP and I can't find
 it in the standard library directories. You can download GeoIP C API from:
 
@@ -64,12 +71,17 @@ push(@extras,
      ABSTRACT_FROM => 'lib/Geo/IP.pm',
      AUTHOR        => 'T.J. Mather (tjmather@tjmather.com)')
     if ($ExtUtils::MakeMaker::Version >= 5.4301);
-     
+
+my $pp = delete $config{PP};
+
 WriteMakefile(
               NAME	=> 'Geo::IP',
               dist      => {COMPRESS => 'gzip', SUFFIX => '.gz'},
               VERSION_FROM => 'lib/Geo/IP.pm',
-              LIBS      => ['-lGeoIP'],
+              LIBS      => $pp ? [] : ['-lGeoIP'],
+              	DEFINE		    => '-DPERL_EXT',	# otherwise 'cxinc' isn't defined 
+
+              CONFIGURE	    => sub { @{$_[1]}{qw/XS C/} = ( {}, [] ) if $pp; $_[1] },
               @extras,
 	      %config
              );

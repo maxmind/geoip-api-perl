@@ -1,5 +1,7 @@
 Revision history for Perl extension Geo::IP.
 
+	- Merged in Geo::IP::PurePerl code, PurePerl code is mostly
+		API compatible with XS code, except for charset functions
 	- Added set_charset - enables UTF8 output of city name
 
 1.28  July 4th 2007
