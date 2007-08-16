@@ -11,7 +11,8 @@ my $gi = Geo::IP->open("/usr/local/share/GeoIP/GeoIPISP.dat", GEOIP_STANDARD);
 while (<DATA>) {
   chomp;
   my ($org) = $gi->org_by_name($_);
-  print join("\t",$_,$org) . "\n";
+  my $netmask = $gi->last_netmask;
+  print join("\t",$_,$org, $netmask) . "\n";
 }
 
 __DATA__
