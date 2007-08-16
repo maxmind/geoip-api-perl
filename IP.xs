@@ -273,11 +273,9 @@ void
 city(gir)
 	GeoIPRecord *gir
     PREINIT:
-        const char * city_ptr;
         SV * n;
     PPCODE:
-        city_ptr = (const char *)gir->city;
-        n = newSVpv(gir->city, 0);
+        n = newSVpv( gir->city ? gir->city : "", 0);
 #if defined(sv_utf8_decode)
         if ( gir->charset == GEOIP_CHARSET_UTF8 )
           SvUTF8_on(n);
