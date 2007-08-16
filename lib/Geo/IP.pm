@@ -4,7 +4,7 @@ use strict;
 use base qw(Exporter);
 use vars qw($VERSION @EXPORT  $TESTING_PERL_ONLY @ISA $XS_VERSION);
 
-BEGIN { $TESTING_PERL_ONLY = 1;}
+BEGIN { $TESTING_PERL_ONLY = 0;}
 
 BEGIN {
   eval {
@@ -910,6 +910,10 @@ sub database_info {
   return '';
 }
 
+sub last_netmask {
+  die "not yet implemented";
+}
+
 #sub _XS
 __PP_CODE__
 
@@ -1074,6 +1078,10 @@ set UTF8, pass GEOIP_CHARSET_UTF8 to set_charset.
 =item $charset = $gi->charset;
 
 Gets the currently used charset.
+
+=item $netmask = $gi->last_netmask;
+
+Gets netmask of network block from last lookup.
 
 =back
 

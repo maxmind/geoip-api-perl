@@ -196,11 +196,10 @@ record_by_name(gi, addr)
     OUTPUT:
 	RETVAL
 
-
 int
 set_charset(gi, charset)
 	GeoIP *gi
-        int charset
+	int charset
     CODE:
 	RETVAL = GeoIP_set_charset(gi, charset);
     OUTPUT:
@@ -211,6 +210,14 @@ charset(gi)
 	GeoIP *gi
     CODE:
 	RETVAL = GeoIP_charset(gi);
+    OUTPUT:
+	RETVAL
+
+int
+last_netmask(gi)
+	GeoIP *gi
+    CODE:
+	RETVAL = GeoIP_last_netmask(gi);
     OUTPUT:
 	RETVAL
 
