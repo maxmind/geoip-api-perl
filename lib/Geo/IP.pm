@@ -6,7 +6,8 @@ use vars qw($VERSION @EXPORT  $TESTING_PERL_ONLY @ISA $XS_VERSION);
 
 BEGIN { $TESTING_PERL_ONLY = 0;}
 
-BEGIN {
+BEGIN {       
+	$VERSION = '1.29';
   eval {
 
     # PERL_DL_NONLAZY must be false, or any errors in loading will just
@@ -15,7 +16,6 @@ BEGIN {
 
     require DynaLoader;
     local @ISA = qw(DynaLoader);
-    $VERSION = '1.28';
     bootstrap Geo::IP $VERSION;
   } unless $TESTING_PERL_ONLY;
 }
@@ -26,6 +26,7 @@ sub GEOIP_STANDARD()     { 0; } # PP
 sub GEOIP_MEMORY_CACHE() { 1; } # PP
 sub GEOIP_CHECK_CACHE()  { 2; }
 sub GEOIP_INDEX_CACHE()  { 4; }
+sub GEOIP_MMAP_CACHE()   { 8; } # PP
 
 sub GEOIP_UNKNOWN_SPEED()   { 0; } #PP
 sub GEOIP_DIALUP_SPEED()    { 1; } #PP
@@ -51,6 +52,19 @@ sub GEOIP_NETSPEED_EDITION()    { 10; }
 
 sub GEOIP_CHARSET_ISO_8859_1(){0;}
 sub GEOIP_CHARSET_UTF8(){1;}
+
+# cheat --- try to load Sys::Mmap PurePerl only
+if ($pp) {
+  eval "require Sys::Mmap"
+    ? Sys::Mmap->import
+    : do {
+    for (qw/ PROT_READ MAP_PRIVATE MAP_SHARED /) {
+      no strict 'refs';
+      my $unused_stub = $_; # we must use a copy
+      *$unused_stub = sub { die 'Sys::Mmap required for mmap support' };
+    }
+  } # do
+} # pp
 
 }
 
@@ -413,23 +427,30 @@ sub open {
   die "Geo::IP::PurePerl::open() requires a path name"
     unless ( @_ > 1 and $_[1] );
   my ( $class, $db_file, $flags ) = @_;
-  my $fh = new FileHandle;
+  my $fh = FileHandle->new;
   my $gi;
   CORE::open $fh, "$db_file" or die "Error opening $db_file";
   binmode($fh);
-  if ( $flags && $flags & GEOIP_MEMORY_CACHE == 1 ) {
-    local ($/) = undef;
+  if ( $flags && ( $flags & ( GEOIP_MEMORY_CACHE | GEOIP_MMAP_CACHE ) ) ) {
     my %self;
-    $self{fh}  = $fh;
-    $self{buf} = <$fh>;
+ 		if ( $flags & GEOIP_MMAP_CACHE ) {
+		  die "Sys::Mmap required for MMAP support"
+		    unless defined $Sys::Mmap::VERSION;
+		  mmap( $self{buf} = undef, 0, PROT_READ, MAP_PRIVATE, $fh )
+		    or die "mmap: $!";
+		}
+    else {
+		  local $/ = undef;
+		  $self{buf} = <$fh>;
+		}   
+		$self{fh}  = $fh;
     $gi = bless \%self, $class;
-    $gi->_setup_segments();
   }
-  else {
-    $gi = bless { fh => $fh }, $class;
-    $gi->_setup_segments();
-    return $gi;
-  }
+	else {
+	  $gi = bless { fh => $fh }, $class;
+	}
+	$gi->_setup_segments();
+	return $gi;
 }
 
 sub new {
@@ -442,8 +463,7 @@ sub new {
     # called as new()
     $db_file = '/usr/local/share/GeoIP/GeoIP.dat';
   }
-  elsif ( $db_file eq GEOIP_MEMORY_CACHE or $db_file eq GEOIP_STANDARD ) {
-
+  elsif ( $db_file =~ /^\d+$/	) {
     # called as new( $flags )
     $flags   = $db_file;
     $db_file = '/usr/local/share/GeoIP/GeoIP.dat';
@@ -530,19 +550,17 @@ sub _seek_country {
 
   my ( $x0, $x1 );
 
+  my $reclen = $gi->{record_length};
+
   for ( my $depth = 31; $depth >= 0; $depth-- ) {
-    if ($fh) {
-      seek $fh, $offset * 2 * $gi->{"record_length"}, 0;
-      read $fh, $x0, $gi->{"record_length"};
-      read $fh, $x1, $gi->{"record_length"};
+    unless ( exists $gi->{buf} ) {
+      seek $fh, $offset * 2 * $reclen, 0;
+      read $fh, $x0, $reclen;
+      read $fh, $x1, $reclen;
     }
     else {
-      $x0 = substr( $gi->{buf},
-                    $offset * 2 * $gi->{"record_length"},
-                    $gi->{"record_length"} );
-      $x1 = substr( $gi->{buf},
-                  $offset * 2 * $gi->{"record_length"} + $gi->{"record_length"},
-                  $gi->{"record_length"} );
+      $x0 = substr( $gi->{buf}, $offset * 2 * $reclen, $reclen );
+      $x1 = substr( $gi->{buf}, $offset * 2 * $reclen + $reclen, $reclen );
     }
 
     $x0 = unpack( "V1", $x0 . "\0" );
@@ -659,10 +677,16 @@ sub get_city_record {
   #set the record pointer to location of the city record
   my $record_pointer = $seek_country +
     ( 2 * $gi->{"record_length"} - 1 ) * $gi->{"databaseSegments"};
-  seek( $gi->{"fh"}, $record_pointer, 0 );
 
-  read( $gi->{"fh"}, $record_buf, FULL_RECORD_LENGTH );
-  $record_buf_pos = 0;
+  unless ( exists $gi->{buf} ) {
+    seek( $gi->{"fh"}, $record_pointer, 0 );
+    read( $gi->{"fh"}, $record_buf, FULL_RECORD_LENGTH );
+    $record_buf_pos = 0;
+  }
+	else {
+	  $record_buf = substr($gi->{buf}, $record_pointer, FULL_RECORD_LENGTH);
+    $record_buf_pos = 0;
+  }
 
   #get the country
   $char = ord( substr( $record_buf, $record_buf_pos, 1 ) );
@@ -777,9 +801,15 @@ sub org_by_name {
 
   $record_pointer =
     $seek_org + ( 2 * $gi->{"record_length"} - 1 ) * $gi->{"databaseSegments"};
-  seek( $gi->{"fh"}, $record_pointer, 0 );
-  read( $gi->{"fh"}, $org_buf, MAX_ORG_RECORD_LENGTH );
-
+  
+  unless ( exists $gi->{buf} ) {
+    seek( $gi->{"fh"}, $record_pointer, 0 );
+    read( $gi->{"fh"}, $org_buf, MAX_ORG_RECORD_LENGTH );
+  }
+	else {
+    $org_buf = substr($gi->{buf}, $record_pointer, MAX_ORG_RECORD_LENGTH );
+	}
+	
   $char = ord( substr( $org_buf, 0, 1 ) );
   while ( $char != 0 ) {
     $org_buf_length++;
@@ -914,6 +944,15 @@ sub last_netmask {
   die "not yet implemented";
 }
 
+sub DESTROY {
+  my $gi = shift;
+ 
+  if ( exists $gi->{buf} && $gi->{flags} && ( $gi->{flags} & GEOIP_MMAP_CACHE ) ) {
+    munmap( $gi->{buf} ) or die "munmap: $!";
+	  delete $gi->{buf};
+  }
+}
+
 #sub _XS
 __PP_CODE__
 
@@ -931,6 +970,7 @@ print STDERR $@ if $@;
   GEOIP_REGION_EDITION_REV1   GEOIP_PROXY_EDITION
   GEOIP_ASNUM_EDITION         GEOIP_NETSPEED_EDITION
   GEOIP_CHARSET_ISO_8859_1    GEOIP_CHARSET_UTF8
+  GEOIP_MMAP_CACHE
 );
 
 
