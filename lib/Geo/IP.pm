@@ -7,7 +7,7 @@ use vars qw($VERSION @EXPORT  $TESTING_PERL_ONLY @ISA $XS_VERSION);
 BEGIN { $TESTING_PERL_ONLY = 0;}
 
 BEGIN {       
-	$VERSION = '1.29';
+	$VERSION = '1.30';
   eval {
 
     # PERL_DL_NONLAZY must be false, or any errors in loading will just
