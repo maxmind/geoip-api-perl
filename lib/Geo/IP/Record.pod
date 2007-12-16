@@ -19,20 +19,15 @@
 	$record->postal_code,
 	$record->latitude,
 	$record->longitude,
+	$record->time_zone,
 	$record->dma_code,
 	$record->area_code;
 
 =head1 DESCRIPTION
 
 Geo::IP::Record represents objects containing location information
-returned by the GeoIP City database.
-
-Note at this time only a commercial version - GeoIP City Premium - is available
-from MaxMind.  The database that is distributed free of charge 
-is the GeoIP Standard Country, and is not compatible with this API.
-
-At some point in the future, we may offer a free version - GeoIP City Standard -
-based only on public data sources such as RIR Whois databases.
+returned by the GeoIP City database.  It works with both the
+commercial GeoIP City and free GeoLite City databases.
 
 =head1 OBJECT METHODS
 
@@ -73,6 +68,10 @@ Returns the latitude from the location object.
 =item $lon = $record->longitude;
 
 Returns the longitude from the location object.
+
+=item $time_zone = $record->time_zone;
+
+Returns the time zone from the location object.
 
 =item $dma_code = $record->dma_code;
 
