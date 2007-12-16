@@ -1,5 +1,6 @@
 Revision history for Perl extension Geo::IP.
 
+1.30  December 16th 2007
 	- Add GEOIP_MMAP_CACHE support ( Peter Shipley )
 	- Added last_netmask - gets netmask of network block from last lookup
 	- Merged in Geo::IP::PurePerl code, PurePerl code is mostly
