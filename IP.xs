@@ -269,6 +269,14 @@ region_name(gir)
     OUTPUT:
 	RETVAL
 
+const char *
+time_zone(gir)
+	GeoIPRecord *gir
+    CODE:
+	RETVAL = (const char *) GeoIP_time_zone_by_country_and_region(gir->country_code, gir->region);
+    OUTPUT:
+	RETVAL
+
 void
 city(gir)
 	GeoIPRecord *gir
