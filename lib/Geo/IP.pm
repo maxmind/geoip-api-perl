@@ -1100,11 +1100,11 @@ Returns a Geo::IP::Record object containing city location for a hostname.
 
 =item $org = $gi->org_by_addr( $ipaddr );
 
-Returns the Organization or ISP name for an IP address.
+Returns the Organization, ISP name or Domain Name for an IP address.
 
 =item $org = $gi->org_by_name( $hostname );
 
-Returns the Organization or ISP name for a hostname.
+Returns the Organization, ISP name or Domain Name for a hostname.
 
 =item $info = $gi->database_info;
 
