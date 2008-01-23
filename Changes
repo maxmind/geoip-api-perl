@@ -7,7 +7,7 @@ Revision history for Perl extension Geo::IP.
 	- Added last_netmask - gets netmask of network block from last lookup
 	- Merged in Geo::IP::PurePerl code, PurePerl code is mostly
 		API compatible with XS code, except for charset functions
-	- Added set_charset - enables UTF8 output of city name
+	! Added set_charset - enables UTF8 output of city name - requires C API 1.4.3 or greater
 
 1.28  July 4th 2007
 	- Added support for region name lookup in GeoIP City API
