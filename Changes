@@ -1,5 +1,7 @@
 Revision history for Perl extension Geo::IP.
 
+        - Change default database name for NetWare to sys:/etc/GeoIP/GeoIP.dat
+	  	 and MSWin32 to c:/GeoIP/GeoIP.dat ( Guenter Knauf )
 	- Added support for time_zone lookup in GeoIP City API
 
 1.30  December 16th 2007
