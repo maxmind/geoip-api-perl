@@ -458,15 +458,21 @@ sub new {
 
   # this will be less messy once deprecated new( $path, [$flags] )
   # is no longer supported (that's what open() is for)
+  my $def_db_file = '/usr/local/share/GeoIP/GeoIP.dat';
+  if ($^O eq 'NetWare') {
+    $def_db_file = 'sys:/etc/GeoIP/GeoIP.dat';
+  } elsif ($^O eq 'MSWin32') {
+    $def_db_file = 'c:/GeoIP/GeoIP.dat';
+  }
   if ( !defined $db_file ) {
 
     # called as new()
-    $db_file = '/usr/local/share/GeoIP/GeoIP.dat';
+    $db_file = $def_db_file;
   }
   elsif ( $db_file =~ /^\d+$/	) {
     # called as new( $flags )
     $flags   = $db_file;
-    $db_file = '/usr/local/share/GeoIP/GeoIP.dat';
+    $db_file = $def_db_file;
   }    # else called as new( $database_filename, [$flags] );
 
   $class->open( $db_file, $flags );
