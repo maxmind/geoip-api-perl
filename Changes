@@ -1,5 +1,7 @@
 Revision history for Perl extension Geo::IP.
 
+1.31  March 22nd 2008
+	- Added BL/Saint Barthelemy, MF/Saint Martin (ISO-3166-1 additions)
         - Change default database name for NetWare to sys:/etc/GeoIP/GeoIP.dat
 	  	 and MSWin32 to c:/GeoIP/GeoIP.dat ( Guenter Knauf )
 	- Added support for time_zone lookup in GeoIP City API
