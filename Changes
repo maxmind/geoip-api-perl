@@ -1,4 +1,8 @@
 Revision history for Perl extension Geo::IP.
+	- make Geo::IP::Record::time_zone work for the pure perl part of Geo::IP ( Boris Zentner ) 
+	- BEGIN{$Geo::IP::GEOIP_PP_ONLY=1} use Geo::IP; disable the C API, even if it is installed. ( Boris Zentner )
+	! rename $Geo::IP::TESTING_PERL_ONLY to $Geo::IP::GEOIP_PP_ONLY. ( Boris Zentner )
+	- Fix Geo::IP::Record to use the C API, only, when Geo::IP use it ( Boris Zentner )
 
 1.31  March 22nd 2008
 	- Added BL/Saint Barthelemy, MF/Saint Martin (ISO-3166-1 additions)
