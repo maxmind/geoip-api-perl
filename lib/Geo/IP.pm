@@ -2,12 +2,12 @@ package Geo::IP;
 
 use strict;
 use base qw(Exporter);
-use vars qw($VERSION @EXPORT  $TESTING_PERL_ONLY @ISA $XS_VERSION);
+use vars qw($VERSION @EXPORT  $GEOIP_PP_ONLY @ISA $XS_VERSION);
 
-BEGIN { $TESTING_PERL_ONLY = 0;}
+BEGIN { $GEOIP_PP_ONLY = 0 unless defined( $GEOIP_PP_ONLY );}
 
 BEGIN {       
-	$VERSION = '1.31';
+	$VERSION = '1.32';
   eval {
 
     # PERL_DL_NONLAZY must be false, or any errors in loading will just
@@ -17,7 +17,7 @@ BEGIN {
     require DynaLoader;
     local @ISA = qw(DynaLoader);
     bootstrap Geo::IP $VERSION;
-  } unless $TESTING_PERL_ONLY;
+  } unless $GEOIP_PP_ONLY;
 }
 
 require Geo::IP::Record;
@@ -68,7 +68,6 @@ if ($pp) {
 
 }
 
-#eval << '__PP_CODE__' if ( !defined &_XScompiled || !&_XScompiled || $TESTING_PERL_ONLY );
 eval << '__PP_CODE__' unless defined &open;
 
 use strict;
