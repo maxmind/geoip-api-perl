@@ -7,7 +7,7 @@ use vars qw($VERSION @EXPORT  $GEOIP_PP_ONLY @ISA $XS_VERSION);
 BEGIN { $GEOIP_PP_ONLY = 0 unless defined( $GEOIP_PP_ONLY );}
 
 BEGIN {       
-	$VERSION = '1.32';
+	$VERSION = '1.33';
   eval {
 
     # PERL_DL_NONLAZY must be false, or any errors in loading will just
@@ -1142,7 +1142,7 @@ http://lists.sourceforge.net/lists/listinfo/geoip-perl
 
 =head1 VERSION
 
-1.31
+1.33
 
 =head1 SEE ALSO
 
