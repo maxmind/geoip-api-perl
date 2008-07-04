@@ -1,7 +1,9 @@
 Revision history for Perl extension Geo::IP.
-       - minimum perl version is 5.6 now ( Boris Zentner )
+  - Fix pureperl time_zone for countries with region codes, but only one time_zone ( Boris Zentner ).
+  - Add continent_code to the pureperl and C API ( Boris Zentner ) 
+  - minimum perl version is 5.6 now ( Boris Zentner )
 1.33 May 5th 2008
-       - make cpantesters happy exit 0 early, if libGeoIP is not found. ( Boris Zentner )
+  - make cpantesters happy exit 0 early, if libGeoIP is not found. ( Boris Zentner )
 1.32 May 4th 2008
 	- make Geo::IP::Record::time_zone work for the pure perl part of Geo::IP ( Boris Zentner ) 
 	- BEGIN{$Geo::IP::GEOIP_PP_ONLY=1} use Geo::IP; disable the C API, even if it is installed. ( Boris Zentner )

@@ -332,6 +332,14 @@ area_code(gir)
     OUTPUT:
 	RETVAL
 
+const char *
+continent_code(gir)
+	GeoIPRecord *gir
+    CODE:
+	RETVAL = (const char *)gir->continent_code;
+    OUTPUT:
+	RETVAL
+
 void
 DESTROY(gir)
 	GeoIPRecord *gir

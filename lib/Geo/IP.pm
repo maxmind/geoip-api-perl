@@ -100,6 +100,36 @@ use constant CANADA_OFFSET             => 677;
 use constant WORLD_OFFSET              => 1353;
 use constant FIPS_RANGE                => 360;
 
+my @continents = qw/
+--
+AS EU EU AS AS SA SA EU AS SA
+AF AN SA OC EU OC SA AS EU SA
+AS EU AF EU AS AF AF SA AS SA
+SA SA AS AF AF EU SA NA AS AF
+AF AF EU AF OC SA AF AS SA SA
+SA AF AS AS EU EU AF EU SA SA
+AF SA EU AF AF AF EU AF EU OC
+SA OC EU EU EU AF EU SA AS SA
+AF EU SA AF AF SA AF EU SA SA
+OC AF SA AS AF SA EU SA EU AS
+EU AS AS AS AS AS EU EU SA AS
+AS AF AS AS OC AF SA AS AS AS
+SA AS AS AS SA EU AS AF AF EU
+EU EU AF AF EU EU AF OC EU AF
+AS AS AS OC SA AF SA EU AF AS
+AF NA AS AF AF OC AF OC AF SA
+EU EU AS OC OC OC AS SA SA OC
+OC AS AS EU SA OC SA AS EU OC
+SA AS AF EU AS AF AS OC AF AF
+EU AS AF EU EU EU AF EU AF AF
+SA AF SA AS AF SA AF AF AF AS
+AS OC AS AF OC AS AS SA OC AS
+AF EU AF OC NA SA AS EU SA SA
+SA SA AS OC OC OC AS AF EU AF
+AF EU AF -- -- -- EU EU EU EU
+SA SA
+/;
+
 my @countries = (
   undef, qw/
  AP EU AD AE AF AG AI 
@@ -671,6 +701,7 @@ sub get_city_record {
   my $record_longitude     = "";
   my $record_dma_code      = "";
   my $record_area_code     = "";
+  my $record_continent_code = '';
   my $str_length           = 0;
   my $i;
   my $j;
@@ -701,6 +732,9 @@ sub get_city_record {
   $record_country_code3 = $code3s[$char];   #get the country code with 3 letters
   $record_country_name  = $names[$char];    #get the country name
   $record_buf_pos++;
+
+  # get the continent code
+  $record_continent_code = $continents[$char];
 
   #get the region
   $char = ord( substr( $record_buf, $record_buf_pos + $str_length, 1 ) );
@@ -770,11 +804,12 @@ sub get_city_record {
       $record_area_code = $dmaarea_combo % 1000;
     }
   }
+
   return (
            $record_country_code, $record_country_code3, $record_country_name,
            $record_region,       $record_city,          $record_postal_code,
            $record_latitude,     $record_longitude,     $record_dma_code,
-           $record_area_code
+           $record_area_code,    $record_continent_code
   );
 }
 
@@ -784,7 +819,8 @@ sub get_city_record_as_hash {
   my %gir;
 
   @gir{qw/ country_code   country_code3   country_name   region     city 
-           postal_code    latitude        longitude      dma_code   area_code / } =
+           postal_code    latitude        longitude      dma_code   area_code 
+		   continent_code / } =
     $gi->get_city_record($host);
   
   return bless \%gir, 'Geo::IP::Record';

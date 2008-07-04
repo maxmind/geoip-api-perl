@@ -30,7 +30,7 @@ eval <<'__PP__' if $pp;
 for ( qw: country_code country_code3 country_name
           region       region_name   city
           postal_code  dma_code      area_code 
-          latitude     longitude                : ) {
+          latitude     longitude     continent_code           : ) {
   no strict   qw/ refs /;
   no warnings qw/ redefine /;
   my $m = $_; # looks bogus, but it is not! it is a copy not a alias
@@ -56,7 +56,7 @@ for ( qw: country_code country_code3 country_name
     return
       defined $TIME_ZONE->{$country}->{$region}
       ? $TIME_ZONE->{$country}->{$region}
-      : undef;
+      : $TIME_ZONE->{$country}->{''};
   }
 }
 
