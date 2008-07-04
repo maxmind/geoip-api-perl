@@ -21,7 +21,8 @@
 	$record->longitude,
 	$record->time_zone,
 	$record->dma_code,
-	$record->area_code;
+	$record->area_code,
+    $record->continent_code;
 
 =head1 DESCRIPTION
 
@@ -80,6 +81,11 @@ Returns the DMA code from the location object (for city-level US locations only)
 =item $area_code = $record->area_code;
 
 Returns the area code from the location object (for city-level US locations only)
+
+=item $continent_code = $record->continent_code;
+
+ Returns the continent code from the location object.
+ Possible continent codes are AF, AS, EU, NA, OC, SA for Africa, Asia, Europe, North America, Oceania  and South America. 
 
 =head1 VERSION
 
