@@ -3,7 +3,7 @@ package Geo::Mirror;
 use strict;
 use vars qw($VERSION);
 
-$VERSION = '1.0';
+$VERSION = '1.01';
 
 use constant PI => 3.14159265358979323846;
 
@@ -20,11 +20,14 @@ BEGIN {
   $geo_ip_pkg->import('GEOIP_STANDARD');
 }
 
-while (<DATA>) {
-  my ($country, $lat, $lon) = split(':');
+{
+  local $_;
+  while (<DATA>) {
+    my ($country, $lat, $lon) = split(':');
 
-  $lat{$country} = $lat;
-  $lon{$country} = $lon;
+    $lat{$country} = $lat;
+    $lon{$country} = $lon;
+  }
 }
 
 sub new {
@@ -38,7 +41,8 @@ sub new {
 sub _init {
   my $self = shift;
   my $mirror_file = $self->{mirror_file};
-  open MIRROR, "$mirror_file";
+  local $_;
+  open MIRROR, "$mirror_file" or die $!;
   while(<MIRROR>) {
     my ($url, $country, $fresh) = split(' ');
     push @{$self->{mirror}->{$country}}, $url;

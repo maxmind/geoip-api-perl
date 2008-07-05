@@ -1,4 +1,7 @@
 Revision history for Perl extension Geo::IP.
+
+  - Fix trash of $_ in Geo::Mirror ( Boris Zentner )
+  - Geo::Mirror die, if open failed ( Boris Zentner )
   - Fix pureperl time_zone for countries with region codes, but only one time_zone ( Boris Zentner ).
   - Add continent_code to the pureperl and C API ( Boris Zentner ) 
   - minimum perl version is 5.6 now ( Boris Zentner )
