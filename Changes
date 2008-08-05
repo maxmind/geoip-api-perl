@@ -1,5 +1,9 @@
 Revision history for Perl extension Geo::IP.
 
+1.34 August 4th 2008
+	- Add Geo::IP::Record::region_name to the PurePerl API ( Boris Zentner ) 
+	- Add missing record_by_name function to the PurePerl API ( Boris Zentner ) 
+	- Add missing country/country code 'Other' for the pureperl fallback ( Boris Zentner )
   - Fix trash of $_ in Geo::Mirror ( Boris Zentner )
   - Geo::Mirror die, if open failed ( Boris Zentner )
   - Fix pureperl time_zone for countries with region codes, but only one time_zone ( Boris Zentner ).
