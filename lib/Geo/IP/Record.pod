@@ -93,7 +93,7 @@ Returns the area code from the location object (for city-level US locations only
 
 =head1 AUTHOR
 
-Copyright (c) 2006, MaxMind LLC
+Copyright (c) 2008, MaxMind LLC
 
 All rights reserved.  This package is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
