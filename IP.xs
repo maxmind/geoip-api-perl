@@ -145,6 +145,21 @@ org_by_name(gi, name)
 	RETVAL
 
 void
+range_by_ip(gi, addr)
+	GeoIP *gi
+	const char * addr
+    PREINIT:
+    char ** r;
+    PPCODE:
+	r = GeoIP_range_by_ip(gi,addr);
+        if (r != NULL){
+	  EXTEND(SP,2);
+ 	  PUSHs( sv_2mortal( newSVpv(r[0], 0) ) );
+	  PUSHs( sv_2mortal( newSVpv(r[1], 0) ) );
+	  free(r);
+        }
+
+void
 region_by_addr(gi, addr)
 	GeoIP *gi
 	char * addr
