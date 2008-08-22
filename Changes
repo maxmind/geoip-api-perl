@@ -1,4 +1,5 @@
 Revision history for Perl extension Geo::IP.
+	- Add range_by_ip, netmask and last_netmask to the PurePerl API ( Boris Zentner )
 	- Add range_by_ip to the C API wrapper ( Boris Zentner )
 1.34 August 4th 2008
 	- Add Geo::IP::Record::region_name to the PurePerl API ( Boris Zentner ) 

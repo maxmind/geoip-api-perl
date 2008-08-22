@@ -153,10 +153,15 @@ range_by_ip(gi, addr)
     PPCODE:
 	r = GeoIP_range_by_ip(gi,addr);
         if (r != NULL){
-	  EXTEND(SP,2);
- 	  PUSHs( sv_2mortal( newSVpv(r[0], 0) ) );
-	  PUSHs( sv_2mortal( newSVpv(r[1], 0) ) );
-	  free(r);
+		EXTEND(SP,2);
+		PUSHs( sv_2mortal( newSVpv(r[0], 0) ) );
+		PUSHs( sv_2mortal( newSVpv(r[1], 0) ) );
+	  
+		if ( r[0] )
+			free(r[0]);
+		if ( r[1] )
+			free(r[1]);
+		free(r);
         }
 
 void
