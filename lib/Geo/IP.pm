@@ -606,12 +606,14 @@ sub _seek_country {
 
     if ( $ipnum & ( 1 << $depth ) ) {
       if ( $x1 >= $gi->{"databaseSegments"} ) {
+	    $gi->{last_netmask} = 32 - $depth;
         return $x1;
       }
       $offset = $x1;
     }
     else {
       if ( $x0 >= $gi->{"databaseSegments"} ) {
+	    $gi->{last_netmask} = 32 - $depth;
         return $x0;
       }
       $offset = $x0;
@@ -947,10 +949,13 @@ sub get_ip_address {
   return $ip_address;
 }
 
-sub addr_to_num {
-  my @a = split( '\.', $_[0] );
-  return $a[0] * 16777216 + $a[1] * 65536 + $a[2] * 256 + $a[3];
-}
+sub addr_to_num { unpack( N => pack( C4 => split( /\./, $_[0] ) ) ) }
+sub num_to_addr { join q{.}, unpack( C4 => pack( N => $_[0] ) ) }
+
+#sub addr_to_num {
+#  my @a = split( '\.', $_[0] );
+#  return $a[0] * 16777216 + $a[1] * 65536 + $a[2] * 256 + $a[3];
+#}
 
 sub database_info {
   my $gi = shift;
@@ -986,8 +991,34 @@ sub database_info {
   return '';
 }
 
+sub range_by_ip {
+  my $gi = shift;
+  my $ipnum          = addr_to_num( shift );
+  my $c              = $gi->_seek_country( $ipnum );
+  my $nm             = $gi->last_netmask;
+  my $m              = 0xffffffff << 32 - $nm;
+  my $left_seek_num  = $ipnum & $m;
+  my $right_seek_num = $left_seek_num + ( 0xffffffff & ~$m );
+
+  while ( $left_seek_num != 0
+          and $c == $gi->_seek_country(  $left_seek_num - 1) ) {
+    my $lm = 0xffffffff << 32 - $gi->last_netmask;
+    $left_seek_num = --$left_seek_num & $lm;
+  }
+  while ( $right_seek_num != 0xffffffff
+          and $c == $gi->_seek_country( $right_seek_num + 1 ) ) {
+    my $rm = 0xffffffff << 32 - $gi->last_netmask;
+    $right_seek_num = ++$right_seek_num & $rm;
+    $right_seek_num += ( 0xffffffff & ~$rm );
+  }
+  return ( num_to_addr($left_seek_num), num_to_addr($right_seek_num) );
+}
+
+
+sub netmask { $_[0]->{last_netmask} = $_[1] }
+
 sub last_netmask {
-  die "not yet implemented";
+  return $_[0]->{last_netmask};
 }
 
 sub DESTROY {
@@ -5779,6 +5810,14 @@ Gets the currently used charset.
 =item $netmask = $gi->last_netmask;
 
 Gets netmask of network block from last lookup.
+
+=item $gi->netmask(12);
+
+Sets netmask for the last lookup
+
+=item my ( $from, $to ) = $gi->range_by_ip('24.24.24.24');
+
+Returns the start and end of the current network block. The method tries to join several continous netblocks.
 
 =back
 
