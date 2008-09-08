@@ -7,7 +7,7 @@ use vars qw($VERSION @EXPORT  $GEOIP_PP_ONLY @ISA $XS_VERSION);
 BEGIN { $GEOIP_PP_ONLY = 0 unless defined( $GEOIP_PP_ONLY );}
 
 BEGIN {       
-	$VERSION = '1.34';
+	$VERSION = '1.35';
   eval {
 
     # PERL_DL_NONLAZY must be false, or any errors in loading will just
@@ -693,7 +693,7 @@ sub get_city_record {
   my $record_buf;
   my $record_buf_pos;
   my $char;
-  my $dmaarea_combo;
+  my $metroarea_combo;
   my $record_country_code  = "";
   my $record_country_code3 = "";
   my $record_country_name  = "";
@@ -702,7 +702,7 @@ sub get_city_record {
   my $record_postal_code   = "";
   my $record_latitude      = "";
   my $record_longitude     = "";
-  my $record_dma_code      = "";
+  my $record_metro_code    = "";
   my $record_area_code     = "";
   my $record_continent_code = '';
   my $record_region_name = '';
@@ -792,29 +792,29 @@ sub get_city_record {
   }
   $record_longitude = ( $longitude / 10000 ) - 180;
 
-  #get the dma code and the area code
+  #get the metro code and the area code
   if ( GEOIP_CITY_EDITION_REV1 == $gi->{"databaseType"} ) {
-    $dmaarea_combo = 0;
+    $metroarea_combo = 0;
     if ( $record_country_code eq "US" ) {
 
-      #if the country is US then read the dma area combo
+      #if the country is US then read the dma/metro area combo
       for ( $j = 0; $j < 3; ++$j ) {
         $char = ord( substr( $record_buf, $record_buf_pos++, 1 ) );
-        $dmaarea_combo += ( $char << ( $j * 8 ) );
+        $metroarea_combo += ( $char << ( $j * 8 ) );
       }
 
-      #split the dma area combo into the dma code and the area code
-      $record_dma_code  = int( $dmaarea_combo / 1000 );
-      $record_area_code = $dmaarea_combo % 1000;
+      #split the dma/metro area combo into the metro code and the area code
+      $record_metro_code  = int( $metroarea_combo / 1000 );
+      $record_area_code = $metroarea_combo % 1000;
     }
   }
   $record_region_name = _get_region_name($record_country_code, $record_region) || '';
   return (
            $record_country_code, $record_country_code3, $record_country_name,
            $record_region,       $record_city,          $record_postal_code,
-           $record_latitude,     $record_longitude,     $record_dma_code,
-           $record_area_code,    $record_continent_code, $record_region_name
-  );
+           $record_latitude,     $record_longitude,     $record_metro_code,
+           $record_area_code,    $record_continent_code, $record_region_name,
+		   $record_metro_code );
 }
 
 #this function returns the city record as a hash ref
@@ -824,7 +824,7 @@ sub get_city_record_as_hash {
 
   @gir{qw/ country_code   country_code3   country_name   region     city 
            postal_code    latitude        longitude      dma_code   area_code 
-		   continent_code region_name/ } =
+		   continent_code region_name metro_code/ } =
     $gi->get_city_record($host);
   
   return bless \%gir, 'Geo::IP::Record';
@@ -5831,7 +5831,7 @@ http://lists.sourceforge.net/lists/listinfo/geoip-perl
 
 =head1 VERSION
 
-1.34
+1.35
 
 =head1 SEE ALSO
 
