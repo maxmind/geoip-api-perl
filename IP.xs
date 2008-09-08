@@ -341,6 +341,15 @@ dma_code(gir)
 	GeoIPRecord *gir
     CODE:
 	RETVAL = gir->dma_code;
+	
+    OUTPUT:
+	RETVAL
+
+int
+metro_code(gir)
+	GeoIPRecord *gir
+    CODE:
+	RETVAL = gir->dma_code; /* dma_code is correct, it is a alias to metro_code */
     OUTPUT:
 	RETVAL
 
