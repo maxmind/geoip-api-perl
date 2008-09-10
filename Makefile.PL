@@ -3,6 +3,8 @@ use Config;
 use Cwd;
 use 5.006;
 
+require DynaLoader;
+
 $geoip_libpath = '';
 $geoip_incpath = '';
 
@@ -10,12 +12,47 @@ my @replacement_args;
 
 my %config;
 
-while($_ = shift) {
-    my ($key, $val) = split(/=/, $_, 2);
-    $config{$key} = $val;
+while ( $_ = shift ) {
+  my ( $key, $val ) = split( /=/, $_, 2 );
+  $config{$key} = $val;
 }
 
-unless ($config{LIBS}) {
+unless ( $config{LIBS} ) {
+  # currently we check only for the C Library version if it is in a 
+  # standard place
+  my $geoip_version = 0;
+  my $clib          = DynaLoader::dl_findfile('GeoIP');
+  my $found         = $clib ? 1 : 0;
+  if ($clib) {
+    $geoip_version = 10000;    # V 1.0.0 ( means, we have something )
+
+    # a GeoIP lib is found, just check the version, we need 1.4.4 now
+    my $lib = DynaLoader::dl_load_file( $clib, 0 );
+    if ($lib) {
+      for (
+            [ 10403, 'GeoIP_last_netmask' ],    # V 1.4.3
+            [ 10404, 'GeoIP_range_by_ip' ],     # V 1.4.4
+            [ 10405, 'GeoIP_code_by_id' ],      # V 1.4.5
+        ) {
+        $geoip_version = $_->[0] if DynaLoader::dl_find_symbol( $lib, $_->[1] );
+      }
+
+      #
+      if ( $geoip_version < 10404 ) {
+        print STDERR <<__ERR__;
+Your installed version of libgeoip is outdated! Please update to at least
+version to 1.4.4 and reinstall this module.
+
+http://www.maxmind.com/app/c
+
+__ERR__
+        exit(0);
+      }
+    }
+  }
+
+=pod
+
   # Test for existence of libGeoIP
   my $found = 0;
   foreach (split(/\s+/, $Config{libpth})) {
@@ -24,6 +61,8 @@ unless ($config{LIBS}) {
       last;
     }
   }
+
+=cut
 
   unless ($found) {
     print STDERR <<'GeoIP_Not_Installed;';
@@ -54,36 +93,37 @@ then you may need to add /usr/local/lib to /etc/ld.so.conf then run
 /sbin/ldconfig /etc/ld.so.conf
 
 GeoIP_Not_Installed;
-  exit 0; # make cpantesters happy
+    exit 0;    # make cpantesters happy
   }
 }
 
-if ($config{LIBS} !~ /\-lGeoIP\b/) {
-    $config{LIBS} .= ' -lGeoIP';
+if ( $config{LIBS} !~ /\-lGeoIP\b/ ) {
+  $config{LIBS} .= ' -lGeoIP';
 }
 
 @extras = ();
 
-push(@extras,
-     CAPI => 'TRUE')
-    if ($PERL_VERSION >= 5.005 and $OSNAME eq 'MSWin32'
-	and $Config{archname} =~ /-object\b/i);
+push( @extras, CAPI => 'TRUE' )
+  if (     $PERL_VERSION >= 5.005
+       and $OSNAME eq 'MSWin32'
+       and $Config{archname} =~ /-object\b/i );
 
-push(@extras,
-     ABSTRACT_FROM => 'lib/Geo/IP.pm',
-     AUTHOR        => 'T.J. Mather (tjmather@tjmather.com)')
-    if ($ExtUtils::MakeMaker::Version >= 5.4301);
+push(
+      @extras,
+      ABSTRACT_FROM => 'lib/Geo/IP.pm',
+      AUTHOR        => 'T.J. Mather (tjmather@tjmather.com)'
+) if ( $ExtUtils::MakeMaker::Version >= 5.4301 );
 
 my $pp = delete $config{PP};
 
 WriteMakefile(
-              NAME	=> 'Geo::IP',
-              dist      => {COMPRESS => 'gzip', SUFFIX => '.gz'},
-              VERSION_FROM => 'lib/Geo/IP.pm',
-              LIBS      => $pp ? [] : ['-lGeoIP'],
-              	DEFINE		    => '-DPERL_EXT',	# otherwise 'cxinc' isn't defined 
+  NAME         => 'Geo::IP',
+  dist         => { COMPRESS => 'gzip', SUFFIX => '.gz' },
+  VERSION_FROM => 'lib/Geo/IP.pm',
+  LIBS => $pp ? [] : ['-lGeoIP'],
+  DEFINE => '-DPERL_EXT',    # otherwise 'cxinc' isn't defined
 
-              CONFIGURE	    => sub { @{$_[1]}{qw/XS C/} = ( {}, [] ) if $pp; $_[1] },
-              @extras,
-	      %config
-             );
+  CONFIGURE => sub { @{ $_[1] }{qw/XS C/} = ( {}, [] ) if $pp; $_[1] },
+  @extras,
+  %config
+);
