@@ -74,10 +74,6 @@ Returns the longitude from the location object.
 
 Returns the time zone from the location object.
 
-=item $dma_code = $record->dma_code; ( DEPRECIATED use metro_code instead )
-
-Returns the DMA code from the location object (for city-level US locations only)
-
 =item $area_code = $record->area_code;
 
 Returns the area code from the location object (for city-level US locations only)
