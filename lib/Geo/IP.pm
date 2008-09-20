@@ -49,6 +49,7 @@ sub GEOIP_REGION_EDITION_REV1() { 3; }
 sub GEOIP_PROXY_EDITION()       { 8; }
 sub GEOIP_ASNUM_EDITION()       { 9; }
 sub GEOIP_NETSPEED_EDITION()    { 10; }
+sub GEOIP_DOMAIN_EDITION()      { 11; }
 
 sub GEOIP_CHARSET_ISO_8859_1(){0;}
 sub GEOIP_CHARSET_UTF8(){1;}
@@ -72,6 +73,9 @@ eval << '__PP_CODE__' unless defined &open;
 
 use strict;
 use FileHandle;
+use File::Spec;
+
+use vars /$PP_OPEN_TYPE_PATH/;
 
 use constant FULL_RECORD_LENGTH        => 50;
 use constant GEOIP_COUNTRY_BEGIN       => 16776960;
@@ -455,8 +459,55 @@ my @names = (
 			  "Saint Martin"
 );
 
+# --- unfortunately we do not know the path so we assume the 
+# default path /usr/local/share/GeoIP
+# if thats not true, you can set $Geo::IP::PP_OPEN_TYPE_PATH
+#
+sub open_type {
+  my ( $class, $type, $flags ) = @_;
+  my %type_dat_name_mapper = (
+    GEOIP_COUNTRY_EDITION()     => 'GeoIP',
+    GEOIP_REGION_EDITION_REV0() => 'GeoIPRegion',
+    GEOIP_REGION_EDITION_REV1() => 'GeoIPRegion',
+    GEOIP_CITY_EDITION_REV0()   => 'GeoIPCity',
+    GEOIP_CITY_EDITION_REV1()   => 'GeoIPCity',
+    GEOIP_ISP_EDITION()         => 'GeoIPISP',
+    GEOIP_ORG_EDITION()         => 'GeoIPOrg',
+    GEOIP_PROXY_EDITION()       => 'GeoIPProxy',
+    GEOIP_ASNUM_EDITION()       => 'GeoIPASNum',
+    GEOIP_NETSPEED_EDITION()    => 'GeoIPNetSpeed',
+    GEOIP_DOMAIN_EDITION()      => 'GeoIPDomain',
+  );
+
+  my $name = $type_dat_name_mapper{$type};
+  die("Invalid database type $type\n") unless $name;
+
+  my $path =
+    defined $Geo::IP::PP_OPEN_TYPE_PATH
+    ? $Geo::IP::PP_OPEN_TYPE_PATH
+    : File::Spec->catfile( File::Spec->rootdir, qw/ usr local share GeoIP / );
+
+  my $mkpath = sub { File::Spec->catfile( File::Spec->rootdir, @_ ) };
+
+  my $path =
+    defined $Geo::IP::PP_OPEN_TYPE_PATH
+    ? $Geo::IP::PP_OPEN_TYPE_PATH
+    : do {
+    $^O eq 'NetWare'
+      ? $mkpath->(qw/ etc GeoIP /)
+      : do {
+	    $^O eq 'MSWin32'
+        ? $mkpath->(qw/ GeoIP /)
+        : $mkpath->(qw/ usr local share GeoIP /);
+      }
+    };
+
+  my $filename = File::Spec->catfile( $path, $name . '.dat' );
+  return $class->open( $filename, $flags );
+}
+
 sub open {
-  die "Geo::IP::PurePerl::open() requires a path name"
+  die "Geo::IP::open() requires a path name"
     unless ( @_ > 1 and $_[1] );
   my ( $class, $db_file, $flags ) = @_;
   my $fh = FileHandle->new;
@@ -1003,12 +1054,12 @@ sub range_by_ip {
   while ( $left_seek_num != 0
           and $c == $gi->_seek_country(  $left_seek_num - 1) ) {
     my $lm = 0xffffffff << 32 - $gi->last_netmask;
-    $left_seek_num = --$left_seek_num & $lm;
+    $left_seek_num = ( $left_seek_num - 1 ) & $lm;
   }
   while ( $right_seek_num != 0xffffffff
           and $c == $gi->_seek_country( $right_seek_num + 1 ) ) {
     my $rm = 0xffffffff << 32 - $gi->last_netmask;
-    $right_seek_num = ++$right_seek_num & $rm;
+    $right_seek_num = ( $right_seek_num + 1 ) & $rm;
     $right_seek_num += ( 0xffffffff & ~$rm );
   }
   return ( num_to_addr($left_seek_num), num_to_addr($right_seek_num) );

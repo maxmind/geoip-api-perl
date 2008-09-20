@@ -1,5 +1,7 @@
 Revision history for Perl extension Geo::IP.
-1.35 September 8th 2008
+1.35 September 20th 2008
+	- Add GEOIP_DOMAIN_EDITION for the PurePerl ( Boris Zentner )
+	- Add open_type method to the PurePerl fallback ( Boris Zentner )
 	- Add CAPI Version detection, for the case, where a outdated CAPI is installed. ( Boris Zentner )
 	- Add metro_code, a alias for dma_code. ( Boris Zentner )
 	- Add range_by_ip, netmask and last_netmask to the PurePerl API ( Boris Zentner )
