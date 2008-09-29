@@ -1,5 +1,5 @@
 Revision history for Perl extension Geo::IP.
-1.35 September 20th 2008
+1.35 September 29th 2008
 	- Add GEOIP_DOMAIN_EDITION for the PurePerl ( Boris Zentner )
 	- Add open_type method to the PurePerl fallback ( Boris Zentner )
 	- Add CAPI Version detection, for the case, where a outdated CAPI is installed. ( Boris Zentner )

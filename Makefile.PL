@@ -64,7 +64,7 @@ __ERR__
 
 =cut
 
-  unless ($found) {
+  if (!$found and !$config{PP}) {
     print STDERR <<'GeoIP_Not_Installed;';
 
 The GeoIP CAPI is not installed you should do that. Otherwise try 
