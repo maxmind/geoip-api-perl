@@ -1,7 +1,7 @@
 To install the GeoIP C library, go to
   http://www.maxmind.com/app/c
 
-Note that Geo::IP 1.30 requires GeoIP C 1.4.3 or higher
+Note that Geo::IP 1.35 requires GeoIP C 1.4.4 or higher
 
 To install the Perl XS wrapper, run
 
