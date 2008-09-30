@@ -156,7 +156,7 @@ range_by_ip(gi, addr)
 		EXTEND(SP,2);
 		PUSHs( sv_2mortal( newSVpv(r[0], 0) ) );
 		PUSHs( sv_2mortal( newSVpv(r[1], 0) ) );
-	  
+
 		if ( r[0] )
 			free(r[0]);
 		if ( r[1] )
@@ -349,7 +349,7 @@ int
 metro_code(gir)
 	GeoIPRecord *gir
     CODE:
-	RETVAL = gir->dma_code; /* dma_code is correct, it is a alias to metro_code */
+       RETVAL = gir->dma_code; /* we can NOT use metro_code here. metro_code may be not present in older CAPI's */
     OUTPUT:
 	RETVAL
 
