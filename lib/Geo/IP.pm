@@ -75,7 +75,7 @@ use strict;
 use FileHandle;
 use File::Spec;
 
-use vars /$PP_OPEN_TYPE_PATH/;
+use vars qw/$PP_OPEN_TYPE_PATH/;
 
 use constant FULL_RECORD_LENGTH        => 50;
 use constant GEOIP_COUNTRY_BEGIN       => 16776960;
@@ -481,11 +481,6 @@ sub open_type {
 
   my $name = $type_dat_name_mapper{$type};
   die("Invalid database type $type\n") unless $name;
-
-  my $path =
-    defined $Geo::IP::PP_OPEN_TYPE_PATH
-    ? $Geo::IP::PP_OPEN_TYPE_PATH
-    : File::Spec->catfile( File::Spec->rootdir, qw/ usr local share GeoIP / );
 
   my $mkpath = sub { File::Spec->catfile( File::Spec->rootdir, @_ ) };
 
