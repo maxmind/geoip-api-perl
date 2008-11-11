@@ -915,10 +915,9 @@ sub org_by_name {
 }
 
 #this function returns isp or org of the domain name
-sub isp_by_name {
-  my ( $gi, $host ) = @_;
-  $gi->org_by_name($host);
-}
+*isp_by_name = \*org_by_name;
+*isp_by_addr = \*org_by_name;
+*org_by_addr = \*org_by_name;
 
 #this function returns the region
 sub region_by_name {
