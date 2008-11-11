@@ -1,4 +1,5 @@
 Revision history for Perl extension Geo::IP.
+	- Add isp_by_addr and org_by_addr to the pureperl fallback ( Boris Zentner )
 1.35 September 29th 2008
 	- Add GEOIP_DOMAIN_EDITION for the PurePerl ( Boris Zentner )
 	- Add open_type method to the PurePerl fallback ( Boris Zentner )
