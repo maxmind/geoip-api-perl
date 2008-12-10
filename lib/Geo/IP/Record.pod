@@ -88,9 +88,11 @@ Returns the metro code from the location object (for city-level US locations onl
  Returns the continent code from the location object.
  Possible continent codes are AF, AS, EU, NA, OC, SA for Africa, Asia, Europe, North America, Oceania  and South America. 
 
+=back
+
 =head1 VERSION
 
-1.20
+1.21
 
 =head1 AUTHOR
 
