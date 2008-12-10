@@ -1,5 +1,6 @@
 Revision history for Perl extension Geo::IP.
-	- Fix require CAPI 1.4.5 not 1.4.4 for range_by_ip ( Boris Zentner )
+	- Add the methodes charset and set_charset to the pureperl fallback ( Boris Zentner )
+	- Fix: We require CAPI 1.4.5 not 1.4.4 for range_by_ip ( Boris Zentner )
 	- Add isp_by_addr and org_by_addr to the pureperl fallback ( Boris Zentner )
 1.35 September 29th 2008
 	- Add GEOIP_DOMAIN_EDITION for the PurePerl ( Boris Zentner )

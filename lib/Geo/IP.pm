@@ -7,7 +7,7 @@ use vars qw($VERSION @EXPORT  $GEOIP_PP_ONLY @ISA $XS_VERSION);
 BEGIN { $GEOIP_PP_ONLY = 0 unless defined( $GEOIP_PP_ONLY );}
 
 BEGIN {       
-	$VERSION = '1.35';
+	$VERSION = '1.36';
   eval {
 
     # PERL_DL_NONLAZY must be false, or any errors in loading will just
@@ -74,6 +74,23 @@ eval << '__PP_CODE__' unless defined &open;
 use strict;
 use FileHandle;
 use File::Spec;
+
+BEGIN {
+  if ( $] >= 5.008 ) {
+    require Encode;
+	Encode->import(qw/ decode /);
+  }
+  else {
+    *decode = sub {
+      local $_ = $_[1];
+      use bytes;
+       s/([\x80-\xff])/my $c = ord($1);
+	       my $p = $c >= 192 ? 1 : 0; 
+	       pack ( 'CC' => 0xc2 + $p , $c & ~0x40 ); /ge;
+	   return $_;
+    };
+  }
+};
 
 use vars qw/$PP_OPEN_TYPE_PATH/;
 
@@ -565,6 +582,7 @@ sub _setup_segments {
   my $delim;
   my $buf;
 
+  $gi->{_charset} = GEOIP_CHARSET_ISO_8859_1; 
   $gi->{"databaseType"}  = GEOIP_COUNTRY_EDITION;
   $gi->{"record_length"} = STANDARD_RECORD_LENGTH;
 
@@ -668,6 +686,17 @@ sub _seek_country {
 
   print STDERR
 "Error Traversing Database for ipnum = $ipnum - Perhaps database is corrupt?";
+}
+
+sub charset {
+  return $_[0]->{_charset};
+}
+
+sub set_charset{
+  my ($gi, $charset) = @_;
+  my $old_charset = $gi->{_charset};
+  $gi->{_charset} = $charset;
+  return $old_charset;
 }
 
 #this function returns the country code of ip address
@@ -855,6 +884,13 @@ sub get_city_record {
     }
   }
   $record_region_name = _get_region_name($record_country_code, $record_region) || '';
+
+
+ # the pureperl API must convert the string by themself to UTF8
+ # using Encode for perl >= 5.008 otherwise use it's own iso-8859-1 to utf8 converter
+ $record_city = decode( 'iso-8859-1' => $record_city ) 
+   if $gi->charset == GEOIP_CHARSET_UTF8; 
+
   return (
            $record_country_code, $record_country_code3, $record_country_name,
            $record_region,       $record_city,          $record_postal_code,
@@ -5847,6 +5883,7 @@ Returns database string, includes version, date, build number and copyright noti
 
 Set the charset for the city name - defaults to GEOIP_CHARSET_ISO_8859_1.  To
 set UTF8, pass GEOIP_CHARSET_UTF8 to set_charset.
+For perl >= 5.008 the utf8 flag is honored.
 
 =item $charset = $gi->charset;
 
