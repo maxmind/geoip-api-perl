@@ -6,15 +6,15 @@
 
 Summary: Geo::IP module for Perl
 Name: perl-Geo-IP
-Version: 1.35
+Version: 1.36
 Release: 1.%{DISTRO_REL}
 License: GPL
 Group: Applications/Internet
 Source0: http://www.maxmind.com/download/geoip/api/perl/Geo-IP-%{version}.tar.gz
 Url: http://www.maxmind.com/app/perl
 BuildRoot: /var/tmp/%{name}/
-BuildRequires: perl >= 5 GeoIP-devel >= 1.2.1
-Requires: perl >= 5 GeoIP >= 1.2.1
+BuildRequires: perl >= 5 GeoIP-devel >= 1.4.5
+Requires: perl >= 5 GeoIP >= 1.4.5
 BuildArch: noarch
 
 %description

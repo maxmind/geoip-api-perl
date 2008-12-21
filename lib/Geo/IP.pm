@@ -5913,7 +5913,7 @@ http://lists.sourceforge.net/lists/listinfo/geoip-perl
 
 =head1 VERSION
 
-1.35
+1.36
 
 =head1 SEE ALSO
 
