@@ -1,4 +1,6 @@
 Revision history for Perl extension Geo::IP.
+	! Fix: PurePerl's get_city_record_as_hash, record_by_addr and record_by_name to return undef for private and unknown IP's. Former we returned a Geo::IP::Record object with everything undef. The PurePerl code and the CAPI wrapper are now behave the same. ( Boris Zentner )
+	- Update region codes from http://www.maxmind.com/app/fips10_4 Dec 17th, 2008 ( Boris Zentner )
 1.36 December 20th 2008
 	- Add the methods charset and set_charset to the pureperl fallback ( Boris Zentner )
 	- Fix: We require CAPI 1.4.5 not 1.4.4 for range_by_ip ( Boris Zentner )
@@ -14,13 +16,13 @@ Revision history for Perl extension Geo::IP.
 	- Add Geo::IP::Record::region_name to the PurePerl API ( Boris Zentner ) 
 	- Add missing record_by_name function to the PurePerl API ( Boris Zentner ) 
 	- Add missing country/country code 'Other' for the pureperl fallback ( Boris Zentner )
-  - Fix trash of $_ in Geo::Mirror ( Boris Zentner )
-  - Geo::Mirror die, if open failed ( Boris Zentner )
-  - Fix pureperl time_zone for countries with region codes, but only one time_zone ( Boris Zentner ).
-  - Add continent_code to the pureperl and C API ( Boris Zentner ) 
-  - minimum perl version is 5.6 now ( Boris Zentner )
+	- Fix trash of $_ in Geo::Mirror ( Boris Zentner )
+	- Geo::Mirror die, if open failed ( Boris Zentner )
+	- Fix pureperl time_zone for countries with region codes, but only one time_zone ( Boris Zentner ).
+	- Add continent_code to the pureperl and C API ( Boris Zentner ) 
+	- minimum perl version is 5.6 now ( Boris Zentner )
 1.33 May 5th 2008
-  - make cpantesters happy exit 0 early, if libGeoIP is not found. ( Boris Zentner )
+	- make cpantesters happy exit 0 early, if libGeoIP is not found. ( Boris Zentner )
 1.32 May 4th 2008
 	- make Geo::IP::Record::time_zone work for the pure perl part of Geo::IP ( Boris Zentner ) 
 	- BEGIN{$Geo::IP::GEOIP_PP_ONLY=1} use Geo::IP; disable the C API, even if it is installed. ( Boris Zentner )
