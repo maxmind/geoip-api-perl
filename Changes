@@ -1,4 +1,5 @@
 Revision history for Perl extension Geo::IP.
+	- Update timezones for Australia
 	! Fix: PurePerl's get_city_record_as_hash, record_by_addr and record_by_name to return undef for private and unknown IP's. Former we returned a Geo::IP::Record object with everything undef. The PurePerl code and the CAPI wrapper are now behave the same. ( Boris Zentner )
 	- Update region codes from http://www.maxmind.com/app/fips10_4 Dec 17th, 2008 ( Boris Zentner )
 1.36 December 20th 2008
