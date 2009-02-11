@@ -45,6 +45,7 @@ for ( qw: country_code country_code3 country_name
   local $_ = <DATA>;    # skip first line
   while (<DATA>) {
     chomp;
+    next if /^\s*$/;
     my ( $country, $region, $timezone ) = split /\t/;
     $TIME_ZONE->{$country}->{ $region || '' } = $timezone;
   }
@@ -116,11 +117,12 @@ US	VA	America/New_York
 US	WA	America/Los_Angeles
 US	WV	America/New_York
 US	WI	America/Chicago
+US	WY	America/Denver
 CA	AB	America/Edmonton
 CA	BC	America/Vancouver
 CA	MB	America/Winnipeg
 CA	NB	America/Halifax
-CA	NF	America/St_Johns
+CA	NL	America/St_Johns
 CA	NT	America/Yellowknife
 CA	NS	America/Halifax
 CA	NU	America/Rankin_Inlet
@@ -128,6 +130,15 @@ CA	ON	America/Rainy_River
 CA	PE	America/Halifax
 CA	QC	America/Montreal
 CA	SK	America/Regina
+CA	YT	America/Whitehorse
+AU	01	Australia/Canberra
+AU	02	Australia/NSW
+AU	03	Australia/North
+AU	04	Australia/Queensland
+AU	05	Australia/South
+AU	06	Australia/Tasmania
+AU	07	Australia/Victoria
+AU	08	Australia/West
 AS		US/Samoa
 CI		Africa/Abidjan
 GH		Africa/Accra
@@ -255,7 +266,6 @@ FO		Atlantic/Faeroe
 IS		Atlantic/Reykjavik
 GS		Atlantic/South_Georgia
 SH		Atlantic/St_Helena
-AU		Australia/Queensland
 BR		Brazil/Acre
 CL		Chile/Continental
 NL		Europe/Amsterdam
@@ -365,3 +375,4 @@ IM		Europe/Isle_of_Man
 JE		Europe/Jersey
 BL		America/St_Barthelemy
 MF		America/Marigot
+
