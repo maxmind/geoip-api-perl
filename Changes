@@ -1,4 +1,10 @@
 Revision history for Perl extension Geo::IP.
+	- Change the default values of Geo::IP::Record fields for metro_code and area_code to 0 instead of '' PurePerl only ( Boris Zentner )
+	- Change the default values of Geo::IP::Record fields for region, postal_code and region_name to undef instead of '' ( Boris Zentner )
+	- Force the output of Geo::IP::Record::longitude and ::latitude to four decimal places ( Boris Zentner )
+	- Fix PurePerl three letter code for Romania ( Boris Zentner )
+	- Update PurePerl regionnames 20090201 ( Boris Zentner )
+	- Update PurePerl timezones 20090201 ( Boris Zentner )
 	- Update timezones for Australia
 	! Fix: PurePerl's get_city_record_as_hash, record_by_addr and record_by_name to return undef for private and unknown IP's. Former we returned a Geo::IP::Record object with everything undef. The PurePerl code and the CAPI wrapper are now behave the same. ( Boris Zentner )
 	- Update region codes from http://www.maxmind.com/app/fips10_4 Dec 17th, 2008 ( Boris Zentner )

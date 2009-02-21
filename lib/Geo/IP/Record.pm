@@ -27,17 +27,19 @@ BEGIN {
 
 eval <<'__PP__' if $pp;
 
-for ( qw: country_code country_code3 country_name
-          region       region_name   city
-          postal_code  dma_code      area_code 
-          latitude     longitude     continent_code
-		  metro_code                                   : ) {
+for ( qw: country_code    country_code3  country_name
+          region          region_name    city
+          postal_code     dma_code       area_code 
+          continent_code  metro_code                      : ) {
 
   no strict   qw/ refs /;
   no warnings qw/ redefine /;
   my $m = $_; # looks bogus, but it is not! it is a copy not a alias
   *$_ = sub { $_[0]->{$m} };
 }
+
+sub longitude {sprintf('%.4f', $_[0]->{longitude})}
+sub latitude  {sprintf('%.4f', $_[0]->{latitude})}
 
 {
   my $TIME_ZONE;
@@ -115,8 +117,8 @@ US	UT	America/Denver
 US	VT	America/New_York
 US	VA	America/New_York
 US	WA	America/Los_Angeles
-US	WV	America/New_York
 US	WI	America/Chicago
+US	WV	America/New_York
 US	WY	America/Denver
 CA	AB	America/Edmonton
 CA	BC	America/Vancouver
@@ -266,6 +268,14 @@ FO		Atlantic/Faeroe
 IS		Atlantic/Reykjavik
 GS		Atlantic/South_Georgia
 SH		Atlantic/St_Helena
+AU	01	Australia/Canberra
+AU	02	Australia/NSW
+AU	03	Australia/North
+AU	04	Australia/Queensland
+AU	05	Australia/South
+AU	06	Australia/Tasmania
+AU	07	Australia/Victoria
+AU	08	Australia/West
 BR		Brazil/Acre
 CL		Chile/Continental
 NL		Europe/Amsterdam
