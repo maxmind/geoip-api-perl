@@ -209,7 +209,7 @@ my @code3s = ( undef, qw/
                NIC NLD NOR NPL NRU NIU NZL OMN
                PAN PER PYF PNG PHL PAK POL SPM
                PCN PRI PSE PRT PLW PRY QAT REU
-               ROM RUS RWA SAU SLB SYC SDN SWE
+               ROU RUS RWA SAU SLB SYC SDN SWE
                SGP SHN SVN SJM SVK SLE SMR SEN
                SOM SUR STP SLV SYR SWZ TCA TCD
                TF  TGO THA TJK TKL TKM TUN TON
@@ -585,6 +585,7 @@ my %country_region_names = (
             '09' => 'Huila',
             '10' => 'Luanda',
             '12' => 'Malanje',
+						'13' => 'Namibe',
             '14' => 'Moxico',
             '15' => 'Uige',
             '16' => 'Zaire',
@@ -939,7 +940,7 @@ my %country_region_names = (
             '04' => 'Mono',
             '05' => 'Oueme',
             '06' => 'Zou',
-            '10' => 'Borgou Department',
+            '10' => 'Borgou',
             '14' => 'Littoral'
   },
   'BM' => {
@@ -4138,6 +4139,7 @@ my %country_region_names = (
             '33' => 'Darfur',
             '34' => 'Kurdufan',
             '35' => 'Upper Nile',
+						'40' => 'Al Wahadah State',
             '44' => 'Central Equatoria State'
   },
   'SE' => {
@@ -5401,15 +5403,15 @@ sub get_city_record {
   my $record_country_code  = "";
   my $record_country_code3 = "";
   my $record_country_name  = "";
-  my $record_region        = "";
-  my $record_city          = "";
-  my $record_postal_code   = "";
+  my $record_region        = undef;
+  my $record_city          = '';
+  my $record_postal_code   = undef;
   my $record_latitude      = "";
   my $record_longitude     = "";
-  my $record_metro_code    = "";
-  my $record_area_code     = "";
+  my $record_metro_code    = 0;
+  my $record_area_code     = 0;
   my $record_continent_code = '';
-  my $record_region_name = '';
+  my $record_region_name = undef;
   my $str_length           = 0;
   my $i;
   my $j;
@@ -5512,7 +5514,7 @@ sub get_city_record {
       $record_area_code = $metroarea_combo % 1000;
     }
   }
-  $record_region_name = _get_region_name($record_country_code, $record_region) || '';
+  $record_region_name = _get_region_name($record_country_code, $record_region);
 
 
  # the pureperl API must convert the string by themself to UTF8
@@ -5538,7 +5540,7 @@ sub get_city_record_as_hash {
            continent_code region_name     metro_code / } =
     $gi->get_city_record($host);
   
-  return defined($gir{country_code}) ? bless( \%gir, 'Geo::IP::Record' ) : undef;
+  return defined($gir{latitude}) ? bless( \%gir, 'Geo::IP::Record' ) : undef;
 }
 
 *record_by_addr = \&get_city_record_as_hash;
