@@ -5634,14 +5634,17 @@ sub region_by_name {
       # return a country of the world
       my $c = $countries[ ( $seek_region - WORLD_OFFSET ) / FIPS_RANGE ];
       my $a2 = ( $seek_region - WORLD_OFFSET ) % FIPS_RANGE;
-      my $r =
-          chr( ( $a2 / 100 ) + 48 )
-        . chr( ( ( $a2 / 10 ) % 10 ) + 48 )
-        . chr( ( $a2 % 10 ) + 48 );
-      return ( $c, $r );
+
+##      my $r =
+##          chr( ( $a2 / 100 ) + 48 )
+##        . chr( ( ( $a2 / 10 ) % 10 ) + 48 )
+##        . chr( ( $a2 % 10 ) + 48 );
+      return ( $c, $a2 ? sprintf('%03d', $a2 ) : undef ) ;
     }
   }
 }
+
+*region_by_addr = \&region_by_name;
 
 sub get_ip_address {
   my ( $gi, $host ) = @_;
@@ -5905,6 +5908,16 @@ For perl >= 5.008 the utf8 flag is honored.
 =item $charset = $gi->charset;
 
 Gets the currently used charset.
+
+=item ( $country, $region ) = $gi->region_by_addr('24.24.24.24');
+
+Returns a list containing country and region. If region and/or country is
+unknown, undef is returned. Sure this works only for region databases.
+
+=item ( $country, $region ) = $gi->region_by_name('www.xyz.com');
+
+Returns a list containing country and region. If region and/or country is
+unknown, undef is returned. Sure this works only for region databases.
 
 =item $netmask = $gi->last_netmask;
 

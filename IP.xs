@@ -174,9 +174,16 @@ region_by_addr(gi, addr)
 	gir = GeoIP_region_by_addr(gi,addr);
         if (gir){
 	  EXTEND(SP,2);
- 	  PUSHs( sv_2mortal( newSVpv(gir->country_code, 2) ) );
-	  PUSHs( sv_2mortal( newSVpv(gir->region, 2) ) );
-	  GeoIPRegion_delete(gir);
+
+          ( gir->country_code[0] == '\0' && gir->country_code[1] == '\0' )
+            ? PUSHs ( sv_newmortal() )
+ 	    : PUSHs ( sv_2mortal( newSVpv(gir->country_code, 2) ) );
+
+          ( gir->region[0] == '\0' && gir->region[1] == '\0' )
+            ? PUSHs ( sv_newmortal() )
+            : PUSHs( sv_2mortal( newSVpv(gir->region, 2) ) );
+
+          GeoIPRegion_delete(gir);
         }
 
 void
@@ -189,8 +196,15 @@ region_by_name(gi, name)
 	gir = GeoIP_region_by_name(gi,name);
         if (gir){
 	  EXTEND(SP,2);
-	  PUSHs( sv_2mortal( newSVpv(gir->country_code, 2) ) );
-	  PUSHs( sv_2mortal( newSVpv(gir->region, 2) ) );
+
+          ( gir->country_code[0] == '\0' && gir->country_code[1] == '\0' )
+            ? PUSHs ( sv_newmortal() )
+ 	    : PUSHs ( sv_2mortal( newSVpv(gir->country_code, 2) ) );
+
+          ( gir->region[0] == '\0' && gir->region[1] == '\0' )
+            ? PUSHs ( sv_newmortal() )
+            : PUSHs( sv_2mortal( newSVpv(gir->region, 2) ) );
+
 	  GeoIPRegion_delete(gir);
         }
 

@@ -1,6 +1,10 @@
 Revision history for Perl extension Geo::IP.
-	- Change the default values of Geo::IP::Record fields for metro_code and area_code to 0 instead of '' PurePerl only ( Boris Zentner )
-	- Change the default values of Geo::IP::Record fields for region, postal_code and region_name to undef instead of '' ( Boris Zentner )
+1.37 March 6th 2009
+        - Document region_by_addr and region_by_name ( Boris Zentner )
+        - region_by_addr and region_by_name return undef for unknown countries and regions. Instead of "\0" and '000' ( Boris Zentner )
+        - Add PP function region_by_addr ( Boris Zentner )
+        - Change the default values of Geo::IP::Record fields for metro_code and area_code to 0 instead of '' PurePerl only ( Boris Zentner )
+        - Change the default values of Geo::IP::Record fields for region, postal_code and region_name to undef instead of '' ( Boris Zentner )
 	- Force the output of Geo::IP::Record::longitude and ::latitude to four decimal places ( Boris Zentner )
 	- Fix PurePerl three letter code for Romania ( Boris Zentner )
 	- Update PurePerl regionnames 20090201 ( Boris Zentner )
