@@ -6,7 +6,7 @@
 
 Summary: Geo::IP module for Perl
 Name: perl-Geo-IP
-Version: 1.36
+Version: 1.37
 Release: 1.%{DISTRO_REL}
 License: GPL
 Group: Applications/Internet
