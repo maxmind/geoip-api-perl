@@ -133,14 +133,6 @@ CA	PE	America/Halifax
 CA	QC	America/Montreal
 CA	SK	America/Regina
 CA	YT	America/Whitehorse
-AU	01	Australia/Canberra
-AU	02	Australia/NSW
-AU	03	Australia/North
-AU	04	Australia/Queensland
-AU	05	Australia/South
-AU	06	Australia/Tasmania
-AU	07	Australia/Victoria
-AU	08	Australia/West
 AS		US/Samoa
 CI		Africa/Abidjan
 GH		Africa/Accra

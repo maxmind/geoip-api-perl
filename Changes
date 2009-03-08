@@ -1,4 +1,5 @@
 Revision history for Perl extension Geo::IP.
+        - Remove Australia double timezones entries. ( Boris Zentner ) 
 1.37 March 6th 2009
         - Document region_by_addr and region_by_name ( Boris Zentner )
         - region_by_addr and region_by_name return undef for unknown countries and regions. Instead of "\0" and '000' ( Boris Zentner )
