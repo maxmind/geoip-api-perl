@@ -1,4 +1,7 @@
 Revision history for Perl extension Geo::IP.
+        - Fix PP GEOIP_ISP_EDITION handling ( Boris Zentner )
+        - Add PP support for GEOIP_DOMAIN_EDITION ( Boris Zentner )
+        - Handle database types in the same way, as the CAPI does ( Boris Zentner )
         - Remove Australia double timezones entries. ( Boris Zentner ) 
 1.37 March 6th 2009
         - Document region_by_addr and region_by_name ( Boris Zentner )
