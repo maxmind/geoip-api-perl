@@ -38,13 +38,13 @@ BEGIN {
   #my $pp = !( defined &_XScompiled && &_XScompiled && !$TESTING_PERL_ONLY );
   my $pp = !defined &open;
 
-  sub GEOIP_COUNTRY_EDITION()     { $pp ? 106 : 1; }
-  sub GEOIP_REGION_EDITION_REV0() { $pp ? 112 : 7; }
-  sub GEOIP_CITY_EDITION_REV0()   { $pp ? 111 : 6; }
-  sub GEOIP_ORG_EDITION()         { $pp ? 110 : 5; }
-  sub GEOIP_ISP_EDITION()         { $pp ? 109 : 4; }
+  sub GEOIP_COUNTRY_EDITION()     { 1; }
   sub GEOIP_CITY_EDITION_REV1()   { 2; }
   sub GEOIP_REGION_EDITION_REV1() { 3; }
+  sub GEOIP_ISP_EDITION()         { 4; }
+  sub GEOIP_ORG_EDITION()         { 5; }
+  sub GEOIP_CITY_EDITION_REV0()   { 6; }
+  sub GEOIP_REGION_EDITION_REV0() { 7; }
   sub GEOIP_PROXY_EDITION()       { 8; }
   sub GEOIP_ASNUM_EDITION()       { 9; }
   sub GEOIP_NETSPEED_EDITION()    { 10; }
@@ -100,15 +100,6 @@ use constant GEOIP_STATE_BEGIN_REV0    => 16700000;
 use constant GEOIP_STATE_BEGIN_REV1    => 16000000;
 use constant STRUCTURE_INFO_MAX_SIZE   => 20;
 use constant DATABASE_INFO_MAX_SIZE    => 100;
-
-#use constant GEOIP_COUNTRY_EDITION     => 106;
-#use constant GEOIP_REGION_EDITION_REV0 => 112;
-#use constant GEOIP_REGION_EDITION_REV1 => 3;
-#use constant GEOIP_CITY_EDITION_REV0   => 111;
-#use constant GEOIP_CITY_EDITION_REV1   => 2;
-#use constant GEOIP_ORG_EDITION         => 110;
-#use constant GEOIP_ISP_EDITION         => 109;
-#use constant GEOIP_NETSPEED_EDITION    => 10;
 
 use constant SEGMENT_RECORD_LENGTH     => 3;
 use constant STANDARD_RECORD_LENGTH    => 3;
@@ -5227,7 +5218,11 @@ sub _setup_segments {
       read( $gi->{fh}, $a, 1 );
 
       #read the databasetype
-      $gi->{"databaseType"} = ord($a);
+      my $database_type = ord($a);
+
+      # backward compatibility for 2003 databases.
+      $database_type -= 105 if $database_type >= 106;
+      $gi->{"databaseType"} = $database_type;
 
 #chose the database segment for the database type
 #if database Type is GEOIP_REGION_EDITION then use database segment GEOIP_STATE_BEGIN
@@ -5243,6 +5238,7 @@ sub _setup_segments {
       elsif (    ( $gi->{"databaseType"} == GEOIP_CITY_EDITION_REV0 )
               || ( $gi->{"databaseType"} == GEOIP_CITY_EDITION_REV1 )
               || ( $gi->{"databaseType"} == GEOIP_ORG_EDITION )
+              || ( $gi->{"databaseType"} == GEOIP_DOMAIN_EDITION )
               || ( $gi->{"databaseType"} == GEOIP_ISP_EDITION ) ) {
         $gi->{"databaseSegments"} = 0;
 
@@ -5255,7 +5251,9 @@ sub _setup_segments {
 
 #record length is four for ISP databases and ORG databases
 #record length is three for country databases, region database and city databases
-        if ( $gi->{"databaseType"} == GEOIP_ORG_EDITION ) {
+        if (    $gi->{"databaseType"} == GEOIP_ORG_EDITION 
+             || $gi->{"databaseType"} == GEOIP_ISP_EDITION
+             || $gi->{"databaseType"} == GEOIP_DOMAIN_EDITION ){
           $gi->{"record_length"} = ORG_RECORD_LENGTH;
         }
       }
