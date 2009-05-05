@@ -42,7 +42,7 @@ open(CLASS,filename,flags = 0)
 	char * filename
 	int flags
     CODE:
-	RETVAL = GeoIP_open(filename,flags);
+	RETVAL = ( filename != NULL ) ? GeoIP_open(filename,flags) : NULL;
     OUTPUT:
 	RETVAL
 
