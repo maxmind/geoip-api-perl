@@ -1,4 +1,5 @@
 Revision history for Perl extension Geo::IP.
+        - Fix segfault when undef is supplied as filename to open ( Boris Zentner )
         - Fix PP GEOIP_ISP_EDITION handling ( Boris Zentner )
         - Add PP support for GEOIP_DOMAIN_EDITION ( Boris Zentner )
         - Handle database types in the same way, as the CAPI does ( Boris Zentner )
