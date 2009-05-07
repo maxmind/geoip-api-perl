@@ -5118,6 +5118,9 @@ sub open_type {
     GEOIP_DOMAIN_EDITION()      => 'GeoIPDomain',
   );
 
+  # backward compatibility for 2003 databases.
+  $type -= 105 if $type >= 106;
+  
   my $name = $type_dat_name_mapper{$type};
   die("Invalid database type $type\n") unless $name;
 
@@ -5592,7 +5595,7 @@ sub region_by_name {
   if ( $gi->{"databaseType"} == GEOIP_REGION_EDITION_REV0 ) {
     my $seek_region =
       $gi->_seek_country( addr_to_num($ip_address) ) - GEOIP_STATE_BEGIN_REV0;
-    if ( $seek_region < 1000 ) {
+    if ( $seek_region >= 1000 ) {
       return (
                "US",
                chr( ( $seek_region - 1000 ) / 26 + 65 )
