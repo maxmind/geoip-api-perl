@@ -73,6 +73,15 @@ database_info (gi)
 	RETVAL
 
 const char *
+country_code_by_ipnum_v6(gi, ptr)
+	GeoIP *gi
+	char *ptr
+    CODE:
+	RETVAL = GeoIP_country_code_by_ipnum_v6(gi,*(geoipv6_t*)ptr);
+    OUTPUT:
+	RETVAL
+
+const char *
 country_code_by_addr(gi, addr)
 	GeoIP *gi
 	char * addr
