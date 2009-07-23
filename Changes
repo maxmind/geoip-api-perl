@@ -1,4 +1,5 @@
 Revision history for Perl extension Geo::IP.
+        - Update PurePerl region names 20090723 ( Boris Zentner )
         - Add XS glue for GeoIP_country_code_by_ipnum_v6 ( Boris Zentner )
 1.38 May 16th 2009
         - PurePerl region_by_addr and region_by_name return '00' for unknown regions, like the CAPI does ( Boris Zentner )
