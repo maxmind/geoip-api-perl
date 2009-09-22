@@ -55,17 +55,21 @@ BEGIN {
 
   # cheat --- try to load Sys::Mmap PurePerl only
   if ($pp) {
-    eval "require Sys::Mmap"
-      ? Sys::Mmap->import
-      : do {
-      for (qw/ PROT_READ MAP_PRIVATE MAP_SHARED /) {
-        no strict 'refs';
-        my $unused_stub = $_;    # we must use a copy
-        *$unused_stub = sub { die 'Sys::Mmap required for mmap support' };
-      }
-      }    # do
-  }    # pp
-
+    eval { 
+        # wrap into eval again, as workaround for centos / mod_perl issue
+        # seems they use $@ without eval somewhere
+      eval "require Sys::Mmap"
+        ? Sys::Mmap->import
+        : do {
+          for (qw/ PROT_READ MAP_PRIVATE MAP_SHARED /) {
+            no strict 'refs';
+            my $unused_stub = $_;    # we must use a copy
+            *$unused_stub = sub { die 'Sys::Mmap required for mmap support' };
+          } # for
+        }; # do
+      1;
+    };  # eval
+  }  # pp
 }
 
 eval << '__PP_CODE__' unless defined &open;
@@ -5269,6 +5273,7 @@ sub _setup_segments {
               || ( $gi->{"databaseType"} == GEOIP_CITY_EDITION_REV1 )
               || ( $gi->{"databaseType"} == GEOIP_ORG_EDITION )
               || ( $gi->{"databaseType"} == GEOIP_DOMAIN_EDITION )
+              || ( $gi->{"databaseType"} == GEOIP_ASNUM_EDITION )
               || ( $gi->{"databaseType"} == GEOIP_ISP_EDITION ) ) {
         $gi->{"databaseSegments"} = 0;
 
@@ -5699,6 +5704,10 @@ sub num_to_addr { join q{.}, unpack( C4 => pack( N => $_[0] ) ) }
 #  my @a = split( '\.', $_[0] );
 #  return $a[0] * 16777216 + $a[1] * 65536 + $a[2] * 256 + $a[3];
 #}
+
+sub database_edition {
+  $_[0]->{databaseType};
+}
 
 sub database_info {
   my $gi = shift;
