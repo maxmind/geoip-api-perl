@@ -17,6 +17,27 @@ MODULE = Geo::IP	PACKAGE = Geo::IP
 
 PROTOTYPES: DISABLE
 
+
+const char *
+continent_code_by_country_code(CLASS, country_code)
+        char * CLASS
+        char * country_code
+
+    CODE:
+	RETVAL = (const char *) GeoIP_country_continent[GeoIP_id_by_code(country_code)];
+    OUTPUT:
+	RETVAL
+
+const char *
+time_zone(CLASS, country_code, region)
+        char * CLASS
+        char * country_code
+        char * region
+    CODE:
+	RETVAL = (const char *) GeoIP_time_zone_by_country_and_region(country_code, region);
+    OUTPUT:
+	RETVAL
+
 GeoIP *
 new(CLASS,flags = 0)
 	char * CLASS
@@ -61,6 +82,14 @@ id_by_name(gi, name)
 	char * name
     CODE:
 	RETVAL = GeoIP_id_by_name(gi,name);
+    OUTPUT:
+	RETVAL
+
+int
+database_edition (gi)
+	GeoIP *gi
+    CODE:
+	RETVAL = GeoIP_database_edition(gi);
     OUTPUT:
 	RETVAL
 
