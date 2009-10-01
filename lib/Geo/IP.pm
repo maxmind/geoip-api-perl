@@ -5586,7 +5586,6 @@ sub org_by_name {
   my $seek_org   = $gi->_seek_country( addr_to_num($ip_address) );
   my $char;
   my $org_buf;
-  my $org_buf_length = 0;
   my $record_pointer;
 
   if ( $seek_org == $gi->{"databaseSegments"} ) {
@@ -5604,13 +5603,11 @@ sub org_by_name {
     $org_buf = substr($gi->{buf}, $record_pointer, MAX_ORG_RECORD_LENGTH );
 	}
 	
-  $char = ord( substr( $org_buf, 0, 1 ) );
-  while ( $char != 0 ) {
-    $org_buf_length++;
-    $char = ord( substr( $org_buf, $org_buf_length, 1 ) );
-  }
+  $org_buf = unpack 'Z*' => $org_buf;
 
-  $org_buf = substr( $org_buf, 0, $org_buf_length );
+  $org_buf = decode( 'iso-8859-1' => $org_buf ) 
+   if $gi->charset == GEOIP_CHARSET_UTF8; 
+
   return $org_buf;
 }
 

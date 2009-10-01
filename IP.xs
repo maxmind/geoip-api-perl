@@ -164,23 +164,45 @@ country_name_by_name(gi, name)
     OUTPUT:
 	RETVAL
 
-char *
+void
 org_by_addr(gi, addr)
 	GeoIP *gi
 	char * addr
-    CODE:
-	RETVAL = GeoIP_org_by_addr(gi,addr);
-    OUTPUT:
-	RETVAL
+    PREINIT:
+        char * n;
+    PPCODE:
+        ST(0) = sv_newmortal();
+	n = GeoIP_org_by_addr(gi,addr);
+        if ( n != NULL ) {
+          ST(0) = newSVpv(n, strlen(n));
+          free(n);
+#if defined(sv_utf8_decode)
+          if ( GeoIP_charset(gi) == GEOIP_CHARSET_UTF8 )
+            svutf8_on(ST(0));
+#endif
+          sv_2mortal(ST(0));
+        }
+       XSRETURN(1);
 
-char *
+void
 org_by_name(gi, name)
 	GeoIP *gi
 	char * name
-    CODE:
-	RETVAL = GeoIP_org_by_name(gi,name);
-    OUTPUT:
-	RETVAL
+    PREINIT:
+        char * n;
+    PPCODE:
+        ST(0) = sv_newmortal();
+	n = GeoIP_org_by_name(gi,name);
+        if ( n != NULL ) {
+          ST(0) = newSVpv(n, strlen(n));
+          free(n);
+#if defined(sv_utf8_decode)
+          if ( GeoIP_charset(gi) == GEOIP_CHARSET_UTF8 )
+            svutf8_on(ST(0));
+#endif
+          sv_2mortal(ST(0));
+        }
+       XSRETURN(1);
 
 void
 range_by_ip(gi, addr)
