@@ -178,7 +178,7 @@ org_by_addr(gi, addr)
           free(n);
 #if defined(sv_utf8_decode)
           if ( GeoIP_charset(gi) == GEOIP_CHARSET_UTF8 )
-            svutf8_on(ST(0));
+            SvUTF8_on(ST(0));
 #endif
           sv_2mortal(ST(0));
         }
@@ -198,7 +198,7 @@ org_by_name(gi, name)
           free(n);
 #if defined(sv_utf8_decode)
           if ( GeoIP_charset(gi) == GEOIP_CHARSET_UTF8 )
-            svutf8_on(ST(0));
+            SvUTF8_on(ST(0));
 #endif
           sv_2mortal(ST(0));
         }
