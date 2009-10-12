@@ -1,4 +1,5 @@
 Revision history for Perl extension Geo::IP.
+        ! Change Turkey's continent code from AS to EU ( Boris Zentner )
         ! org_by_* and friends return UTF8 scalars, if the charset is set to GEOIP_CHARSET_UTF8 ( Boris Zentner )
         - Add PP ASNum support ( Boris Zentner )
         - Add XS glue for time_zone and continent_code_by_country_code ( Boris Zentner )
