@@ -111,6 +111,42 @@ country_code_by_ipnum_v6(gi, ptr)
 	RETVAL
 
 const char *
+country_code_by_addr_v6(gi, addr)
+	GeoIP *gi
+	char * addr
+    CODE:
+	RETVAL = GeoIP_country_code_by_addr_v6(gi,addr);
+    OUTPUT:
+	RETVAL
+
+const char *
+country_code_by_name_v6(gi, name)
+	GeoIP *gi
+	char * name
+    CODE:
+	RETVAL = GeoIP_country_code_by_name_v6(gi,name);
+    OUTPUT:
+	RETVAL
+
+const char *
+country_code3_by_addr_v6(gi, addr)
+	GeoIP *gi
+	char * addr
+    CODE:
+	RETVAL = GeoIP_country_code3_by_addr_v6(gi,addr);
+    OUTPUT:
+	RETVAL
+
+const char *
+country_code3_by_name_v6(gi, name)
+	GeoIP *gi
+	char * name
+    CODE:
+	RETVAL = GeoIP_country_code3_by_name_v6(gi,name);
+    OUTPUT:
+	RETVAL
+
+const char *
 country_code_by_addr(gi, addr)
 	GeoIP *gi
 	char * addr
