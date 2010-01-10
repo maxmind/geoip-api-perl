@@ -1,4 +1,10 @@
 Revision history for Perl extension Geo::IP.
+        - Add some more v6 XS glue. IPv6 support require the CAPI to work.
+            GeoIP_country_code_by_addr_v6
+            GeoIP_country_code_by_name_v6
+            GeoIP_country_code3_by_addr_v6
+            GeoIP_country_code3_by_name_v6
+            ( Boris Zentner )
         ! Change RU's continent code from AS to EU ( Boris Zentner )
         ! Change Turkey's continent code from AS to EU ( Boris Zentner )
         ! org_by_* and friends return UTF8 scalars, if the charset is set to GEOIP_CHARSET_UTF8 ( Boris Zentner )
