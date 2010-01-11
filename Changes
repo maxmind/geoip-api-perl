@@ -1,4 +1,6 @@
 Revision history for Perl extension Geo::IP.
+        - Export GEOIP_CITYCONFIDENCE_EDITION, GEOIP_LOCATIONA_EDITION,
+          GEOIP_ACCURACYRADIUS_EDITION and GEOIP_COUNTRY_EDITION_V6 ( Boris Zentner )
         - Add some more v6 XS glue. IPv6 support require the CAPI to work.
             GeoIP_country_code_by_addr_v6
             GeoIP_country_code_by_name_v6
