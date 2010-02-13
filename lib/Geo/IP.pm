@@ -57,6 +57,11 @@ BEGIN {
   sub GEOIP_CHARSET_ISO_8859_1() { 0; }
   sub GEOIP_CHARSET_UTF8()       { 1; }
 
+  # 
+  sub api {
+    defined &Geo::IP::Record::_XScompiled ? 'CAPI' : 'PurePerl';
+  }
+
   # cheat --- try to load Sys::Mmap PurePerl only
   if ($pp) {
     eval { 
@@ -74,6 +79,12 @@ BEGIN {
       1;
     };  # eval
   }  # pp
+  else {
+    eval << '__CAPI_GLUE__';
+  *isp_by_name = *org_by_name;
+  *isp_by_addr = *org_by_addr;
+__CAPI_GLUE__
+  }
 }
 
 eval << '__PP_CODE__' unless defined &open;
@@ -5583,10 +5594,14 @@ sub get_city_record_as_hash {
 *record_by_addr = \&get_city_record_as_hash;
 *record_by_name = \&get_city_record_as_hash;
 
-#this function returns isp or org of the domain name
-sub org_by_name {
+sub org_by_name{
   my ( $gi, $host ) = @_;
-  my $ip_address = $gi->get_ip_address($host);
+  return $gi->org_by_addr($gi->get_ip_address($host));
+}
+
+#this function returns isp or org of the domain name
+sub org_by_addr {
+  my ( $gi, $ip_address ) = @_;
   my $seek_org   = $gi->_seek_country( addr_to_num($ip_address) );
   my $char;
   my $org_buf;
@@ -5617,8 +5632,8 @@ sub org_by_name {
 
 #this function returns isp or org of the domain name
 *isp_by_name = \*org_by_name;
-*isp_by_addr = \*org_by_name;
-*org_by_addr = \*org_by_name;
+*isp_by_addr = \*org_by_addr;
+*org_by_addr = \*org_by_addr;
 
 #this function returns the region
 sub region_by_name {
