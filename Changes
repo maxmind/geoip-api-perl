@@ -1,4 +1,10 @@
 Revision history for Perl extension Geo::IP.
+        - Add isp_by_name and isp_by_addr if the CAPI is used ( Boris Zentner )
+        - Add isp_by_addr and org_by_addr to the PurePerl API ( Boris Zentner )
+        - Add api method, so users know if they use the PurePerl or CAPI glue
+          print Geo::IP->api ( Boris Zentner )
+        - Silence redefined warning, when perl is started with -w and the
+            PurePerl API is used ( Boris Zentner )
         - Export GEOIP_CITYCONFIDENCE_EDITION, GEOIP_LOCATIONA_EDITION,
           GEOIP_ACCURACYRADIUS_EDITION and GEOIP_COUNTRY_EDITION_V6 ( Boris Zentner )
         - Add some more v6 XS glue. IPv6 support require the CAPI to work.

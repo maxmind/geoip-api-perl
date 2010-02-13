@@ -18,8 +18,6 @@ use vars qw/$pp/;
     return sprintf( "%.4f", $gir->_longitude );
   }
 
-
-
 BEGIN {
  $pp = !defined(&Geo::IP::Record::city)
   || $Geo::IP::GEOIP_PP_ONLY;
@@ -37,6 +35,9 @@ for ( qw: country_code    country_code3  country_name
   my $m = $_; # looks bogus, but it is not! it is a copy not a alias
   *$_ = sub { $_[0]->{$m} };
 }
+
+# for the case warnings are globaly enabled with perl -w and the CAPI is absent
+no warnings qw/ redefine /;
 
 sub longitude {sprintf('%.4f', $_[0]->{longitude})}
 sub latitude  {sprintf('%.4f', $_[0]->{latitude})}
