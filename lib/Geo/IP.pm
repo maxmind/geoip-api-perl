@@ -7,7 +7,7 @@ use vars qw($VERSION @EXPORT  $GEOIP_PP_ONLY @ISA $XS_VERSION);
 BEGIN { $GEOIP_PP_ONLY = 0 unless defined($GEOIP_PP_ONLY); }
 
 BEGIN {
-  $VERSION = '1.38';
+  $VERSION = '1.39';
   eval {
 
     # PERL_DL_NONLAZY must be false, or any errors in loading will just
@@ -38,47 +38,48 @@ BEGIN {
   #my $pp = !( defined &_XScompiled && &_XScompiled && !$TESTING_PERL_ONLY );
   my $pp = !defined &open;
 
-  sub GEOIP_COUNTRY_EDITION()     { 1; }
-  sub GEOIP_CITY_EDITION_REV1()   { 2; }
-  sub GEOIP_REGION_EDITION_REV1() { 3; }
-  sub GEOIP_ISP_EDITION()         { 4; }
-  sub GEOIP_ORG_EDITION()         { 5; }
-  sub GEOIP_CITY_EDITION_REV0()   { 6; }
-  sub GEOIP_REGION_EDITION_REV0() { 7; }
-  sub GEOIP_PROXY_EDITION()       { 8; }
-  sub GEOIP_ASNUM_EDITION()       { 9; }
-  sub GEOIP_NETSPEED_EDITION()    { 10; }
-  sub GEOIP_DOMAIN_EDITION()      { 11; }
-  sub GEOIP_COUNTRY_EDITION_V6()  { 12; }
-  sub GEOIP_LOCATIONA_EDITION()   { 13; }
+  sub GEOIP_COUNTRY_EDITION()        { 1; }
+  sub GEOIP_CITY_EDITION_REV1()      { 2; }
+  sub GEOIP_REGION_EDITION_REV1()    { 3; }
+  sub GEOIP_ISP_EDITION()            { 4; }
+  sub GEOIP_ORG_EDITION()            { 5; }
+  sub GEOIP_CITY_EDITION_REV0()      { 6; }
+  sub GEOIP_REGION_EDITION_REV0()    { 7; }
+  sub GEOIP_PROXY_EDITION()          { 8; }
+  sub GEOIP_ASNUM_EDITION()          { 9; }
+  sub GEOIP_NETSPEED_EDITION()       { 10; }
+  sub GEOIP_DOMAIN_EDITION()         { 11; }
+  sub GEOIP_COUNTRY_EDITION_V6()     { 12; }
+  sub GEOIP_LOCATIONA_EDITION()      { 13; }
   sub GEOIP_ACCURACYRADIUS_EDITION() { 14; }
   sub GEOIP_CITYCONFIDENCE_EDITION() { 15; }
 
   sub GEOIP_CHARSET_ISO_8859_1() { 0; }
   sub GEOIP_CHARSET_UTF8()       { 1; }
 
-  # 
+  #
   sub api {
     defined &Geo::IP::Record::_XScompiled ? 'CAPI' : 'PurePerl';
   }
 
   # cheat --- try to load Sys::Mmap PurePerl only
   if ($pp) {
-    eval { 
-        # wrap into eval again, as workaround for centos / mod_perl issue
-        # seems they use $@ without eval somewhere
+    eval {
+
+      # wrap into eval again, as workaround for centos / mod_perl issue
+      # seems they use $@ without eval somewhere
       eval "require Sys::Mmap"
         ? Sys::Mmap->import
         : do {
-          for (qw/ PROT_READ MAP_PRIVATE MAP_SHARED /) {
-            no strict 'refs';
-            my $unused_stub = $_;    # we must use a copy
-            *$unused_stub = sub { die 'Sys::Mmap required for mmap support' };
-          } # for
-        }; # do
+        for (qw/ PROT_READ MAP_PRIVATE MAP_SHARED /) {
+          no strict 'refs';
+          my $unused_stub = $_;    # we must use a copy
+          *$unused_stub = sub { die 'Sys::Mmap required for mmap support' };
+        }    # for
+        };    # do
       1;
-    };  # eval
-  }  # pp
+    };    # eval
+  }    # pp
   else {
     eval << '__CAPI_GLUE__';
   *isp_by_name = *org_by_name;
@@ -2643,7 +2644,6 @@ my %country_region_names = (
             '09' => 'Batken'
   },
   'KH' => {
-            '00' => 'Banteay Meanchey',
             '01' => 'Batdambang',
             '02' => 'Kampong Cham',
             '03' => 'Kampong Chhnang',
@@ -2663,6 +2663,7 @@ my %country_region_names = (
             '17' => 'Stung Treng',
             '18' => 'Svay Rieng',
             '19' => 'Takeo',
+            '25' => 'Banteay Meanchey',
             '29' => 'Batdambang',
             '30' => 'Pailin'
   },
@@ -5132,7 +5133,7 @@ my %country_region_names = (
             '08' => 'Masvingo',
             '09' => 'Bulawayo',
             '10' => 'Harare'
-  }
+    }
 );
 
 sub _get_region_name {
@@ -5829,14 +5830,40 @@ Geo::IP - Look up location and network information by IP Address
 =head1 SYNOPSIS
 
   use Geo::IP;
-
-  my $gi = Geo::IP->new(GEOIP_STANDARD);
-
+  my $gi = Geo::IP->new(GEOIP_MEMORY_CACHE);
   # look up IP address '24.24.24.24'
   # returns undef if country is unallocated, or not defined in our database
   my $country = $gi->country_code_by_addr('24.24.24.24');
   $country = $gi->country_code_by_name('yahoo.com');
   # $country is equal to "US"
+  
+
+  use Geo::IP;
+  my $gi = Geo::IP->open("/usr/local/share/GeoIP/GeoIPCity.dat", GEOIP_STANDARD);
+  my $record = $gi->record_by_addr('24.24.24.24');
+  print $record->country_code,
+        $record->country_code3,
+        $record->country_name,
+        $record->region,
+        $record->region_name,
+        $record->city,
+        $record->postal_code,
+        $record->latitude,
+        $record->longitude,
+        $record->time_zone,
+        $record->area_code,
+        $record->continent_code,
+        $record->metro_code;
+
+
+  # the IPv6 support is currently only avail if you use the CAPI which is much
+  # faster anyway. ie: print Geo::IP->api equals to 'CAPI'
+  use Socket;
+  use Socket6;
+  use Geo::IP;
+  my $g = Geo::IP->open('/usr/local/share/GeoIP/GeoIPv6.dat') or die;
+  print $g->country_code_by_ipnum_v6(inet_pton AF_INET6, '::24.24.24.24');
+  print $g->country_code_by_addr_v6('2a02:e88::');
 
 =head1 DESCRIPTION
 
@@ -5866,6 +5893,11 @@ database automatically each month, by running a program called geoipupdate
 included with the C API from a cronjob.  For more details on the differences
 between the free and paid databases, see:
 http://www.maxmind.com/app/geoip_country
+
+Do not miss the city database, described in Geo::IP::Record
+
+Make sure to use the F<geolite-mirror-simple.pl> script from the example directory to
+stay current with the databases.
 
 =head1 CLASS METHODS
 
@@ -5986,6 +6018,75 @@ Sets netmask for the last lookup
 
 Returns the start and end of the current network block. The method tries to join several continous netblocks.
 
+=item $api = $gi->api or $api = Geo::IP->api
+
+Returns the currently used API.
+
+  # prints either CAPI or PurePerl
+  print Geo::IP->api;
+
+=item $continent = $gi->continent_code_by_country_code('US');
+
+Returns the continentcode by country code.
+
+=item $dbe = $gi->database_edition
+
+Returns the database_edition of the currently opened database.
+
+  if ( $gi->database_edition == GEOIP_COUNTRY_EDITION ){
+    ...
+  }
+
+=item $isp = $gi->isp_by_addr('24.24.24.24');
+
+Returns the isp for 24.24.24.24
+
+=item $isp = $gi->isp_by_name('www.maxmind.com');
+
+Returns the isp for www.something.de
+
+=item my $time_zone = $gi->time_zone('US', 'AZ');
+
+Returns the time zone for country/region.
+
+  # undef
+  print  $gi->time_zone('US', '');
+
+  # America/Phoenix
+  print  $gi->time_zone('US', 'AZ');
+
+  # Europe/Berlin
+  print  $gi->time_zone('DE', '00');
+
+  # Europe/Berlin
+  print  $gi->time_zone('DE', '');
+
+=item $id = $gi->id_by_addr('24.24.24.24');
+
+Returns the country_id for 24.24.24.24. The country_id might be useful as array
+index. 0 is unknown.
+
+=item $id = $gi->id_by_name('www.maxmind.com');
+
+Returns the country_id for www.maxmind.com. The country_id might be useful as array
+index. 0 is unknown.
+
+=item $cc = $gi->country_code3_by_addr_v6('::24.24.24.24');
+
+=item $cc = $gi->country_code3_by_name_v6('ipv6.google.com');
+
+=item $cc = $gi->country_code_by_addr_v6('2a02:ea0::');
+
+=item $cc = $gi->country_code_by_ipnum_v6($ipnum);
+
+  use Socket;
+  use Socket6;
+  use Geo::IP;
+  my $g = Geo::IP->open('/usr/local/share/GeoIP/GeoIPv6.dat') or die;
+  print $g->country_code_by_ipnum_v6(inet_pton AF_INET6, '::24.24.24.24');
+
+=item $cc = $gi->country_code_by_name_v6('ipv6.google.com');
+
 =back
 
 =head1 MAILING LISTS AND CVS
@@ -5998,11 +6099,14 @@ http://lists.sourceforge.net/lists/listinfo/geoip-perl
 
 =head1 VERSION
 
-1.38
+1.39
 
 =head1 SEE ALSO
 
 Geo::IP::Record
+
+
+
 
 =head1 AUTHOR
 
