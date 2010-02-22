@@ -1,4 +1,6 @@
 Revision history for Perl extension Geo::IP.
+        - Add example/geolite-mirror-simple.pl to download maxmind databases ( Boris Zentner )
+        - Update region codes ( Boris Zentner )
         - Update timezones ( Boris Zentner )
         - Add isp_by_name and isp_by_addr if the CAPI is used ( Boris Zentner )
         - Add isp_by_addr and org_by_addr to the PurePerl API ( Boris Zentner )
