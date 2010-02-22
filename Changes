@@ -1,4 +1,5 @@
 Revision history for Perl extension Geo::IP.
+        - Update timezones ( Boris Zentner )
         - Add isp_by_name and isp_by_addr if the CAPI is used ( Boris Zentner )
         - Add isp_by_addr and org_by_addr to the PurePerl API ( Boris Zentner )
         - Add api method, so users know if they use the PurePerl or CAPI glue
