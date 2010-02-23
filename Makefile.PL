@@ -18,7 +18,8 @@ while ( $_ = shift ) {
 }
 
 unless ( $config{LIBS} ) {
-  # currently we check only for the C Library version if it is in a 
+
+  # currently we check only for the C Library version if it is in a
   # standard place
   my $geoip_version = 0;
   my $clib          = DynaLoader::dl_findfile('GeoIP');
@@ -30,18 +31,19 @@ unless ( $config{LIBS} ) {
     my $lib = DynaLoader::dl_load_file( $clib, 0 );
     if ($lib) {
       for (
-            [ 10403, 'GeoIP_last_netmask' ],    # V 1.4.3
-            [ 10405, 'GeoIP_range_by_ip' ],     # V 1.4.5
-            [ 10405, 'GeoIP_code_by_id' ],      # V 1.4.5
+            [ 10403, 'GeoIP_last_netmask' ],         # V 1.4.3
+            [ 10405, 'GeoIP_range_by_ip' ],          # V 1.4.5
+            [ 10405, 'GeoIP_code_by_id' ],           # V 1.4.5
+            [ 10407, 'country_code_by_addr_v6' ],    # V 1.4.7
         ) {
         $geoip_version = $_->[0] if DynaLoader::dl_find_symbol( $lib, $_->[1] );
       }
 
       #
-      if ( $geoip_version < 10405 ) {
+      if ( $geoip_version < 10407 ) {
         print STDERR <<__ERR__;
 Your installed version of libgeoip is outdated! Please update to at least
-version to 1.4.5 and reinstall this module.
+version to 1.4.7 and reinstall this module.
 
 http://www.maxmind.com/app/c
 
@@ -64,7 +66,7 @@ __ERR__
 
 =cut
 
-  if (!$found and !$config{PP}) {
+  if ( !$found and !$config{PP} ) {
     print STDERR <<'GeoIP_Not_Installed;';
 
 The GeoIP CAPI is not installed you should do that. Otherwise try 
