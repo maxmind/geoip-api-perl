@@ -1228,7 +1228,11 @@ my %country_region_names = (
             '10' => 'Magallanes y de la Antartica Chilena',
             '11' => 'Maule',
             '12' => 'Region Metropolitana',
-            '13' => 'Tarapaca'
+            '13' => 'Tarapaca',
+            '14' => 'Los Lagos',
+            '15' => 'Tarapaca',
+            '16' => 'Arica y Parinacota',
+            '17' => 'Los Rios'
   },
   'CM' => {
             '04' => 'Est',

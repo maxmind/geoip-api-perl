@@ -1,4 +1,5 @@
 Revision history for Perl extension Geo::IP.
+        - Update region codes 20100420 ( Boris Zentner )
         - Link at least to CAPI 1.4.7 ( Boris Zentner )
         - Add example/geolite-mirror-simple.pl to download maxmind databases ( Boris Zentner )
         - Update region codes ( Boris Zentner )
