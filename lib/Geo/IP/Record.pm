@@ -53,9 +53,9 @@ sub latitude  {sprintf('%.4f', $_[0]->{latitude})}
     $TIME_ZONE->{$country}->{ $region || '' } = $timezone;
   }
 
-  sub time_zone {
-    my ( $self ) = @_;
-    my ( $country, $region ) = ( $self->country_code, $self->region );
+  # called from Geo::IP
+  sub _time_zone {
+    my ( undef, $country, $region  ) = @_;
     return undef unless $country;
     return undef unless defined $TIME_ZONE->{$country};
     $region ||= '';
@@ -63,6 +63,11 @@ sub latitude  {sprintf('%.4f', $_[0]->{latitude})}
       defined $TIME_ZONE->{$country}->{$region}
       ? $TIME_ZONE->{$country}->{$region}
       : $TIME_ZONE->{$country}->{''};
+  }
+  sub time_zone {
+    my ( $self ) = @_;
+    my ( $country, $region ) = ( $self->country_code, $self->region );
+    return $self->_time_zone( $country, $region );
   }
 }
 

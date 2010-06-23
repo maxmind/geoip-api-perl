@@ -22,7 +22,6 @@ const char *
 continent_code_by_country_code(CLASS, country_code)
         char * CLASS
         char * country_code
-
     CODE:
 	RETVAL = (const char *) GeoIP_country_continent[GeoIP_id_by_code(country_code)];
     OUTPUT:

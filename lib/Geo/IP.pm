@@ -94,6 +94,8 @@ use strict;
 use FileHandle;
 use File::Spec;
 
+require bytes;
+
 BEGIN {
   if ( $] >= 5.008 ) {
     require Encode;
@@ -196,6 +198,13 @@ my @countries = (
  ZA ZM ME ZW A1 A2 O1 AX 
  GG IM JE BL MF/
 );
+
+
+my %_id_by_code;
+for ( 1 .. $#countries ) {
+  $_id_by_code{ $countries[$_] } = $_;
+}
+
 my @code3s = ( undef, qw/
                    AP  EU  AND ARE AFG ATG AIA
                ALB ARM ANT AGO AQ  ARG ASM AUT
@@ -5139,6 +5148,12 @@ my %country_region_names = (
             '10' => 'Harare'
     }
 );
+
+sub continent_code_by_country_code { 
+    my $id = $_id_by_code{ $_[1] } || 0;
+    return $continents[$id];
+}
+sub time_zone { Geo::IP::Record->_time_zone( $_[1], $_[2] ) }
 
 sub _get_region_name {
   my ( $ccode, $region ) = @_;
