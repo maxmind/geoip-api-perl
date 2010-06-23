@@ -4,6 +4,7 @@ example/city.pl
 example/netspeed.pl
 example/region.pl
 example/org.pl
+example/geolite-mirror-simple.pl
 lib/Geo/IP.pm
 lib/Geo/Mirror.pm
 lib/Geo/IP/Record.pm
