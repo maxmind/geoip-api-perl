@@ -1,4 +1,6 @@
 Revision history for Perl extension Geo::IP.
+        - Fix some PP 3letter country codes ( Boris Zentner )
+        - Fix PP continent codes ( Boris Zentner )
         - Add PP continent_code_by_country_code ( Boris Zentner )
         - Add PP Geo::IP->time_zone ( Boris Zentner )
         - Update region codes 20100420 ( Boris Zentner )
