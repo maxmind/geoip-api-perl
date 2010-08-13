@@ -1341,7 +1341,7 @@ my %country_region_names = (
   },
   'DK' => {
             '17' => 'Hovedstaden',
-            '18' => 'Midtjyllen',
+            '18' => 'Midtjylland',
             '19' => 'Nordjylland',
             '20' => 'Sjelland',
             '21' => 'Syddanmark'
