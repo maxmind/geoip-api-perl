@@ -1,4 +1,5 @@
 Revision history for Perl extension Geo::IP.
+        - Export GEOIP_DOMAIN_EDITION by default ( Boris Zentner )
         - Update region codes 20100810 ( Boris Zentner ) 
         - Fix some PP 3letter country codes ( Boris Zentner )
         - Fix PP continent codes ( Boris Zentner )
