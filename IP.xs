@@ -200,6 +200,66 @@ country_name_by_name(gi, name)
 	RETVAL
 
 void
+name_by_ipnum_v6(gi, ptr)
+	GeoIP *gi
+	char * ptr
+    PREINIT:
+        char * n;
+    PPCODE:
+        ST(0) = sv_newmortal();
+	n = GeoIP_name_by_ipnum_v6(gi,*(geoipv6_t*)ptr);
+        if ( n != NULL ) {
+          ST(0) = newSVpv(n, strlen(n));
+          free(n);
+#if defined(sv_utf8_decode)
+          if ( GeoIP_charset(gi) == GEOIP_CHARSET_UTF8 )
+            SvUTF8_on(ST(0));
+#endif
+          sv_2mortal(ST(0));
+        }
+       XSRETURN(1);
+
+void
+name_by_addr_v6(gi, addr)
+	GeoIP *gi
+	char * addr
+    PREINIT:
+        char * n;
+    PPCODE:
+        ST(0) = sv_newmortal();
+	n = GeoIP_name_by_addr_v6(gi,addr);
+        if ( n != NULL ) {
+          ST(0) = newSVpv(n, strlen(n));
+          free(n);
+#if defined(sv_utf8_decode)
+          if ( GeoIP_charset(gi) == GEOIP_CHARSET_UTF8 )
+            SvUTF8_on(ST(0));
+#endif
+          sv_2mortal(ST(0));
+        }
+       XSRETURN(1);
+
+void
+name_by_name_v6(gi, name)
+	GeoIP *gi
+	char * name
+    PREINIT:
+        char * n;
+    PPCODE:
+        ST(0) = sv_newmortal();
+	n = GeoIP_name_by_name_v6(gi,name);
+        if ( n != NULL ) {
+          ST(0) = newSVpv(n, strlen(n));
+          free(n);
+#if defined(sv_utf8_decode)
+          if ( GeoIP_charset(gi) == GEOIP_CHARSET_UTF8 )
+            SvUTF8_on(ST(0));
+#endif
+          sv_2mortal(ST(0));
+        }
+       XSRETURN(1);
+     
+void
 org_by_addr(gi, addr)
 	GeoIP *gi
 	char * addr
@@ -238,6 +298,7 @@ org_by_name(gi, name)
           sv_2mortal(ST(0));
         }
        XSRETURN(1);
+
 
 void
 range_by_ip(gi, addr)
