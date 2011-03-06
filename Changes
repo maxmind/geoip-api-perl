@@ -1,4 +1,9 @@
 Revision history for Perl extension Geo::IP.
+        - Add name_by_name and name_by_addr ( Boris Zentner )
+        - Add org_by_name_v6 and org_by_addr_v6 only XS ( Boris Zentner )
+        - Add name_by_ipnum_v6, name_by_name_v6 and name_by_addr_v6 XS glue ( Boris Zentner )
+        - Add sub Geo::IP::CLONE_SKIP {1} in conjunction with .xs Avoid thread
+          issues ( Boris Zentner )
         - Export GEOIP_DOMAIN_EDITION by default ( Boris Zentner )
         - Update region codes 20100810 ( Boris Zentner ) 
         - Fix some PP 3letter country codes ( Boris Zentner )

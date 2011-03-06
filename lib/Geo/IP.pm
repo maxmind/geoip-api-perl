@@ -82,8 +82,14 @@ BEGIN {
   }    # pp
   else {
     eval << '__CAPI_GLUE__';
-  *isp_by_name = *org_by_name;
-  *isp_by_addr = *org_by_addr;
+  # threads should not clone or DESTROY the GeoIP object.
+  sub CLONE_SKIP {1}
+
+  *name_by_name = *isp_by_name = *org_by_name;
+  *name_by_addr = *isp_by_addr = *org_by_addr;
+
+  *org_by_name_v6 = *name_by_name_v6;
+  *org_by_addr_v6 = *name_by_addr_v6;
 __CAPI_GLUE__
   }
 }
@@ -5384,7 +5390,8 @@ sub org_by_addr {
 #this function returns isp or org of the domain name
 *isp_by_name = \*org_by_name;
 *isp_by_addr = \*org_by_addr;
-*org_by_addr = \*org_by_addr;
+*name_by_addr = \*org_by_addr;
+*name_by_name = \*org_by_name;
 
 #this function returns the region
 sub region_by_name {
