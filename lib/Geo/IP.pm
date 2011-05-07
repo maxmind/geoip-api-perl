@@ -5656,6 +5656,19 @@ Do not miss the city database, described in Geo::IP::Record
 Make sure to use the F<geolite-mirror-simple.pl> script from the example directory to
 stay current with the databases.
 
+=head1 BENCHMARK the lookups are fast. This is my laptop ( examples/benchmark.pl ):
+
+  Benchmark: running city_mem, city_std, country_mem, country_std, country_v6_mem, country_v6_std, isp_mem, isp_std for at least 10 CPU seconds...
+    city_mem: 10.3121 wallclock secs (10.30 usr +  0.01 sys = 10.31 CPU) @ 387271.48/s (n=3992769)
+    city_std: 10.0658 wallclock secs ( 2.86 usr +  7.17 sys = 10.03 CPU) @ 54392.62/s (n=545558)
+  country_mem: 10.1772 wallclock secs (10.16 usr +  0.00 sys = 10.16 CPU) @ 1077507.97/s (n=10947481)
+  country_std: 10.1432 wallclock secs ( 2.30 usr +  7.85 sys = 10.15 CPU) @ 83629.56/s (n=848840)
+  country_v6_mem: 10.2579 wallclock secs (10.25 usr + -0.00 sys = 10.25 CPU) @ 365997.37/s (n=3751473)
+  country_v6_std: 10.8541 wallclock secs ( 1.77 usr +  9.07 sys = 10.84 CPU) @ 10110.42/s (n=109597)
+     isp_mem: 10.147 wallclock secs (10.13 usr +  0.01 sys = 10.14 CPU) @ 590109.66/s (n=5983712)
+     isp_std: 10.0484 wallclock secs ( 2.71 usr +  7.33 sys = 10.04 CPU) @ 73186.35/s (n=734791)
+
+
 =head1 CLASS METHODS
 
 =over 4
@@ -5731,11 +5744,11 @@ Returns a Geo::IP::Record object containing city location for an IP address.
 
 Returns a Geo::IP::Record object containing city location for a hostname.
 
-=item $org = $gi->org_by_addr( $ipaddr );
+=item $org = $gi->org_by_addr( $ipaddr ); B<depreciated> use C<name_by_addr> instead.
 
 Returns the Organization, ISP name or Domain Name for an IP address.
 
-=item $org = $gi->org_by_name( $hostname );
+=item $org = $gi->org_by_name( $hostname );  B<depreciated> use C<name_by_name> instead.
 
 Returns the Organization, ISP name or Domain Name for a hostname.
 
@@ -5844,6 +5857,51 @@ index. 0 is unknown.
 
 =item $cc = $gi->country_code_by_name_v6('ipv6.google.com');
 
+=item name_by_addr
+
+Returns the Organization, ISP name or Domain Name for a IP address.
+
+=item name_by_addr_v6
+
+Returns the Organization, ISP name or Domain Name for an IPv6 address.
+
+=item name_by_ipnum_v6
+
+Returns the Organization, ISP name or Domain Name for an ipnum.
+
+=item name_by_name
+
+Returns the Organization, ISP name or Domain Name for a hostname.
+
+=item name_by_name_v6
+
+Returns the Organization, ISP name or Domain Name for a hostname.
+
+=item org_by_addr_v6 B<depreciated> use C<name_by_addr_v6>
+
+Returns the Organization, ISP name or Domain Name for an IPv6 address.
+
+=item org_by_name_v6  B<depreciated> use C<name_by_name_v6>
+
+Returns the Organization, ISP name or Domain Name for a hostname.
+
+=item teredo
+
+Returns the current setting for teredo.
+
+=item enable_teredo
+
+Enable / disable teredo
+
+  $gi->enable_teredo(1); # enable
+  $gi->enable_teredo(0); # disable
+
+=item lib_version
+
+  if ( $gi->api eq 'CAPI' ){
+      print $gi->lib_version;
+  }
+
 =back
 
 =head1 MAILING LISTS AND CVS
@@ -5863,11 +5921,9 @@ http://lists.sourceforge.net/lists/listinfo/geoip-perl
 Geo::IP::Record
 
 
-
-
 =head1 AUTHOR
 
-Copyright (c) 2009, MaxMind, Inc
+Copyright (c) 2011, MaxMind, Inc
 
 All rights reserved.  This package is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
