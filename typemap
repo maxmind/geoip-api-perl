@@ -17,11 +17,7 @@ O_OBJECT
 # this is just here because a O_CHAR input is required to compile,
 # should be same as if O_CHAR wasn't defined
 O_CHAR
-    if( SvOK($arg) )
-       $var = (char *) SvPV($arg, PL_na);
-    else {
-       $var = NULL;
-    }
+        $var = ($type)SvPVbyte_nolen ($arg)
 
 OUTPUT
 

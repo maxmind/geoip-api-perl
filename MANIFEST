@@ -1,9 +1,12 @@
 Changes
 IP.xs
+ppport.h
 example/city.pl
 example/netspeed.pl
 example/region.pl
 example/org.pl
+example/benchmark.pl
+example/country_v6.pl
 example/geolite-mirror-simple.pl
 lib/Geo/IP.pm
 lib/Geo/Mirror.pm
@@ -13,6 +16,7 @@ INSTALL
 Makefile.PL
 MANIFEST
 README
+TODO
 typemap
 t/0_base.t
 t/1_lookup.t

@@ -5,7 +5,7 @@ extern "C" {
 #include "EXTERN.h"
 #include "perl.h"
 #include "XSUB.h"
-
+#include "ppport.h"
 #include "GeoIP.h"
 #include "GeoIPCity.h"
 
@@ -387,11 +387,36 @@ record_by_name(gi, addr)
 	RETVAL
 
 int
+enable_teredo(gi, tf)
+	GeoIP *gi
+	int tf
+    CODE:
+	RETVAL = GeoIP_enable_teredo(gi, tf);
+    OUTPUT:
+	RETVAL
+
+int
+teredo(gi)
+	GeoIP *gi
+    CODE:
+	RETVAL = GeoIP_teredo(gi);
+    OUTPUT:
+	RETVAL
+
+int
 set_charset(gi, charset)
 	GeoIP *gi
 	int charset
     CODE:
 	RETVAL = GeoIP_set_charset(gi, charset);
+    OUTPUT:
+	RETVAL
+
+const char *
+lib_version(CLASS)
+      char * CLASS
+    CODE:
+	RETVAL = GeoIP_lib_version();
     OUTPUT:
 	RETVAL
 
