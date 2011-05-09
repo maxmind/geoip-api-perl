@@ -16,7 +16,6 @@ INSTALL
 Makefile.PL
 MANIFEST
 README
-TODO
 typemap
 t/0_base.t
 t/1_lookup.t
