@@ -1,4 +1,6 @@
 Revision history for Perl extension Geo::IP.
+        - Add new CAPI glue methods to use GeoIPCityv6 databases
+          record_by_addr_v6 record_by_name_v6 ( Boris Zentner )
 1.39 May 7th 2011
         - Upd Docs ( Boris Zentner )
         - Add glue for the CAPI lib_version method ( Boris Zentner )

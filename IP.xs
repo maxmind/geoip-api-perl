@@ -365,6 +365,28 @@ region_by_name(gi, name)
         }
 
 GeoIPRecord *
+record_by_addr_v6(gi, addr)
+	GeoIP *gi
+	char * addr
+    PREINIT:
+	char * CLASS = "Geo::IP::Record";
+    CODE:
+	RETVAL = GeoIP_record_by_addr_v6(gi,addr);
+    OUTPUT:
+	RETVAL
+
+GeoIPRecord *
+record_by_name_v6(gi, addr)
+	GeoIP *gi
+	char * addr
+    PREINIT:
+	char * CLASS = "Geo::IP::Record";
+    CODE:
+	RETVAL = GeoIP_record_by_name_v6(gi,addr);
+    OUTPUT:
+	RETVAL
+
+GeoIPRecord *
 record_by_addr(gi, addr)
 	GeoIP *gi
 	char * addr
