@@ -365,6 +365,17 @@ region_by_name(gi, name)
         }
 
 GeoIPRecord *
+record_by_ipnum_v6(gi, ipnum)
+	GeoIP *gi
+	char * ipnum
+    PREINIT:
+	char * CLASS = "Geo::IP::Record";
+    CODE:
+	RETVAL = GeoIP_record_by_ipnum_v6(gi,*(geoipv6_t*)ipnum);
+    OUTPUT:
+	RETVAL
+
+GeoIPRecord *
 record_by_addr_v6(gi, addr)
 	GeoIP *gi
 	char * addr
