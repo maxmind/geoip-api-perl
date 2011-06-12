@@ -1,4 +1,5 @@
 Revision history for Perl extension Geo::IP.
+        - Add support for GEOIP_NETSPEED_EDITION_REV1 ( Boris Zentner )
         - Add new CAPI method record_by_ipnum_v6 ( Boris Zentner )
         - Add new CAPI glue methods to use GeoIPCityv6 databases
           record_by_addr_v6 record_by_name_v6 ( Boris Zentner )

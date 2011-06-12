@@ -53,6 +53,7 @@ BEGIN {
   sub GEOIP_LOCATIONA_EDITION()      { 13; }
   sub GEOIP_ACCURACYRADIUS_EDITION() { 14; }
   sub GEOIP_CITYCONFIDENCE_EDITION() { 15; }
+  sub GEOIP_NETSPEED_EDITION_REV1() {32;}
 
   sub GEOIP_CHARSET_ISO_8859_1() { 0; }
   sub GEOIP_CHARSET_UTF8()       { 1; }
@@ -4918,6 +4919,7 @@ sub open_type {
     GEOIP_PROXY_EDITION()       => 'GeoIPProxy',
     GEOIP_ASNUM_EDITION()       => 'GeoIPASNum',
     GEOIP_NETSPEED_EDITION()    => 'GeoIPNetSpeed',
+    GEOIP_NETSPEED_EDITION_REV1() => 'GeoIPNetSpeed',
     GEOIP_DOMAIN_EDITION()      => 'GeoIPDomain',
   );
 
@@ -5046,6 +5048,7 @@ sub _setup_segments {
               || ( $gi->{"databaseType"} == GEOIP_ORG_EDITION )
               || ( $gi->{"databaseType"} == GEOIP_DOMAIN_EDITION )
               || ( $gi->{"databaseType"} == GEOIP_ASNUM_EDITION )
+              || ( $gi->{"databaseType"} == GEOIP_NETSPEED_EDITION_REV1 )
               || ( $gi->{"databaseType"} == GEOIP_ISP_EDITION ) ) {
         $gi->{"databaseSegments"} = 0;
 
@@ -5575,6 +5578,7 @@ print STDERR $@ if $@;
   GEOIP_MMAP_CACHE            GEOIP_CITYCONFIDENCE_EDITION
   GEOIP_LOCATIONA_EDITION     GEOIP_ACCURACYRADIUS_EDITION
   GEOIP_COUNTRY_EDITION_V6    GEOIP_DOMAIN_EDITION
+  GEOIP_NETSPEED_EDITION_REV1
 );
 
 1;
