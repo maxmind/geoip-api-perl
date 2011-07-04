@@ -17,6 +17,15 @@ MODULE = Geo::IP	PACKAGE = Geo::IP
 
 PROTOTYPES: DISABLE
 
+const char *
+region_name_by_code(CLASS, country_code, region)
+        char * CLASS
+        char * country_code
+        char * region
+    CODE:
+	RETVAL = (const char *) GeoIP_region_name_by_code(country_code, region);
+    OUTPUT:
+	RETVAL
 
 const char *
 continent_code_by_country_code(CLASS, country_code)
