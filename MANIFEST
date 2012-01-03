@@ -3,6 +3,7 @@ IP.xs
 ppport.h
 example/city.pl
 example/netspeed.pl
+example/netspeedcell.pl
 example/region.pl
 example/org.pl
 example/benchmark.pl
@@ -20,6 +21,8 @@ typemap
 t/0_base.t
 t/1_lookup.t
 t/2_namelookup.t
+t/20_min_capi_version.t
 t/3_mirror.t
 t/cpan_mirror.txt
 META.yml                                 Module meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)
