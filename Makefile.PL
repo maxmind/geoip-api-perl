@@ -31,21 +31,23 @@ unless ( $config{LIBS} ) {
     my $lib = DynaLoader::dl_load_file( $clib, 0 );
     if ($lib) {
       for (
-            [ 10403, 'GeoIP_last_netmask' ],         # V 1.4.3
-            [ 10405, 'GeoIP_range_by_ip' ],          # V 1.4.5
-            [ 10405, 'GeoIP_code_by_id' ],           # V 1.4.5
+            [ 10403, 'GeoIP_last_netmask' ],               # V 1.4.3
+            [ 10405, 'GeoIP_range_by_ip' ],                # V 1.4.5
+            [ 10405, 'GeoIP_code_by_id' ],                 # V 1.4.5
             [ 10407, 'GeoIP_country_code_by_addr_v6' ],    # V 1.4.7
-            [ 10407, 'GeoIP_record_by_addr_v6' ], # V 1.4.7 or 1.4.8?
+            [ 10407, 'GeoIP_record_by_addr_v6' ],          # V 1.4.7 or 1.4.8?
+            [ 10500, 'GeoIP_currency_by_id' ],             # V 1.5.0
+            [ 10500, 'GeoIP_currency_by_code' ],           # V 1.5.0
         ) {
         $geoip_version = $_->[0] if DynaLoader::dl_find_symbol( $lib, $_->[1] );
       }
 
       # to bad we can not distinguish between 1.4.7 and 1.4.8 here
       # I add a test to t/20_min_capi_version.t.
-      if ( $geoip_version < 10407 ) {
+      if ( $geoip_version < 10500 ) {
         print STDERR <<__ERR__;
 Your installed version of libgeoip is outdated! Please update to at least
-version to 1.4.8 and reinstall this module.
+version to 1.5.0 and reinstall this module.
 
 http://www.maxmind.com/app/c
 
