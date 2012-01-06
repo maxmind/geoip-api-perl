@@ -59,8 +59,13 @@ GeoIP *
 new(CLASS,flags = 0)
 	char * CLASS
 	int flags
+    PREINIT:
+        GeoIP * gi;
     CODE:
-	RETVAL = GeoIP_new(flags);
+	gi = GeoIP_new(flags);
+        if ( gi )
+          GeoIP_set_charset(gi, GEOIP_CHARSET_ISO_8859_1);
+        RETVAL = gi;
     OUTPUT:
 	RETVAL
 
@@ -69,8 +74,13 @@ open_type(CLASS,type,flags = 0)
 	char * CLASS
 	int type
 	int flags
+    PREINIT:
+        GeoIP * gi;
     CODE:
-	RETVAL = GeoIP_open_type(type,flags);
+        gi = GeoIP_open_type(type,flags);
+        if ( gi )
+          GeoIP_set_charset(gi, GEOIP_CHARSET_ISO_8859_1);
+        RETVAL = gi;
     OUTPUT:
 	RETVAL
 
@@ -79,8 +89,13 @@ open(CLASS,filename,flags = 0)
 	char * CLASS
 	char * filename
 	int flags
+    PREINIT:
+        GeoIP * gi;
     CODE:
-	RETVAL = ( filename != NULL ) ? GeoIP_open(filename,flags) : NULL;
+	gi = ( filename != NULL ) ? GeoIP_open(filename,flags) : NULL;
+        if ( gi )
+          GeoIP_set_charset(gi, GEOIP_CHARSET_ISO_8859_1);
+        RETVAL = gi;
     OUTPUT:
 	RETVAL
 
