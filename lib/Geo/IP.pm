@@ -5749,11 +5749,11 @@ Returns a Geo::IP::Record object containing city location for an IP address.
 
 Returns a Geo::IP::Record object containing city location for a hostname.
 
-=item $org = $gi->org_by_addr( $ipaddr ); B<depreciated> use C<name_by_addr> instead.
+=item $org = $gi->org_by_addr( $ipaddr ); B<deprecated> use C<name_by_addr> instead.
 
 Returns the Organization, ISP name or Domain Name for an IP address.
 
-=item $org = $gi->org_by_name( $hostname );  B<depreciated> use C<name_by_name> instead.
+=item $org = $gi->org_by_name( $hostname );  B<deprecated> use C<name_by_name> instead.
 
 Returns the Organization, ISP name or Domain Name for a hostname.
 
@@ -5882,11 +5882,11 @@ Returns the Organization, ISP name or Domain Name for a hostname.
 
 Returns the Organization, ISP name or Domain Name for a hostname.
 
-=item org_by_addr_v6 B<depreciated> use C<name_by_addr_v6>
+=item org_by_addr_v6 B<deprecated> use C<name_by_addr_v6>
 
 Returns the Organization, ISP name or Domain Name for an IPv6 address.
 
-=item org_by_name_v6  B<depreciated> use C<name_by_name_v6>
+=item org_by_name_v6  B<deprecated> use C<name_by_name_v6>
 
 Returns the Organization, ISP name or Domain Name for a hostname.
 
