@@ -18,15 +18,6 @@ MODULE = Geo::IP	PACKAGE = Geo::IP
 PROTOTYPES: DISABLE
 
 const char *
-currency_by_code(CLASS, country_code)
-        char * CLASS
-        char * country_code
-    CODE:
-	RETVAL = (const char *) GeoIP_currency_by_code(country_code);
-    OUTPUT:
-	RETVAL
-
-const char *
 region_name_by_code(CLASS, country_code, region)
         char * CLASS
         char * country_code
