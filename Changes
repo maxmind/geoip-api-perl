@@ -1,6 +1,7 @@
 Revision history for Perl extension Geo::IP.
         - Doc fixes ( Tina Müller )
         - Update FIPS Codes ( Boris Zentner )
+	- Update PurePerl country list. ( Boris Zentner )
 1.40 Aug 23th 2011
         - Add new CAPI method region_name_by_code ( Boris Zentner )
         - Add support for GEOIP_NETSPEED_EDITION_REV1 ( Boris Zentner )
