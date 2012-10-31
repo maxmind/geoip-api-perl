@@ -380,7 +380,7 @@ my @names = (
               "Lithuania",
               "Luxembourg",
               "Latvia",
-              "Libyan Arab Jamahiriya",
+              "Libya",
               "Morocco",
               "Monaco",
               "Moldova, Republic of",
