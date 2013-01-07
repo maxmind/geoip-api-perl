@@ -168,7 +168,7 @@ AS OC AS AF OC AS EU NA OC AS
 AF EU AF OC NA SA AS EU NA SA 
 NA NA AS OC OC OC AS AF EU AF 
 AF EU AF -- -- -- EU EU EU EU 
-NA NA 
+NA NA AF
 /;
 
 my @countries = (
@@ -204,7 +204,7 @@ my @countries = (
  UM US UY UZ VA VC VE VG 
  VI VN VU WF WS YE YT RS 
  ZA ZM ME ZW A1 A2 O1 AX 
- GG IM JE BL MF/
+ GG IM JE BL MF SS /
 );
 
 
@@ -245,7 +245,7 @@ my @code3s = ( undef, qw/
                UMI USA URY UZB VAT VCT VEN VGB
                VIR VNM VUT WLF WSM YEM MYT SRB
                ZAF ZMB MNE ZWE A1  A2  O1  ALA
-			   GGY IMN JEY BLM MAF         /
+			   GGY IMN JEY BLM MAF SSD        /
 );
 my @names = (
               undef,
@@ -500,7 +500,8 @@ my @names = (
               "Isle of Man",
               "Jersey",
 			  "Saint Barthelemy",
-			  "Saint Martin"
+			  "Saint Martin",
+			  "South Sudan"
 );
 
 ## created with:
