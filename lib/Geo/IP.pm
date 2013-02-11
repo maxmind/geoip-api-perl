@@ -7,17 +7,17 @@ use vars qw($VERSION @EXPORT  $GEOIP_PP_ONLY @ISA $XS_VERSION);
 BEGIN { $GEOIP_PP_ONLY = 0 unless defined($GEOIP_PP_ONLY); }
 
 BEGIN {
-  $VERSION = '1.40';
-  eval {
+    $VERSION = '1.40';
+    eval {
 
-    # PERL_DL_NONLAZY must be false, or any errors in loading will just
-    # cause the perl code to be tested
-    local $ENV{PERL_DL_NONLAZY} = 0 if $ENV{PERL_DL_NONLAZY};
+        # PERL_DL_NONLAZY must be false, or any errors in loading will just
+        # cause the perl code to be tested
+        local $ENV{PERL_DL_NONLAZY} = 0 if $ENV{PERL_DL_NONLAZY};
 
-    require DynaLoader;
-    local @ISA = qw(DynaLoader);
-    bootstrap Geo::IP $VERSION;
-  } unless $GEOIP_PP_ONLY;
+        require DynaLoader;
+        local @ISA = qw(DynaLoader);
+        bootstrap Geo::IP $VERSION;
+    } unless $GEOIP_PP_ONLY;
 }
 
 require Geo::IP::Record;
@@ -35,55 +35,56 @@ sub GEOIP_CORPORATE_SPEED() { 3; } #PP
 
 BEGIN {
 
-  #my $pp = !( defined &_XScompiled && &_XScompiled && !$TESTING_PERL_ONLY );
-  my $pp = !defined &open;
+    #my $pp = !( defined &_XScompiled && &_XScompiled && !$TESTING_PERL_ONLY );
+    my $pp = !defined &open;
 
-  sub GEOIP_COUNTRY_EDITION()        { 1; }
-  sub GEOIP_CITY_EDITION_REV1()      { 2; }
-  sub GEOIP_REGION_EDITION_REV1()    { 3; }
-  sub GEOIP_ISP_EDITION()            { 4; }
-  sub GEOIP_ORG_EDITION()            { 5; }
-  sub GEOIP_CITY_EDITION_REV0()      { 6; }
-  sub GEOIP_REGION_EDITION_REV0()    { 7; }
-  sub GEOIP_PROXY_EDITION()          { 8; }
-  sub GEOIP_ASNUM_EDITION()          { 9; }
-  sub GEOIP_NETSPEED_EDITION()       { 10; }
-  sub GEOIP_DOMAIN_EDITION()         { 11; }
-  sub GEOIP_COUNTRY_EDITION_V6()     { 12; }
-  sub GEOIP_LOCATIONA_EDITION()      { 13; }
-  sub GEOIP_ACCURACYRADIUS_EDITION() { 14; }
-  sub GEOIP_CITYCONFIDENCE_EDITION() { 15; }
-  sub GEOIP_CITY_EDITION_REV1_V6()   { 30; }
-  sub GEOIP_NETSPEED_EDITION_REV1()  { 32; }
+    sub GEOIP_COUNTRY_EDITION()        { 1; }
+    sub GEOIP_CITY_EDITION_REV1()      { 2; }
+    sub GEOIP_REGION_EDITION_REV1()    { 3; }
+    sub GEOIP_ISP_EDITION()            { 4; }
+    sub GEOIP_ORG_EDITION()            { 5; }
+    sub GEOIP_CITY_EDITION_REV0()      { 6; }
+    sub GEOIP_REGION_EDITION_REV0()    { 7; }
+    sub GEOIP_PROXY_EDITION()          { 8; }
+    sub GEOIP_ASNUM_EDITION()          { 9; }
+    sub GEOIP_NETSPEED_EDITION()       { 10; }
+    sub GEOIP_DOMAIN_EDITION()         { 11; }
+    sub GEOIP_COUNTRY_EDITION_V6()     { 12; }
+    sub GEOIP_LOCATIONA_EDITION()      { 13; }
+    sub GEOIP_ACCURACYRADIUS_EDITION() { 14; }
+    sub GEOIP_CITYCONFIDENCE_EDITION() { 15; }
+    sub GEOIP_CITY_EDITION_REV1_V6()   { 30; }
+    sub GEOIP_NETSPEED_EDITION_REV1()  { 32; }
 
-  sub GEOIP_CHARSET_ISO_8859_1() { 0; }
-  sub GEOIP_CHARSET_UTF8()       { 1; }
+    sub GEOIP_CHARSET_ISO_8859_1() { 0; }
+    sub GEOIP_CHARSET_UTF8()       { 1; }
 
-  #
-  sub api {
-    defined &Geo::IP::Record::_XScompiled ? 'CAPI' : 'PurePerl';
-  }
+    #
+    sub api {
+        defined &Geo::IP::Record::_XScompiled ? 'CAPI' : 'PurePerl';
+    }
 
-  # cheat --- try to load Sys::Mmap PurePerl only
-  if ($pp) {
-    eval {
+    # cheat --- try to load Sys::Mmap PurePerl only
+    if ($pp) {
+        eval {
 
-      # wrap into eval again, as workaround for centos / mod_perl issue
-      # seems they use $@ without eval somewhere
-      eval "require Sys::Mmap"
-        ? Sys::Mmap->import
-        : do {
-        for (qw/ PROT_READ MAP_PRIVATE MAP_SHARED /) {
-          no strict 'refs';
-          my $unused_stub = $_;    # we must use a copy
-          *$unused_stub = sub { die 'Sys::Mmap required for mmap support' };
-        }    # for
-        };    # do
-      1;
-    };    # eval
-  }    # pp
-  else {
-    eval << '__CAPI_GLUE__';
+            # wrap into eval again, as workaround for centos / mod_perl issue
+            # seems they use $@ without eval somewhere
+            eval "require Sys::Mmap"
+                ? Sys::Mmap->import
+                : do {
+                for (qw/ PROT_READ MAP_PRIVATE MAP_SHARED /) {
+                    no strict 'refs';
+                    my $unused_stub = $_;    # we must use a copy
+                    *$unused_stub
+                        = sub { die 'Sys::Mmap required for mmap support' };
+                }    # for
+                };    # do
+            1;
+        };    # eval
+    }    # pp
+    else {
+        eval << '__CAPI_GLUE__';
   # threads should not clone or DESTROY the GeoIP object.
   sub CLONE_SKIP {1}
 
@@ -93,7 +94,7 @@ BEGIN {
   *org_by_name_v6 = *name_by_name_v6;
   *org_by_addr_v6 = *name_by_addr_v6;
 __CAPI_GLUE__
-  }
+    }
 }
 
 eval << '__PP_CODE__' unless defined &open;
@@ -5568,20 +5569,20 @@ __PP_CODE__
 print STDERR $@ if $@;
 
 @EXPORT = qw(
-  GEOIP_STANDARD              GEOIP_MEMORY_CACHE
-  GEOIP_CHECK_CACHE           GEOIP_INDEX_CACHE
-  GEOIP_UNKNOWN_SPEED         GEOIP_DIALUP_SPEED
-  GEOIP_CABLEDSL_SPEED        GEOIP_CORPORATE_SPEED
-  GEOIP_COUNTRY_EDITION       GEOIP_REGION_EDITION_REV0
-  GEOIP_CITY_EDITION_REV0     GEOIP_ORG_EDITION
-  GEOIP_ISP_EDITION           GEOIP_CITY_EDITION_REV1
-  GEOIP_REGION_EDITION_REV1   GEOIP_PROXY_EDITION
-  GEOIP_ASNUM_EDITION         GEOIP_NETSPEED_EDITION
-  GEOIP_CHARSET_ISO_8859_1    GEOIP_CHARSET_UTF8
-  GEOIP_MMAP_CACHE            GEOIP_CITYCONFIDENCE_EDITION
-  GEOIP_LOCATIONA_EDITION     GEOIP_ACCURACYRADIUS_EDITION
-  GEOIP_COUNTRY_EDITION_V6    GEOIP_DOMAIN_EDITION
-  GEOIP_NETSPEED_EDITION_REV1 GEOIP_CITY_EDITION_REV1_V6
+    GEOIP_STANDARD              GEOIP_MEMORY_CACHE
+    GEOIP_CHECK_CACHE           GEOIP_INDEX_CACHE
+    GEOIP_UNKNOWN_SPEED         GEOIP_DIALUP_SPEED
+    GEOIP_CABLEDSL_SPEED        GEOIP_CORPORATE_SPEED
+    GEOIP_COUNTRY_EDITION       GEOIP_REGION_EDITION_REV0
+    GEOIP_CITY_EDITION_REV0     GEOIP_ORG_EDITION
+    GEOIP_ISP_EDITION           GEOIP_CITY_EDITION_REV1
+    GEOIP_REGION_EDITION_REV1   GEOIP_PROXY_EDITION
+    GEOIP_ASNUM_EDITION         GEOIP_NETSPEED_EDITION
+    GEOIP_CHARSET_ISO_8859_1    GEOIP_CHARSET_UTF8
+    GEOIP_MMAP_CACHE            GEOIP_CITYCONFIDENCE_EDITION
+    GEOIP_LOCATIONA_EDITION     GEOIP_ACCURACYRADIUS_EDITION
+    GEOIP_COUNTRY_EDITION_V6    GEOIP_DOMAIN_EDITION
+    GEOIP_NETSPEED_EDITION_REV1 GEOIP_CITY_EDITION_REV1_V6
 );
 
 1;
