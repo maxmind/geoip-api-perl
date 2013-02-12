@@ -647,6 +647,7 @@ SM,,Europe/San_Marino
 SN,,Africa/Dakar
 SO,,Africa/Mogadishu
 SR,,America/Paramaribo
+SS,,Africa/Juba
 ST,,Africa/Sao_Tome
 SV,,America/El_Salvador
 SY,,Asia/Damascus
