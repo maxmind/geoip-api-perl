@@ -202,7 +202,7 @@ my @countries = (
  UM US UY UZ VA VC VE VG 
  VI VN VU WF WS YE YT RS 
  ZA ZM ME ZW A1 A2 O1 AX 
- GG IM JE BL MF BQ SS /
+ GG IM JE BL MF BQ SS O1 /
 );
 
 
@@ -243,7 +243,7 @@ my @code3s = ( undef, qw/
                UMI USA URY UZB VAT VCT VEN VGB
                VIR VNM VUT WLF WSM YEM MYT SRB
                ZAF ZMB MNE ZWE A1  A2  O1  ALA
-			   GGY IMN JEY BLM MAF BES SSD /
+			   GGY IMN JEY BLM MAF BES SSD O1 /
 );
 my @names = (
               undef,
@@ -500,7 +500,8 @@ my @names = (
 			  "Saint Barthelemy",
 			  "Saint Martin",
 			  "Bonaire, Saint Eustatius and Saba"
-			  "South Sudan"
+			  "South Sudan",
+			  "Other"
 );
 
 my %country_region_names = (
