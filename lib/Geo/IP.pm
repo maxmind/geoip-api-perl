@@ -504,7 +504,7 @@ my @names = (
 );
 
 my %country_region_names = (
-   'AD' => {
+    'AD' => {
         '02' => 'Canillo',
         '03' => 'Encamp',
         '04' => 'La Massana',
@@ -4236,6 +4236,18 @@ my %country_region_names = (
         '17' => 'Saramacca',
         '18' => 'Sipaliwini',
         '19' => 'Wanica'
+    },
+    'SS' => {
+        '01' => 'Central Equatoria',
+        '02' => 'Eastern Equatoria',
+        '03' => 'Jonglei',
+        '04' => 'Lakes',
+        '05' => 'Northern Bahr el Ghazal',
+        '06' => 'Unity',
+        '07' => 'Upper Nile',
+        '08' => 'Warrap',
+        '09' => 'Western Bahr el Ghazal',
+        '10' => 'Western Equatoria'
     },
     'ST' => {
         '01' => 'Principe',
