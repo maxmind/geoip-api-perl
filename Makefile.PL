@@ -36,6 +36,7 @@ unless ( $config{LIBS} ) {
                 [ 10405, 'GeoIP_code_by_id' ],                 # V 1.4.5
                 [ 10407, 'GeoIP_country_code_by_addr_v6' ],    # V 1.4.7
                 [ 10407, 'GeoIP_record_by_addr_v6' ],    # V 1.4.7 or 1.4.8?
+                [ 10500, 'GeoIP_country_code_by_ipnum_v6_gl' ],    # V1.5.0
                 ) {
                 $geoip_version = $_->[0]
                     if DynaLoader::dl_find_symbol( $lib, $_->[1] );
