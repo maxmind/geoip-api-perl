@@ -499,7 +499,7 @@ my @names = (
               "Jersey",
 			  "Saint Barthelemy",
 			  "Saint Martin",
-			  "Bonaire, Saint Eustatius and Saba"
+			  "Bonaire, Saint Eustatius and Saba",
 			  "South Sudan",
 			  "Other"
 );
