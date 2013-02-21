@@ -49,7 +49,7 @@ unless ( $config{LIBS} ) {
 Your installed version of libgeoip is outdated! Please update to at least
 version to 1.5.0 and reinstall this module.
 
-http://www.maxmind.com/app/c
+http://dev.maxmind.com/geoip/downloadable
 
 __ERR__
                 exit(0);
@@ -83,7 +83,7 @@ and you can rebuid it later.
 GeoIP must be installed prior to building Geo::IP and I can't find
 it in the standard library directories. You can download GeoIP C API from:
 
-http://www.maxmind.com/app/c
+http://dev.maxmind.com/geoip/downloadable
 
 If GeoIP is installed, but in a non-standard directory, then use the
 following options to Makefile.PL:
