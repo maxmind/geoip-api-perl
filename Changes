@@ -1,4 +1,6 @@
 Revision history for Perl extension Geo::IP.
+1.41 Feb 20th 2013
+        - Add South Sudan ( Boris Zentner )
         - Doc fixes ( Tina Müller )
         - Update FIPS Codes ( Boris Zentner )
 	- Update PurePerl country list. ( Boris Zentner )

@@ -7,7 +7,7 @@ use vars qw($VERSION @EXPORT  $GEOIP_PP_ONLY @ISA $XS_VERSION);
 BEGIN { $GEOIP_PP_ONLY = 0 unless defined($GEOIP_PP_ONLY); }
 
 BEGIN {
-    $VERSION = '1.40';
+    $VERSION = '1.41';
     eval {
 
         # PERL_DL_NONLAZY must be false, or any errors in loading will just
@@ -5704,7 +5704,7 @@ detection, and for software export controls.
 
 Free monthly updates to the database are available from 
 
-  http://www.maxmind.com/download/geoip/database/
+  http://dev.maxmind.com/geoip/geolite
 
 This free database is similar to the database contained in IP::Country, as 
 well as many paid databases. It uses ARIN, RIPE, APNIC, and LACNIC whois to 
@@ -5715,7 +5715,8 @@ subscription basis.  Also included with this is a service that updates your
 database automatically each month, by running a program called geoipupdate
 included with the C API from a cronjob.  For more details on the differences
 between the free and paid databases, see:
-http://www.maxmind.com/app/geoip_country
+
+http://www.maxmind.com/en/geolocation_landing
 
 Do not miss the city database, described in Geo::IP::Record
 
@@ -5970,17 +5971,15 @@ Enable / disable teredo
 
 =back
 
-=head1 MAILING LISTS AND CVS
+=head1 ISSUE TRACKER AND GIT repo
 
-Are available from SourceForge, see
-http://sourceforge.net/projects/geoip/
+Is available from GitHub, see
 
-The direct link to the mailing list is
-http://lists.sourceforge.net/lists/listinfo/geoip-perl
+https://github.com/maxmind/geoip-api-perl
 
 =head1 VERSION
 
-1.39
+1.41
 
 =head1 SEE ALSO
 
@@ -5989,7 +5988,7 @@ Geo::IP::Record
 
 =head1 AUTHOR
 
-Copyright (c) 2011, MaxMind, Inc
+Copyright (c) 2013, MaxMind, Inc
 
 All rights reserved.  This package is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
