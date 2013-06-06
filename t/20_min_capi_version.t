@@ -18,6 +18,6 @@ unless ( defined $capi_version ) {
   # ugh, we use the pure perl API
   ok( 1, 1, "Pure perl API - skip" );
 } else {
-  ok( $capi_version, qr/^1\.5\./, "CAPI must be at least 1.5.0 - Please update libGeoIP" );
+  ok( $capi_version, qr/^1\.5\./, "This module only supports 1.5.x releases of the libGeoIP C API." );
 }
 
