@@ -4395,7 +4395,8 @@ my %country_region_names = (
         '77' => 'Amnat Charoen',
         '78' => 'Mukdahan',
         '79' => 'Nong Bua Lamphu',
-        '80' => 'Sa Kaeo'
+        '80' => 'Sa Kaeo',
+		'81' => 'Bueng Kan',
     },
     'TJ' => {
         '01' => 'Kuhistoni Badakhshon',
