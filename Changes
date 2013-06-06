@@ -1,4 +1,7 @@
 Revision history for Perl extension Geo::IP.
+1.42 Jun 6th 2013
+        - Fix testcase any CAPI >= 1.5.0 should work ( Boris Zentner )
+        - Add new pure perl region code TH 81 Bueng Kan ( Boris Zentner )
 1.41 Feb 20th 2013
         - Add South Sudan ( Boris Zentner )
         - Doc fixes ( Tina Müller )
