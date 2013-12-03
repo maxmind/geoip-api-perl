@@ -738,7 +738,8 @@ my %country_region_names = (
     },
     'BA' => {
         '01' => 'Federation of Bosnia and Herzegovina',
-        '02' => 'Republika Srpska'
+        '02' => 'Republika Srpska',
+        '03' => 'Brcko District'
     },
     'BB' => {
         '01' => 'Christ Church',
@@ -3622,8 +3623,10 @@ my %country_region_names = (
         'H3' => 'Negros Occidental',
         'I6' => 'Compostela Valley',
         'I7' => 'Davao del Norte',
+        'J4' => 'Himamaylan',
         'J7' => 'Kalinga',
         'K6' => 'Malaybalay',
+        'L9' => 'Passi',
         'M5' => 'San Jose del Monte',
         'M6' => 'San Juan',
         'M8' => 'Santiago',
@@ -3706,7 +3709,8 @@ my %country_region_names = (
         '19' => 'Canindeyu',
         '20' => 'Chaco',
         '21' => 'Nueva Asuncion',
-        '23' => 'Alto Paraguay'
+        '23' => 'Alto Paraguay',
+        '24' => 'Boqueron'
     },
     'QA' => {
         '01' => 'Ad Dawhah',
@@ -3804,7 +3808,6 @@ my %country_region_names = (
         '32' => 'Khanty-Mansiy',
         '33' => 'Kirov',
         '34' => 'Komi',
-        '35' => 'Komi-Permyak',
         '36' => 'Koryak',
         '37' => 'Kostroma',
         '38' => 'Krasnodar',
@@ -3851,7 +3854,6 @@ my %country_region_names = (
         '79' => 'Tuva',
         '80' => 'Udmurt',
         '81' => 'Ul\'yanovsk',
-        '82' => 'Ust-Orda Buryat',
         '83' => 'Vladimir',
         '84' => 'Volgograd',
         '85' => 'Vologda',
@@ -3937,7 +3939,11 @@ my %country_region_names = (
         '34' => 'Kurdufan',
         '35' => 'Upper Nile',
         '40' => 'Al Wahadah State',
-        '44' => 'Central Equatoria State'
+        '44' => 'Central Equatoria State',
+        '49' => 'Southern Darfur',
+        '50' => 'Southern Kordofan',
+        '52' => 'Kassala',
+        '55' => 'Northern Darfur'
     },
     'SE' => {
         '02' => 'Blekinge Lan',
@@ -4396,13 +4402,14 @@ my %country_region_names = (
         '78' => 'Mukdahan',
         '79' => 'Nong Bua Lamphu',
         '80' => 'Sa Kaeo',
-		'81' => 'Bueng Kan',
+        '81' => 'Bueng Kan'
     },
     'TJ' => {
         '01' => 'Kuhistoni Badakhshon',
         '02' => 'Khatlon',
         '03' => 'Sughd'
     },
+    'TL' => { '06' => 'Dili' },
     'TM' => {
         '01' => 'Ahal',
         '02' => 'Balkan',
@@ -4950,7 +4957,6 @@ my %country_region_names = (
         '10' => 'Harare'
     }
 );
-
 sub continent_code_by_country_code { 
     my $id = $_id_by_code{ $_[1] } || 0;
     return $continents[$id];
@@ -5642,7 +5648,7 @@ print STDERR $@ if $@;
     GEOIP_MMAP_CACHE            GEOIP_ACCURACYRADIUS_EDITION
     GEOIP_COUNTRY_EDITION_V6    GEOIP_DOMAIN_EDITION
     GEOIP_NETSPEED_EDITION_REV1
-/;
+    /;
 
 1;
 __END__
