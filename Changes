@@ -1,6 +1,6 @@
 Revision history for Perl extension Geo::IP.
 1.43 Dec 2nd 2013
-        - Update FIPS codes ( Boris Zentner )
+	- Update FIPS codes ( Boris Zentner )
 	- Fix test case ( Boris Zentner )
 	- Update time zones ( Boris Zentner )
 1.42 Jun 6th 2013
