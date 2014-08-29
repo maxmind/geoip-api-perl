@@ -1,6 +1,6 @@
 =head1 NAME
 
-  Geo::IP::Record - Contains city information for GeoIP City Edition
+  Geo::IP::Record - Contains city information for GeoIP Legacy City Edition
 
 =head1 SYNOPSIS
 
@@ -26,9 +26,9 @@
 
 =head1 DESCRIPTION
 
-Geo::IP::Record represents objects containing location information
-returned by the GeoIP City database.  It works with both the
-commercial GeoIP City and free GeoLite City databases.
+Geo::IP::Record represents objects containing location information returned by
+the GeoIP Legacy City database.  It works with both the commercial GeoIP
+Legacy City and free GeoLite Legacy City databases.
 
 =head1 OBJECT METHODS
 
@@ -86,13 +86,13 @@ Returns the metro code from the location object (for city-level US locations onl
 =item $continent_code = $record->continent_code;
 
  Returns the continent code from the location object.
- Possible continent codes are AF, AS, EU, NA, OC, SA for Africa, Asia, Europe, North America, Oceania  and South America. 
+ Possible continent codes are AF, AS, EU, NA, OC, SA for Africa, Asia, Europe, North America, Oceania  and South America.
 
 =back
 
 =head1 VERSION
 
-1.21
+1.43
 
 =head1 AUTHOR
 
