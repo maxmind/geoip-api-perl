@@ -1,4 +1,6 @@
 Revision history for Perl extension Geo::IP.
+1.44 Sep 2nd 2014
+	- Add support for GEOIP_SILENCE ( Philip Prindeville )
 1.43 Dec 2nd 2013
 	- Update FIPS codes ( Boris Zentner )
 	- Fix test case ( Boris Zentner )

@@ -9,6 +9,11 @@ extern "C" {
 #include "GeoIP.h"
 #include "GeoIPCity.h"
 
+/* render this flag harmless if it's not defined by the API */
+#ifndef GEOIP_SILENCE
+#define GEOIP_SILENCE		0
+#endif
+
 #ifdef __cplusplus
 }
 #endif
@@ -53,7 +58,7 @@ new(CLASS,flags = 0)
     PREINIT:
         GeoIP * gi;
     CODE:
-	gi = GeoIP_new(flags);
+	gi = GeoIP_new(flags | GEOIP_SILENCE);
         if ( gi )
           GeoIP_set_charset(gi, GEOIP_CHARSET_ISO_8859_1);
         RETVAL = gi;
@@ -68,7 +73,7 @@ open_type(CLASS,type,flags = 0)
     PREINIT:
         GeoIP * gi;
     CODE:
-        gi = GeoIP_open_type(type,flags);
+        gi = GeoIP_open_type(type, flags | GEOIP_SILENCE);
         if ( gi )
           GeoIP_set_charset(gi, GEOIP_CHARSET_ISO_8859_1);
         RETVAL = gi;
@@ -83,7 +88,7 @@ open(CLASS,filename,flags = 0)
     PREINIT:
         GeoIP * gi;
     CODE:
-	gi = ( filename != NULL ) ? GeoIP_open(filename,flags) : NULL;
+	gi = ( filename != NULL ) ? GeoIP_open(filename, flags | GEOIP_SILENCE) : NULL;
         if ( gi )
           GeoIP_set_charset(gi, GEOIP_CHARSET_ISO_8859_1);
         RETVAL = gi;
