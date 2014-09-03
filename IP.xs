@@ -9,9 +9,11 @@ extern "C" {
 #include "GeoIP.h"
 #include "GeoIPCity.h"
 
-/* render this flag harmless if it's not defined by the API */
+/* if we're built against a version of geoip-api-c that doesn't define this,
+ * the flag should be harmless (as long as it doesn't clash with another
+ * flag using the same bit position). */
 #ifndef GEOIP_SILENCE
-#define GEOIP_SILENCE		0
+#define GEOIP_SILENCE		16
 #endif
 
 #ifdef __cplusplus
