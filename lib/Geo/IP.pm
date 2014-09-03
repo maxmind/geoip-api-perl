@@ -7,7 +7,7 @@ use vars qw($VERSION @EXPORT  $GEOIP_PP_ONLY @ISA $XS_VERSION);
 BEGIN { $GEOIP_PP_ONLY = 0 unless defined($GEOIP_PP_ONLY); }
 
 BEGIN {
-    $VERSION = '1.43';
+    $VERSION = '1.44';
     eval {
 
         # PERL_DL_NONLAZY must be false, or any errors in loading will just
@@ -27,6 +27,7 @@ sub GEOIP_MEMORY_CACHE() { 1; }    # PP
 sub GEOIP_CHECK_CACHE()  { 2; }
 sub GEOIP_INDEX_CACHE()  { 4; }
 sub GEOIP_MMAP_CACHE()   { 8; }    # PP
+sub GEOIP_SILENCE()     { 16; }
 
 sub GEOIP_UNKNOWN_SPEED()   { 0; } #PP
 sub GEOIP_DIALUP_SPEED()    { 1; } #PP
@@ -5690,7 +5691,7 @@ print STDERR $@ if $@;
     GEOIP_CHARSET_ISO_8859_1    GEOIP_CHARSET_UTF8
     GEOIP_MMAP_CACHE            GEOIP_ACCURACYRADIUS_EDITION
     GEOIP_COUNTRY_EDITION_V6    GEOIP_DOMAIN_EDITION
-    GEOIP_NETSPEED_EDITION_REV1
+    GEOIP_NETSPEED_EDITION_REV1 GEOIP_SILENCE
     /;
 
 1;
@@ -5800,11 +5801,16 @@ GEOIP_INDEX_CACHE caches the most frequently accessed index portion of the
 database, resulting in faster lookups than GEOIP_STANDARD, but less memory
 usage than GEOIP_MEMORY_CACHE - useful for larger databases such as GeoIP
 Legacy Organization and GeoIP City. Note, for GeoIP Country, Region and
-Netspeed databases, GEOIP_INDEX_CACHE is equivalent to GEOIP_MEMORY_CACHE
+Netspeed databases, GEOIP_INDEX_CACHE is equivalent to GEOIP_MEMORY_CACHE.
+
+Prior to geoip-api version 1.6.3, the C API would leak diagnostic messages
+onto stderr unconditionally. From Geo::IP v1.44 onwards, the flag
+squelching this behavior (GEOIP_SILENCE) is implicitly added to the flags
+passed in new(), open(), and open_type().
 
 To combine flags, use the bitwise OR operator, |.  For example, to cache the
 database in memory, but check for an updated GeoIP.dat file, use:
-Geo::IP->new( GEOIP_MEMORY_CACHE | GEOIP_CHECK_CACHE. );
+Geo::IP->new( GEOIP_MEMORY_CACHE | GEOIP_CHECK_CACHE );
 
 =item $gi = Geo::IP->open( $database_filename, $flags );
 
