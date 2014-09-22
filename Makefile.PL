@@ -134,6 +134,20 @@ push(
     },
 ) if ( $ExtUtils::MakeMaker::VERSION >= 6.46 );
 
+push(
+    @extras,
+    LICENSE => 'perl_5',
+) if ( $ExtUtils::MakeMaker::Version >= 6.31 );
+
+push(
+    @extras,
+    META_MERGE     => {
+        resources => {
+            repository => 'https://github.com/maxmind/geoip-api-perl',
+        },
+    },
+) if ( $ExtUtils::MakeMaker::Version >= 6.46 );
+
 my $pp = delete $config{PP};
 
 WriteMakefile(
