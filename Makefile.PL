@@ -73,12 +73,8 @@ __ERR__
     if ( !$found and !$config{PP} ) {
         print STDERR <<'GeoIP_Not_Installed;';
 
-The GeoIP CAPI is not installed you should do that. Otherwise try
-
-    perl Makefile.PL PP=1
-
-to install this module anyway. It uses a slower pure perl version
-and you can rebuid it later.
+The GeoIP CAPI is not installed you should do that NOW. Otherwise the slow
+pure Perl API is used.
 
 GeoIP must be installed prior to building Geo::IP and I can't find
 it in the standard library directories. You can download GeoIP C API from:
@@ -98,8 +94,11 @@ If you installed the GeoIP C libraries to the /usr/local/lib directory,
 then you may need to add /usr/local/lib to /etc/ld.so.conf then run
 /sbin/ldconfig /etc/ld.so.conf
 
+Press Ctrl-C within 30 seconds, or the pure perl API is used
+
 GeoIP_Not_Installed;
-        exit 0;    # make cpantesters happy
+        $config{PP} = 1;
+        sleep 30;    # make cpantesters happy
     }
 }
 
