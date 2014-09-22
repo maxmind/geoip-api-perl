@@ -6046,6 +6046,17 @@ Copyright (c) 2013, MaxMind, Inc
 All rights reserved.  This package is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
 
+
+=head1 COPYRIGHT
+
+Copyright (c) 2007, MaxMind LLC. 
+All rights reserved.
+
+=head1 LICENSE
+
+This package is free software; you can redistribute it
+and/or modify it under the same terms as Perl itself.
+
 =cut
 
 
