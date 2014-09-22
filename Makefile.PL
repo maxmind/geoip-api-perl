@@ -120,6 +120,15 @@ push(
     AUTHOR        => 'T.J. Mather (tjmather@tjmather.com)'
 ) if ( $ExtUtils::MakeMaker::Version >= 5.4301 );
 
+push(
+    @extras,
+    META_MERGE     => {
+        resources => {
+            repository => 'https://github.com/maxmind/geoip-api-perl',
+        },
+    },
+) if ( $ExtUtils::MakeMaker::Version >= 6.46 );
+
 my $pp = delete $config{PP};
 
 WriteMakefile(
