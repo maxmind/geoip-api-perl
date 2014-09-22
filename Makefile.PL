@@ -118,7 +118,7 @@ push(
     @extras,
     ABSTRACT_FROM => 'lib/Geo/IP.pm',
     AUTHOR        => 'T.J. Mather (tjmather@tjmather.com)'
-) if ( $ExtUtils::MakeMaker::Version >= 5.4301 );
+) if ( $ExtUtils::MakeMaker::VERSION >= 5.4301 );
 
 my $pp = delete $config{PP};
 
