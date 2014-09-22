@@ -129,6 +129,7 @@ push(
     @extras,
     META_MERGE     => {
         resources => {
+            bugtracker => 'https://github.com/maxmind/geoip-api-perl/issues',
             repository => 'https://github.com/maxmind/geoip-api-perl',
         },
     },
