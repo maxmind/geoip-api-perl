@@ -73,11 +73,11 @@ __ERR__
     if ( !$found and !$config{PP} ) {
         print STDERR <<'GeoIP_Not_Installed;';
 
-The GeoIP CAPI is not installed you should do that. Otherwise try 
+The GeoIP CAPI is not installed you should do that. Otherwise try
 
     perl Makefile.PL PP=1
-    
-to install this module anyway. It uses a slower pure perl version 
+
+to install this module anyway. It uses a slower pure perl version
 and you can rebuid it later.
 
 GeoIP must be installed prior to building Geo::IP and I can't find
@@ -119,6 +119,15 @@ push(
     ABSTRACT_FROM => 'lib/Geo/IP.pm',
     AUTHOR        => 'T.J. Mather (tjmather@tjmather.com)'
 ) if ( $ExtUtils::MakeMaker::VERSION >= 5.4301 );
+
+push(
+    @extras,
+    META_MERGE     => {
+        resources => {
+            repository => 'https://github.com/maxmind/geoip-api-perl',
+        },
+    },
+) if ( $ExtUtils::MakeMaker::VERSION >= 6.46 );
 
 my $pp = delete $config{PP};
 
