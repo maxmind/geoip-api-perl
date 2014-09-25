@@ -98,7 +98,6 @@ Press Ctrl-C within 30 seconds, or the pure perl API is used
 
 GeoIP_Not_Installed;
         $config{PP} = 1;
-        sleep 30;    # make cpantesters happy
     }
 }
 
