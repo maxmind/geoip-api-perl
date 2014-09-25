@@ -94,8 +94,6 @@ If you installed the GeoIP C libraries to the /usr/local/lib directory,
 then you may need to add /usr/local/lib to /etc/ld.so.conf then run
 /sbin/ldconfig /etc/ld.so.conf
 
-Press Ctrl-C within 30 seconds, or the pure perl API is used
-
 GeoIP_Not_Installed;
         $config{PP} = 1;
     }
