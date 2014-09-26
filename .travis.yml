@@ -9,7 +9,7 @@ perl:
    - "5.10"
 
 before_install:
-  - git clone git@github.com:maxmind/geoip-api-c.git
+  - git clone git://github.com/maxmind/geoip-api-c.git
   - cd geoip-api-c
   - ./bootstrap
   - ./configure
