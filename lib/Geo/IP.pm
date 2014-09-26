@@ -4,7 +4,7 @@ use strict;
 use base qw(Exporter);
 use vars qw($VERSION @EXPORT  $GEOIP_PP_ONLY @ISA $XS_VERSION);
 
-BEGIN { $GEOIP_PP_ONLY = 0 unless defined($GEOIP_PP_ONLY); }
+BEGIN { $GEOIP_PP_ONLY = 0 unless defined($GEOIP_PP_ONLY) }
 
 BEGIN {
     $VERSION = '1.44';
@@ -17,7 +17,7 @@ BEGIN {
         require DynaLoader;
         local @ISA = qw(DynaLoader);
         bootstrap Geo::IP $VERSION;
-    } unless $GEOIP_PP_ONLY;
+    } unless $GEOIP_PP_ONLY || $ENV{GEOIP_PP_ONLY};
 }
 
 require Geo::IP::Record;
@@ -6049,7 +6049,7 @@ and/or modify it under the same terms as Perl itself.
 
 =head1 COPYRIGHT
 
-Copyright (c) 2007, MaxMind LLC. 
+Copyright (c) 2007, MaxMind LLC.
 All rights reserved.
 
 =head1 LICENSE
