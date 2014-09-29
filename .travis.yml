@@ -1,0 +1,35 @@
+language: perl
+
+perl:
+  - "5.20"
+  - "5.18"
+  - "5.16"
+  - "5.14"
+  - "5.12"
+  - "5.10"
+  - "5.8"
+
+before_install:
+  - git clone git://github.com/maxmind/geoip-api-c.git
+  - cd geoip-api-c
+  - ./bootstrap
+  - ./configure
+  - make
+  - sudo make install
+  - sudo ldconfig
+  - cd ..
+
+install:
+  - perl Makefile.PL
+  - make
+
+script:
+  - GEOIP_PP_ONLY=1 prove -lvr t
+  - prove -blvr t
+
+notifications:
+  email:
+    recipients:
+      - dev@maxmind.com
+    on_success: change
+    on_failure: always

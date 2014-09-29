@@ -92,11 +92,11 @@ Returns the metro code from the location object (for city-level US locations onl
 
 =head1 VERSION
 
-1.43
+1.44
 
 =head1 AUTHOR
 
-Copyright (c) 2008, MaxMind LLC
+Copyright (c) 2014, MaxMind LLC
 
 All rights reserved.  This package is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.

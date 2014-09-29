@@ -3,131 +3,137 @@ package Geo::Mirror;
 use strict;
 use vars qw($VERSION);
 
-$VERSION = '1.01';
+$VERSION = '1.44';
 
 use constant PI => 3.14159265358979323846;
 
-our (%lat, %lon, $geo_ip_pkg);
+our ( %lat, %lon, $geo_ip_pkg );
 
 BEGIN {
-  if (eval { require Geo::IP }) {
-    $geo_ip_pkg = "Geo::IP";
-  }
-  else {
-    require Geo::IP::PurePerl;
-    $geo_ip_pkg = "Geo::IP::PurePerl";
-  }
-  $geo_ip_pkg->import('GEOIP_STANDARD');
+    if ( eval { require Geo::IP } ) {
+        $geo_ip_pkg = "Geo::IP";
+    }
+    else {
+        require Geo::IP::PurePerl;
+        $geo_ip_pkg = "Geo::IP::PurePerl";
+    }
+    $geo_ip_pkg->import('GEOIP_STANDARD');
 }
 
 {
-  local $_;
-  while (<DATA>) {
-    my ($country, $lat, $lon) = split(':');
+    local $_;
+    while (<DATA>) {
+        my ( $country, $lat, $lon ) = split(':');
 
-    $lat{$country} = $lat;
-    $lon{$country} = $lon;
-  }
+        $lat{$country} = $lat;
+        $lon{$country} = $lon;
+    }
 }
 
 sub new {
-  my ($class, %h) = @_;
-  my $self = \%h;
-  bless $self, $class;
-  $self->_init;
-  return $self;
+    my ( $class, %h ) = @_;
+    my $self = \%h;
+    bless $self, $class;
+    $self->_init;
+    return $self;
 }
 
 sub _init {
-  my $self = shift;
-  my $mirror_file = $self->{mirror_file};
-  local $_;
-  open MIRROR, "$mirror_file" or die $!;
-  while(<MIRROR>) {
-    my ($url, $country, $fresh) = split(' ');
-    push @{$self->{mirror}->{$country}}, $url;
-    $self->{fresh}{$url} = $fresh || 0;
-  }
-  close MIRROR;
+    my $self        = shift;
+    my $mirror_file = $self->{mirror_file};
+    local $_;
+    open MIRROR, "$mirror_file" or die $!;
+    while (<MIRROR>) {
+        my ( $url, $country, $fresh ) = split(' ');
+        push @{ $self->{mirror}->{$country} }, $url;
+        $self->{fresh}{$url} = $fresh || 0;
+    }
+    close MIRROR;
 }
 
 sub _random_mirror {
-  my ($self, $country, $fresh) = @_;
+    my ( $self, $country, $fresh ) = @_;
 
-  my @mirror = grep { $self->{fresh}{$_} >= $fresh } @{$self->{mirror}->{$country}};
+    my @mirror = grep { $self->{fresh}{$_} >= $fresh }
+        @{ $self->{mirror}->{$country} };
 
-  my $num = scalar @mirror or return;
+    my $num = scalar @mirror or return;
 
-  return $mirror[ rand($num) ];
+    return $mirror[ rand($num) ];
 }
 
 sub find_mirror_by_country {
-  my ($self, $country, $fresh) = @_;
-  my $url;
+    my ( $self, $country, $fresh ) = @_;
+    my $url;
 
-  $fresh ||= 0;
+    $fresh ||= 0;
 
-  if (exists $self->{mirror}->{$country}) {
-    $url = $self->_random_mirror($country, $fresh);
-  }
-
-  if (!$url) {
-    my $nearby = $self->{nearby_cache}->{$country} ||= $self->_find_nearby_countries($country);
-    foreach my $new_country (@$nearby) {
-      $url = $self->_random_mirror($new_country, $fresh) and last;
+    if ( exists $self->{mirror}->{$country} ) {
+        $url = $self->_random_mirror( $country, $fresh );
     }
-  }
 
-  return $url;
+    if ( !$url ) {
+        my $nearby = $self->{nearby_cache}->{$country}
+            ||= $self->_find_nearby_countries($country);
+        foreach my $new_country (@$nearby) {
+            $url = $self->_random_mirror( $new_country, $fresh ) and last;
+        }
+    }
+
+    return $url;
 }
 
 sub find_mirror_by_addr {
-  my ($self, $addr, $fresh) = @_;
+    my ( $self, $addr, $fresh ) = @_;
 
-  unless($self->{gi}) {
-    if ($self->{database_file}) {
-      $self->{gi} = $geo_ip_pkg->open($self->{database_file}, GEOIP_STANDARD);
-    } else {
-      $self->{gi} = $geo_ip_pkg->new(GEOIP_STANDARD);
+    unless ( $self->{gi} ) {
+        if ( $self->{database_file} ) {
+            $self->{gi}
+                = $geo_ip_pkg->open( $self->{database_file}, GEOIP_STANDARD );
+        }
+        else {
+            $self->{gi} = $geo_ip_pkg->new(GEOIP_STANDARD);
+        }
     }
-  }
 
-  # default to US if country not found
-  my $country = lc($self->{gi}->country_code_by_addr($addr)) || 'us';
-  $country = 'us' if $country eq '--';
-  return $self->find_mirror_by_country($country, $fresh);
+    # default to US if country not found
+    my $country = lc( $self->{gi}->country_code_by_addr($addr) ) || 'us';
+    $country = 'us' if $country eq '--';
+    return $self->find_mirror_by_country( $country, $fresh );
 }
 
 sub _find_nearby_countries {
-  my ($self, $country) = @_;
+    my ( $self, $country ) = @_;
 
-  my %distance = map { ($_, $self->_calculate_distance($country, $_)) } keys %{$self->{mirror}};
-  delete $distance{$country};
+    my %distance = map { ( $_, $self->_calculate_distance( $country, $_ ) ) }
+        keys %{ $self->{mirror} };
+    delete $distance{$country};
 
-  [ sort { $distance{$a} <=> $distance{$b} } keys %distance ];
+    [ sort { $distance{$a} <=> $distance{$b} } keys %distance ];
 }
 
 sub _calculate_distance {
-  my ($self, $country1, $country2) = @_;
+    my ( $self, $country1, $country2 ) = @_;
 
-  my $lat_1 = $lat{$country1};
-  my $lat_2 = $lat{$country2};
-  my $lon_1 = $lon{$country1};
-  my $lon_2 = $lon{$country2};
+    my $lat_1 = $lat{$country1};
+    my $lat_2 = $lat{$country2};
+    my $lon_1 = $lon{$country1};
+    my $lon_2 = $lon{$country2};
 
-  # Convert all the degrees to radians
-  $lat_1 *= PI/180;
-  $lon_1 *= PI/180;
-  $lat_2 *= PI/180;
-  $lon_2 *= PI/180;
+    # Convert all the degrees to radians
+    $lat_1 *= PI / 180;
+    $lon_1 *= PI / 180;
+    $lat_2 *= PI / 180;
+    $lon_2 *= PI / 180;
 
-  # Find the deltas
-  my $delta_lat = $lat_2 - $lat_1;
-  my $delta_lon = $lon_2 - $lon_1;
+    # Find the deltas
+    my $delta_lat = $lat_2 - $lat_1;
+    my $delta_lon = $lon_2 - $lon_1;
 
-  # Find the Great Circle distance
-  my $temp = sin($delta_lat/2.0)**2 + cos($lat_1) * cos($lat_2) * sin($delta_lon/2.0)**2;
-  return atan2(sqrt($temp),sqrt(1-$temp));
+    # Find the Great Circle distance
+    my $temp = sin( $delta_lat / 2.0 )**2
+        + cos($lat_1) * cos($lat_2) * sin( $delta_lon / 2.0 )**2;
+    return atan2( sqrt($temp), sqrt( 1 - $temp ) );
 }
 
 1;

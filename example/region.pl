@@ -4,12 +4,15 @@ use Test;
 
 use Geo::IP;
 
-my $gi = Geo::IP->open("/usr/local/share/GeoIP/GeoIPRegion.dat", GEOIP_STANDARD);
+my $gi = Geo::IP->open(
+    "/usr/local/share/GeoIP/GeoIPRegion.dat",
+    GEOIP_STANDARD
+);
 
 while (<DATA>) {
-  chomp;
-  my ($country, $region) = $gi->region_by_name($_);
-  print join("\t",$_,$country,$region) . "\n";
+    chomp;
+    my ( $country, $region ) = $gi->region_by_name($_);
+    print join( "\t", $_, $country, $region ) . "\n";
 }
 
 __DATA__

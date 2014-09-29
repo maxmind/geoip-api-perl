@@ -4,7 +4,7 @@ use strict;
 use base qw(Exporter);
 use vars qw($VERSION @EXPORT  $GEOIP_PP_ONLY @ISA $XS_VERSION);
 
-BEGIN { $GEOIP_PP_ONLY = 0 unless defined($GEOIP_PP_ONLY); }
+BEGIN { $GEOIP_PP_ONLY = 0 unless defined($GEOIP_PP_ONLY) }
 
 BEGIN {
     $VERSION = '1.44';
@@ -17,7 +17,7 @@ BEGIN {
         require DynaLoader;
         local @ISA = qw(DynaLoader);
         bootstrap Geo::IP $VERSION;
-    } unless $GEOIP_PP_ONLY;
+    } unless $GEOIP_PP_ONLY || $ENV{GEOIP_PP_ONLY};
 }
 
 require Geo::IP::Record;
@@ -27,12 +27,12 @@ sub GEOIP_MEMORY_CACHE() { 1; }    # PP
 sub GEOIP_CHECK_CACHE()  { 2; }
 sub GEOIP_INDEX_CACHE()  { 4; }
 sub GEOIP_MMAP_CACHE()   { 8; }    # PP
-sub GEOIP_SILENCE()     { 16; }
+sub GEOIP_SILENCE()      { 16; }
 
-sub GEOIP_UNKNOWN_SPEED()   { 0; } #PP
-sub GEOIP_DIALUP_SPEED()    { 1; } #PP
-sub GEOIP_CABLEDSL_SPEED()  { 2; } #PP
-sub GEOIP_CORPORATE_SPEED() { 3; } #PP
+sub GEOIP_UNKNOWN_SPEED()   { 0; }    #PP
+sub GEOIP_DIALUP_SPEED()    { 1; }    #PP
+sub GEOIP_CABLEDSL_SPEED()  { 2; }    #PP
+sub GEOIP_CORPORATE_SPEED() { 3; }    #PP
 
 BEGIN {
 
@@ -6032,7 +6032,7 @@ https://github.com/maxmind/geoip-api-perl
 
 =head1 VERSION
 
-1.43
+1.44
 
 =head1 SEE ALSO
 
@@ -6041,7 +6041,7 @@ L<GeoIP2> - database reader for the GeoIP2 format.
 
 =head1 AUTHOR
 
-Copyright (c) 2013, MaxMind, Inc
+Copyright (c) 2014, MaxMind, Inc
 
 All rights reserved.  This package is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
@@ -6049,7 +6049,7 @@ and/or modify it under the same terms as Perl itself.
 
 =head1 COPYRIGHT
 
-Copyright (c) 2007, MaxMind LLC. 
+Copyright (c) 2014, MaxMind LLC.
 All rights reserved.
 
 =head1 LICENSE
