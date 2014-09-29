@@ -2,8 +2,8 @@ Revision history for Perl extension Geo::IP.
 
 1.45 2014-09-29
 
-* Fixed typo in 1.44 release notes.
-* Replaced `use vars` with `our`.
+- Fixed typo in 1.44 release notes.
+- Replaced `use vars` with `our`.
 
 
 1.44 2014-09-29
