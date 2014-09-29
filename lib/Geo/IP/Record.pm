@@ -4,23 +4,22 @@ use Geo::IP;    #
 
 use vars qw/$pp/;
 
-
-  use strict;
+use strict;
 
 # here are the missing functions if the C API is used
-  sub latitude {
+sub latitude {
     my $gir = shift;
     return sprintf( "%.4f", $gir->_latitude );
-  }
+}
 
-  sub longitude {
+sub longitude {
     my $gir = shift;
     return sprintf( "%.4f", $gir->_longitude );
-  }
+}
 
 BEGIN {
- $pp = !defined(&Geo::IP::Record::city)
-  || $Geo::IP::GEOIP_PP_ONLY;
+    $pp = !defined(&Geo::IP::Record::city)
+        || $Geo::IP::GEOIP_PP_ONLY;
 }
 
 eval <<'__PP__' if $pp;

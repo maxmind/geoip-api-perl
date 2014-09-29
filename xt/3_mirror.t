@@ -9,13 +9,16 @@ BEGIN { plan tests => 2 }
 
 use Geo::Mirror;
 
-my $gm = Geo::Mirror->new(mirror_file => 't/cpan_mirror.txt');
+my $gm = Geo::Mirror->new( mirror_file => 't/cpan_mirror.txt' );
 
 # pakistan closest to India
-ok($gm->find_mirror_by_country('pk'), 'http://cpan.in.freeos.com');
+ok( $gm->find_mirror_by_country('pk'), 'http://cpan.in.freeos.com' );
 
 # Iran closest to Saudi Arabia
-ok($gm->find_mirror_by_addr('62.60.128.1'), 'ftp://ftp.isu.net.sa/pub/CPAN/');
+ok(
+    $gm->find_mirror_by_addr('62.60.128.1'),
+    'ftp://ftp.isu.net.sa/pub/CPAN/'
+);
 
 # This test is somewhat unreliable
 # Philippines

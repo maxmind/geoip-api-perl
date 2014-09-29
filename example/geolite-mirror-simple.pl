@@ -2,7 +2,7 @@
 use strict;
 our $VERSION = '0.02';
 use LWP::Simple qw/ mirror RC_NOT_MODIFIED RC_OK $ua /;
-use File::Copy  qw/ mv /;
+use File::Copy qw/ mv /;
 use File::Spec;
 use PerlIO::gzip;
 
@@ -24,10 +24,10 @@ use PerlIO::gzip;
 # This example overwrite your GeoIPCity.dat database!
 
 my %mirror = (    # local-filename       geolite-name
-               'GeoIP.dat.gz'      => 'GeoLiteCountry/GeoIP.dat.gz',
-               'GeoIPCity.dat.gz'  => 'GeoLiteCity.dat.gz',
-               'GeoIPv6.dat.gz'    => 'GeoIPv6.dat.gz',
-               'GeoIPASNum.dat.gz' => 'asnum/GeoIPASNum.dat.gz'
+    'GeoIP.dat.gz'      => 'GeoLiteCountry/GeoIP.dat.gz',
+    'GeoIPCity.dat.gz'  => 'GeoLiteCity.dat.gz',
+    'GeoIPv6.dat.gz'    => 'GeoIPv6.dat.gz',
+    'GeoIPASNum.dat.gz' => 'asnum/GeoIPASNum.dat.gz'
 );
 
 $ua->agent("MaxMind-geolite-mirror-simple/$VERSION");
@@ -35,15 +35,15 @@ my $dl_path = 'http://geolite.maxmind.com/download/geoip/database/';
 
 chdir $download_dir or die $!;
 for my $f ( keys %mirror ) {
-  my $rc = mirror( $dl_path . $mirror{$f}, $f );
-  next if $rc == RC_NOT_MODIFIED;
-  if ( $rc == RC_OK ) {
-    ( my $outfile = $f ) =~ s/\.gz$//;
-    open my $in,  '<:gzip', $f       or die $!;
-    open my $out, '>',      $outfile or die $!;
-    print $out $_ or die $! while <$in>;
-    mv( $outfile, File::Spec->catfile( $dest_dir, $outfile ) ) or die $!;
-  }
+    my $rc = mirror( $dl_path . $mirror{$f}, $f );
+    next if $rc == RC_NOT_MODIFIED;
+    if ( $rc == RC_OK ) {
+        ( my $outfile = $f ) =~ s/\.gz$//;
+        open my $in,  '<:gzip', $f       or die $!;
+        open my $out, '>',      $outfile or die $!;
+        print $out $_ or die $! while <$in>;
+        mv( $outfile, File::Spec->catfile( $dest_dir, $outfile ) ) or die $!;
+    }
 }
 exit 0;
 

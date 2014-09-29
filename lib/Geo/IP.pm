@@ -27,12 +27,12 @@ sub GEOIP_MEMORY_CACHE() { 1; }    # PP
 sub GEOIP_CHECK_CACHE()  { 2; }
 sub GEOIP_INDEX_CACHE()  { 4; }
 sub GEOIP_MMAP_CACHE()   { 8; }    # PP
-sub GEOIP_SILENCE()     { 16; }
+sub GEOIP_SILENCE()      { 16; }
 
-sub GEOIP_UNKNOWN_SPEED()   { 0; } #PP
-sub GEOIP_DIALUP_SPEED()    { 1; } #PP
-sub GEOIP_CABLEDSL_SPEED()  { 2; } #PP
-sub GEOIP_CORPORATE_SPEED() { 3; } #PP
+sub GEOIP_UNKNOWN_SPEED()   { 0; }    #PP
+sub GEOIP_DIALUP_SPEED()    { 1; }    #PP
+sub GEOIP_CABLEDSL_SPEED()  { 2; }    #PP
+sub GEOIP_CORPORATE_SPEED() { 3; }    #PP
 
 BEGIN {
 

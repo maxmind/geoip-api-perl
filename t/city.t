@@ -16,7 +16,7 @@ is( $record->country_code3, 'USA',        'expected 3 letter country code' );
 is( $record->country_name, 'United States',       'expected country name' );
 is( $record->dma_code,     803,                   'expected DMA code' );
 is( $record->latitude,     33.9164,               'expected latitude' );
-is( $record->longitude,    '-118.4040',             'expected longitude' );
+is( $record->longitude,    '-118.4040',           'expected longitude' );
 is( $record->metro_code,   803,                   'expected metro code' );
 is( $record->postal_code,  '90245',               'expected postal code' );
 is( $record->region,       'CA',                  'expeced region' );
