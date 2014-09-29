@@ -1,0 +1,14 @@
+.git
+.perltidyallrc
+.tidyallrc
+.travis.yml
+.tidyall.d
+Geo-IP-*
+^MANIFEST\.
+^Makefile$
+^blib/
+^MakeMaker-\d
+~$
+\.old$
+^#.*#$
+^\.#

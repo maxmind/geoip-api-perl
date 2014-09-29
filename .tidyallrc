@@ -5,4 +5,4 @@ argv = --profile=$ROOT/.perltidyallrc
 
 [SortLines]
 select = .gitignore
-
+select = MANIFEST.SKIP

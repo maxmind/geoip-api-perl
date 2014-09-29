@@ -1,6 +1,6 @@
 Revision history for Perl extension Geo::IP.
 
-1.44 2014-09-XX
+1.44 2014-09-29
 
 - On installation, this API will not default to the pure Perl version rather
   than failing if libGeoIP is not found.
@@ -357,4 +357,3 @@ be downloaded from http://geo-ip.com
 0.01 2001-06-30
 
 - original version; created by h2xs 1.19
-
