@@ -1,9 +1,15 @@
 Revision history for Perl extension Geo::IP.
 
+1.45 2014-09-29
+
+* Fixed typo in 1.44 release notes.
+* Replaced `use vars` with `our`.
+
+
 1.44 2014-09-29
 
-- On installation, this API will not default to the pure Perl version rather
-  than failing if libGeoIP is not found.
+- On installation, this API will now default to the pure Perl version rather
+  than failing if libGeoIP is not found. (GitHub #6, #11)
 - Add support for GEOIP_SILENCE ( Philip Prindeville )
 - Unit tests for different databases were added.
 

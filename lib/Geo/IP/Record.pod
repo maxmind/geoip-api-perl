@@ -92,7 +92,7 @@ Returns the metro code from the location object (for city-level US locations onl
 
 =head1 VERSION
 
-1.44
+1.45
 
 =head1 AUTHOR
 
