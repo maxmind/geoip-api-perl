@@ -3,7 +3,7 @@ package Geo::Mirror;
 use strict;
 use vars qw($VERSION);
 
-$VERSION = '1.01';
+$VERSION = '1.44';
 
 use constant PI => 3.14159265358979323846;
 

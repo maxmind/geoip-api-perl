@@ -6032,7 +6032,7 @@ https://github.com/maxmind/geoip-api-perl
 
 =head1 VERSION
 
-1.43
+1.44
 
 =head1 SEE ALSO
 
@@ -6041,7 +6041,7 @@ L<GeoIP2> - database reader for the GeoIP2 format.
 
 =head1 AUTHOR
 
-Copyright (c) 2013, MaxMind, Inc
+Copyright (c) 2014, MaxMind, Inc
 
 All rights reserved.  This package is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
@@ -6049,7 +6049,7 @@ and/or modify it under the same terms as Perl itself.
 
 =head1 COPYRIGHT
 
-Copyright (c) 2007, MaxMind LLC.
+Copyright (c) 2014, MaxMind LLC.
 All rights reserved.
 
 =head1 LICENSE
