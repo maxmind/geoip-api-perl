@@ -40,22 +40,23 @@ Revision history for Perl extension Geo::IP.
 - Add new CAPI method region_name_by_code ( Boris Zentner )
 - Add support for GEOIP_NETSPEED_EDITION_REV1 ( Boris Zentner )
 - Add new CAPI method record_by_ipnum_v6 ( Boris Zentner )
-- Add new CAPI glue methods to use GeoIPCityv6 databases
-  record_by_addr_v6 record_by_name_v6 ( Boris Zentner )
+- Add new CAPI glue methods to use GeoIPCityv6 databases record_by_addr_v6
+  record_by_name_v6 ( Boris Zentner )
 
 
 1.39 2011-05-07
 
 - Upd Docs ( Boris Zentner )
 - Add glue for the CAPI lib_version method ( Boris Zentner )
-- Add CAPI glue for the methods enable_teredo and teredo.
-    currently only avail in conjunction with the CAPI ( Boris Zentner )
+- Add CAPI glue for the methods enable_teredo and teredo. currently only avail
+  in conjunction with the CAPI ( Boris Zentner )
 - Add example/benchmark.pl and example/country_v6.pl ( Boris Zentner )
 - Add name_by_name and name_by_addr ( Boris Zentner )
 - Add org_by_name_v6 and org_by_addr_v6 only XS ( Boris Zentner )
-- Add name_by_ipnum_v6, name_by_name_v6 and name_by_addr_v6 XS glue ( Boris Zentner )
-- Add sub Geo::IP::CLONE_SKIP {1} in conjunction with .xs Avoid thread
-    issues ( Boris Zentner )
+- Add name_by_ipnum_v6, name_by_name_v6 and name_by_addr_v6 XS glue ( Boris
+  Zentner )
+- Add sub Geo::IP::CLONE_SKIP {1} in conjunction with .xs Avoid thread issues
+  ( Boris Zentner )
 - Export GEOIP_DOMAIN_EDITION by default ( Boris Zentner )
 - Update region codes 20100810 ( Boris Zentner )
 - Fix some PP 3letter country codes ( Boris Zentner )
@@ -64,38 +65,42 @@ Revision history for Perl extension Geo::IP.
 - Add PP Geo::IP->time_zone ( Boris Zentner )
 - Update region codes 20100420 ( Boris Zentner )
 - Link at least to CAPI 1.4.7 ( Boris Zentner )
-- Add example/geolite-mirror-simple.pl to download maxmind databases ( Boris Zentner )
+- Add example/geolite-mirror-simple.pl to download maxmind databases ( Boris
+  Zentner )
 - Update region codes ( Boris Zentner )
 - Update timezones ( Boris Zentner )
 - Add isp_by_name and isp_by_addr if the CAPI is used ( Boris Zentner )
 - Add isp_by_addr and org_by_addr to the PurePerl API ( Boris Zentner )
-- Add api method, so users know if they use the PurePerl or CAPI glue
-  print Geo::IP->api ( Boris Zentner )
-- Silence redefined warning, when perl is started with -w and the
-    PurePerl API is used ( Boris Zentner )
+- Add api method, so users know if they use the PurePerl or CAPI glue print
+  Geo::IP->api ( Boris Zentner )
+- Silence redefined warning, when perl is started with -w and the PurePerl API
+  is used ( Boris Zentner )
 - Export GEOIP_CITYCONFIDENCE_EDITION, GEOIP_LOCATIONA_EDITION,
   GEOIP_ACCURACYRADIUS_EDITION and GEOIP_COUNTRY_EDITION_V6 ( Boris Zentner )
-- Add some more v6 XS glue. IPv6 support require the CAPI to work.
-    GeoIP_country_code_by_addr_v6
-    GeoIP_country_code_by_name_v6
-    GeoIP_country_code3_by_addr_v6
-    GeoIP_country_code3_by_name_v6
-    ( Boris Zentner )
-! Change RU's continent code from AS to EU ( Boris Zentner )
-! Change Turkey's continent code from AS to EU ( Boris Zentner )
-! org_by_* and friends return UTF8 scalars, if the charset is set to GEOIP_CHARSET_UTF8 ( Boris Zentner )
+- Add some more v6 XS glue. IPv6 support require the CAPI to work.( Boris
+  Zentner )
+  - GeoIP_country_code_by_addr_v6
+  - GeoIP_country_code_by_name_v6
+  - GeoIP_country_code3_by_addr_v6
+  - GeoIP_country_code3_by_name_v6
+- Change RU's continent code from AS to EU ( Boris Zentner )
+- Change Turkey's continent code from AS to EU ( Boris Zentner )
+- org_by_* and friends return UTF8 scalars, if the charset is set to
+  GEOIP_CHARSET_UTF8 ( Boris Zentner )
 - Add PP ASNum support ( Boris Zentner )
-- Add XS glue for time_zone and continent_code_by_country_code ( Boris Zentner )
+- Add XS glue for time_zone and continent_code_by_country_code ( Boris Zentner
+  )
 - Add glue for database_edition ( Boris Zentner )
-- Workaround centos/mod_perl issue when the PP fallback is used and
-  Sys::Mmap is not installed ( Boris Zentner )
+- Workaround centos/mod_perl issue when the PP fallback is used and Sys::Mmap
+  is not installed ( Boris Zentner )
 - Update PurePerl region names 20090723 ( Boris Zentner )
 - Add XS glue for GeoIP_country_code_by_ipnum_v6 ( Boris Zentner )
 
 
 1.38 2009-05-16
 
-- PurePerl region_by_addr and region_by_name return '00' for unknown regions, like the CAPI does ( Boris Zentner )
+- PurePerl region_by_addr and region_by_name return '00' for unknown regions,
+  like the CAPI does ( Boris Zentner )
 - Update to latest FIPS codes from 20090401 ( Boris Zentner )
 - Fix Pureperl handling of GEOIP_REGION_EDITION_REV0 ( Boris Zentner )
 - Fix segfault when undef is supplied as filename to open ( Boris Zentner )
@@ -103,24 +108,36 @@ Revision history for Perl extension Geo::IP.
 - Add PP support for GEOIP_DOMAIN_EDITION ( Boris Zentner )
 - Handle database types in the same way, as the CAPI does ( Boris Zentner )
 - Remove Australia double timezones entries. ( Boris Zentner )
+
+
 1.37 2009-03-6
+
 - Document region_by_addr and region_by_name ( Boris Zentner )
-- region_by_addr and region_by_name return undef for unknown countries and regions. Instead of "\0" and '000' ( Boris Zentner )
+- region_by_addr and region_by_name return undef for unknown countries and
+  regions. Instead of "\0" and '000' ( Boris Zentner )
 - Add PP function region_by_addr ( Boris Zentner )
-- Change the default values of Geo::IP::Record fields for metro_code and area_code to 0 instead of '' PurePerl only ( Boris Zentner )
-- Change the default values of Geo::IP::Record fields for region, postal_code and region_name to undef instead of '' ( Boris Zentner )
-- Force the output of Geo::IP::Record::longitude and ::latitude to four decimal places ( Boris Zentner )
+- Change the default values of Geo::IP::Record fields for metro_code and
+  area_code to 0 instead of '' PurePerl only ( Boris Zentner )
+- Change the default values of Geo::IP::Record fields for region, postal_code
+  and region_name to undef instead of '' ( Boris Zentner )
+- Force the output of Geo::IP::Record::longitude and ::latitude to four
+  decimal places ( Boris Zentner )
 - Fix PurePerl three letter code for Romania ( Boris Zentner )
 - Update PurePerl regionnames 20090201 ( Boris Zentner )
 - Update PurePerl timezones 20090201 ( Boris Zentner )
 - Update timezones for Australia
-! Fix: PurePerl's get_city_record_as_hash, record_by_addr and record_by_name to return undef for private and unknown IP's. Former we returned a Geo::IP::Record object with everything undef. The PurePerl code and the CAPI wrapper are now behave the same. ( Boris Zentner )
-- Update region codes from http://www.maxmind.com/app/fips10_4 Dec 17th, 2008 ( Boris Zentner )
+- Fix: PurePerl's get_city_record_as_hash, record_by_addr and record_by_name
+  to return undef for private and unknown IP's. Former we returned a
+  Geo::IP::Record object with everything undef. The PurePerl code and the CAPI
+  wrapper are now behave the same. ( Boris Zentner )
+- Update region codes from http://www.maxmind.com/app/fips10_4 Dec 17th, 2008
+  ( Boris Zentner )
 
 
 1.36 2008-12-20
 
-- Add the methods charset and set_charset to the pureperl fallback ( Boris Zentner )
+- Add the methods charset and set_charset to the pureperl fallback ( Boris
+  Zentner )
 - Fix: We require CAPI 1.4.5 not 1.4.4 for range_by_ip ( Boris Zentner )
 - Add isp_by_addr and org_by_addr to the pureperl fallback ( Boris Zentner )
 
@@ -130,9 +147,12 @@ Revision history for Perl extension Geo::IP.
 
 - Add GEOIP_DOMAIN_EDITION for the PurePerl ( Boris Zentner )
 - Add open_type method to the PurePerl fallback ( Boris Zentner )
-- Add CAPI Version detection, for the case, where a outdated CAPI is installed. ( Boris Zentner )
-- Add metro_code, a replacement for the depreciated dma_code method. ( Boris Zentner )
-- Add range_by_ip, netmask and last_netmask to the PurePerl API ( Boris Zentner )
+- Add CAPI Version detection, for the case, where a outdated CAPI is
+  installed. ( Boris Zentner )
+- Add metro_code, a replacement for the depreciated dma_code method. ( Boris
+  Zentner )
+- Add range_by_ip, netmask and last_netmask to the PurePerl API ( Boris
+  Zentner )
 - Add range_by_ip to the C API wrapper ( Boris Zentner )
 
 
@@ -140,32 +160,39 @@ Revision history for Perl extension Geo::IP.
 
 - Add Geo::IP::Record::region_name to the PurePerl API ( Boris Zentner )
 - Add missing record_by_name function to the PurePerl API ( Boris Zentner )
-- Add missing country/country code 'Other' for the pureperl fallback ( Boris Zentner )
+- Add missing country/country code 'Other' for the pureperl fallback ( Boris
+  Zentner )
 - Fix trash of $_ in Geo::Mirror ( Boris Zentner )
 - Geo::Mirror die, if open failed ( Boris Zentner )
-- Fix pureperl time_zone for countries with region codes, but only one time_zone ( Boris Zentner ).
+- Fix pureperl time_zone for countries with region codes, but only one
+  time_zone ( Boris Zentner ).
 - Add continent_code to the pureperl and C API ( Boris Zentner )
 - minimum perl version is 5.6 now ( Boris Zentner )
 
 
 1.33 2008-05-05
 
-- make cpantesters happy exit 0 early, if libGeoIP is not found. ( Boris Zentner )
+- make cpantesters happy exit 0 early, if libGeoIP is not found. ( Boris
+  Zentner )
 
 
 1.32 2008-05-04
 
-- make Geo::IP::Record::time_zone work for the pure perl part of Geo::IP ( Boris Zentner )
-- BEGIN{$Geo::IP::GEOIP_PP_ONLY=1} use Geo::IP; disable the C API, even if it is installed. ( Boris Zentner )
-! rename $Geo::IP::TESTING_PERL_ONLY to $Geo::IP::GEOIP_PP_ONLY. ( Boris Zentner )
-- Fix Geo::IP::Record to use the C API, only, when Geo::IP use it ( Boris Zentner )
+- make Geo::IP::Record::time_zone work for the pure perl part of Geo::IP (
+  Boris Zentner )
+- BEGIN{$Geo::IP::GEOIP_PP_ONLY=1} use Geo::IP; disable the C API, even if it
+  is installed. ( Boris Zentner )
+- rename $Geo::IP::TESTING_PERL_ONLY to $Geo::IP::GEOIP_PP_ONLY. ( Boris
+  Zentner )
+- Fix Geo::IP::Record to use the C API, only, when Geo::IP use it ( Boris
+  Zentner )
 
 
 1.31 2008-03-22
 
 - Added BL/Saint Barthelemy, MF/Saint Martin (ISO-3166-1 additions)
-- Change default database name for NetWare to sys:/etc/GeoIP/GeoIP.dat
-   and MSWin32 to c:/GeoIP/GeoIP.dat ( Guenter Knauf )
+- Change default database name for NetWare to sys:/etc/GeoIP/GeoIP.dat and
+  MSWin32 to c:/GeoIP/GeoIP.dat ( Guenter Knauf )
 - Added support for time_zone lookup in GeoIP City API
 
 
@@ -173,9 +200,10 @@ Revision history for Perl extension Geo::IP.
 
 - Add GEOIP_MMAP_CACHE support ( Peter Shipley )
 - Added last_netmask - gets netmask of network block from last lookup
-- Merged in Geo::IP::PurePerl code, PurePerl code is mostly
-API compatible with XS code, except for charset functions
-! Added set_charset - enables UTF8 output of city name - requires C API 1.4.3 or greater
+- Merged in Geo::IP::PurePerl code, PurePerl code is mostly API compatible
+  with XS code, except for charset functions
+- Added set_charset - enables UTF8 output of city name - requires C API 1.4.3
+  or greater
 
 
 1.28 2007-02-4
@@ -187,19 +215,18 @@ API compatible with XS code, except for charset functions
 1.27 2005-09-8
 
 - Fixed Autoloader/open issue (Alexander Vasiljev)
-- Fixed compilation error in Perl 5.005 with semicolon
-in GeoIP_database_info in IP.xs(Stephen Schulte)
+- Fixed compilation error in Perl 5.005 with semicolon in GeoIP_database_info
+  in IP.xs(Stephen Schulte)
 - Added support for open_type (Frank Mather)
 
 
 1.26 2005-05-19
 
-- Fixed segfault issue if non-resolvable domain name is
-  passed to region_by_addr or region_by_name
-- Added support for GEOIP_INDEX_CACHE - which just caches
-the most frequently accessed index portion of the database, resulting
-in faster lookups than GEOIP_STANDARD, but less memory usage than
-GEOIP_MEMORY_CACHE
+- Fixed segfault issue if non-resolvable domain name is passed to
+  region_by_addr or region_by_name
+- Added support for GEOIP_INDEX_CACHE - which just caches the most frequently
+  accessed index portion of the database, resulting in faster lookups than
+  GEOIP_STANDARD, but less memory usage than GEOIP_MEMORY_CACHE
 
 
 1.25 2004-12-24
@@ -210,15 +237,15 @@ GEOIP_MEMORY_CACHE
 
 1.24 2004-11-30
 
-- Fixed memory leak in ISP/Organization database lookups
-by adding O_CHAR to typemap
+- Fixed memory leak in ISP/Organization database lookups by adding O_CHAR to
+  typemap
 
 
 1.23  October 6th 2004
 
 - Updated test case, removed www.bundesregierung.de
 - Geo::Mirror: fallback to using Geo::IP::PurePerl if Geo::IP is not available
-(Graham Barr)
+  (Graham Barr)
 - Geo::Mirror: added support for mirror freshness
 
 
@@ -229,6 +256,7 @@ by adding O_CHAR to typemap
 
 
 1.21 2003-02-28
+
 - Added support for GEOIP_CHECK_CACHE
 
 
@@ -266,8 +294,7 @@ by adding O_CHAR to typemap
 1.10 2002-11-22
 
 - Added support for GeoIP City Edition
-- Added more documentation on where to get databases,
-  and sourceforge.
+- Added more documentation on where to get databases, and sourceforge.
 
 
 0.26 2002-02-25
@@ -300,10 +327,10 @@ by adding O_CHAR to typemap
 
 0.08 2002-04-07
 
-- This perl module is now a XS wrapper around the GeoIP C library
-  for improved performance.  Note that the API has changed.
-- Removed the geoip-lookup script, since GeoIP C contains a
-  geoiplookup executable that provides the same functionality
+- This perl module is now a XS wrapper around the GeoIP C library for improved
+  performance.  Note that the API has changed.
+- Removed the geoip-lookup script, since GeoIP C contains a geoiplookup
+  executable that provides the same functionality
 
 
 0.07 2002-04-01
@@ -314,18 +341,16 @@ by adding O_CHAR to typemap
 0.06 2002-02-19
 
 - Geo::IP
-  - Added new method, lookup_country_by_name,
-      performs DNS lookup of IP address for hostnames
-  - added O_RDWR option to tie DB_File for
-      compatibility (Allen Smith)
+  - Added new method, lookup_country_by_name, performs DNS lookup of IP
+    address for hostnames
+  - added O_RDWR option to tie DB_File for compatibility (Allen Smith)
   - makes directory '/usr/local/geoip' (Philip Mak)
   - added binmode for compatibility (Randy Kobes)
 
 - Geo::Mirror
   - Mirror when doesn't find country, default to US
-  - Special handing for "EU" (European Union)
-      treat as country with coordinates between
-      Germany and Italy.
+  - Special handing for "EU" (European Union) treat as country with
+    coordinates between Germany and Italy.
 
 
 0.05 2002-02-15
@@ -346,9 +371,8 @@ by adding O_CHAR to typemap
 
 0.03 2001-02-28
 
-- Geo::IP now generates Berkeley DB file from
-data file, to get around differing versions
-of Berkeley DB.
+- Geo::IP now generates Berkeley DB file from data file, to get around
+  differing versions of Berkeley DB.
 - now croaks if db file can not be opened (Nick Craig-Wood)
 
 
@@ -356,8 +380,8 @@ of Berkeley DB.
 
 - renamed to Geo::IP from Net::Geography
 - revised docs
-- data separated from perl distribution, can
-be downloaded from http://geo-ip.com
+- data separated from perl distribution, can be downloaded from
+  http://geo-ip.com
 
 
 0.01 2001-06-30
