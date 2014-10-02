@@ -5183,9 +5183,12 @@ sub _setup_segments {
 #read in the database segment
       elsif (    ( $gi->{"databaseType"} == GEOIP_CITY_EDITION_REV0 )
               || ( $gi->{"databaseType"} == GEOIP_CITY_EDITION_REV1 )
+              || ( $gi->{"databaseType"} == GEOIP_CITY_EDITION_REV0_V6 )
+              || ( $gi->{"databaseType"} == GEOIP_CITY_EDITION_REV1_V6 )
               || ( $gi->{"databaseType"} == GEOIP_ORG_EDITION )
               || ( $gi->{"databaseType"} == GEOIP_DOMAIN_EDITION )
               || ( $gi->{"databaseType"} == GEOIP_ASNUM_EDITION )
+              || ( $gi->{"databaseType"} == GEOIP_ASNUM_EDITION_V6 )
               || ( $gi->{"databaseType"} == GEOIP_NETSPEED_EDITION_REV1 )
               || ( $gi->{"databaseType"} == GEOIP_ISP_EDITION ) ) {
         $gi->{"databaseSegments"} = 0;
@@ -5214,6 +5217,7 @@ sub _setup_segments {
 
 #if database Type is GEOIP_COUNTY_EDITION then use database segment GEOIP_COUNTRY_BEGIN
   if (    $gi->{"databaseType"} == GEOIP_COUNTRY_EDITION
+       || $gi->{"databaseType"} == GEOIP_COUNTRY_EDITION_V6 )
        || $gi->{"databaseType"} == GEOIP_NETSPEED_EDITION ) {
     $gi->{"databaseSegments"} = GEOIP_COUNTRY_BEGIN;
   }
