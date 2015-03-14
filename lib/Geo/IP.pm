@@ -5540,7 +5540,7 @@ sub database_info {
     my $i  = 0;
     my $buf;
     my $retval;
-    my $hasStructureInfo;
+    my $hasStructureInfo = 0;
     seek( $gi->{fh}, -3, 2 );
     for ( my $i = 0 ; $i < STRUCTURE_INFO_MAX_SIZE ; $i++ ) {
         read( $gi->{fh}, $buf, 3 );
