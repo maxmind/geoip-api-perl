@@ -1,14 +1,13 @@
+---
 language: perl
-
 perl:
-  - "5.20"
-  - "5.18"
-  - "5.16"
-  - "5.14"
-  - "5.12"
-  - "5.10"
-  - "5.8"
-
+  - '5.20'
+  - '5.18'
+  - '5.16'
+  - '5.14'
+  - '5.12'
+  - '5.10'
+  - '5.8'
 before_install:
   - git clone git://github.com/maxmind/geoip-api-c.git
   - cd geoip-api-c
@@ -18,18 +17,18 @@ before_install:
   - sudo make install
   - sudo ldconfig
   - cd ..
-
 install:
   - perl Makefile.PL
   - make
-
 script:
   - GEOIP_PP_ONLY=1 prove -lvr t
   - prove -blvr t
-
 notifications:
   email:
+    on_failure: always
+    on_success: change
     recipients:
       - dev-ci@maxmind.com
-    on_success: change
-    on_failure: always
+  slack:
+    rooms:
+      secure: "knOewGj9fnNlwWzrZYz4pfG2aPPMhVJ4DAXKvB+XdSGN2HG4nNL6P9AqB2IOY42Fqk9yyNNbcjEL2YnoI4/hLzo4HulEVq+2aafIn5jgAZip8sXSePJlk8Adr9xwMnD03lvF3Vo9MW7nE6quzFDnp29Vs4Hgw994njYq2kbucFE=\n"
