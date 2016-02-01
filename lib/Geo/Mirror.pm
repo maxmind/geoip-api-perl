@@ -163,7 +163,7 @@ request a mirror with a minimum freshness.
 
 =head1 AUTHOR
 
-Copyright (c) 2004, MaxMind LLC, support@maxmind.com
+Copyright (c) 2016, MaxMind LLC, support@maxmind.com
 
 All rights reserved.  This package is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
