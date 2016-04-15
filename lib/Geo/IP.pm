@@ -5963,6 +5963,12 @@ This module can be used to automatically select the geographically closest
 mirror, to analyze your web server logs to determine the countries of your
 visitors, for credit card fraud detection, and for software export controls.
 
+=head1 IP GEOLOCATION USAGE
+
+IP geolocation is inherently imprecise. Locations are often near the center of
+the population. Any location provided by a GeoIP database or web service
+should not be used to identify a particular address or household.
+
 =head1 IP ADDRESS TO COUNTRY DATABASES
 
 Free monthly updates to the database are available from
