@@ -11,18 +11,18 @@
   my $record = $gi->record_by_addr('24.24.24.24');
 
   print $record->country_code,
-	$record->country_code3,
-	$record->country_name,
-	$record->region,
-	$record->region_name,
-	$record->city,
-	$record->postal_code,
-	$record->latitude,
-	$record->longitude,
-	$record->time_zone,
-	$record->area_code,
+    $record->country_code3,
+    $record->country_name,
+    $record->region,
+    $record->region_name,
+    $record->city,
+    $record->postal_code,
+    $record->latitude,
+    $record->longitude,
+    $record->time_zone,
+    $record->area_code,
     $record->continent_code,
-	$record->metro_code;
+    $record->metro_code;
 
 =head1 DESCRIPTION
 
@@ -64,11 +64,15 @@ Returns the postal code from the location object.
 
 =item $lat = $record->latitude;
 
-Returns the latitude from the location object.
+Returns the approximate latitude of the location associated with the IP
+address. This value is not precise and should not be used to identify a
+particular address or household.
 
 =item $lon = $record->longitude;
 
-Returns the longitude from the location object.
+Returns the approximate longitude of the location associated with the IP
+address. This value is not precise and should not be used to identify a
+particular address or household.
 
 =item $time_zone = $record->time_zone;
 
