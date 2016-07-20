@@ -1,5 +1,9 @@
 Revision history for Perl extension Geo::IP.
 
+1.46 2016-07-20
+
+- MYMETA files are now no longer included in releases.
+
 1.45 2014-09-29
 
 - Fixed typo in 1.44 release notes.
