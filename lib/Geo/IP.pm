@@ -165,8 +165,8 @@ BEGIN {
             local $_ = $_[1];
             use bytes;
             s/([\x80-\xff])/my $c = ord($1);
-	       my $p = $c >= 192 ? 1 : 0;
-	       pack ( 'CC' => 0xc2 + $p , $c & ~0x40 ); /ge;
+            my $p = $c >= 192 ? 1 : 0;
+            pack ( 'CC' => 0xc2 + $p , $c & ~0x40 ); /ge;
             return $_;
         };
     }
