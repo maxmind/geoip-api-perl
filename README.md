@@ -346,7 +346,7 @@ https://github.com/maxmind/geoip-api-perl
 - Olaf Alders <oalders@maxmind.com>
 - Philip A. Prindeville <philipp@redfish-solutions.com>
 - shawniverson <shawniverson@gmail.com>
-- Thomas J Mather <geoipapi@maxmind.com>
+- Thomas J Mather <tjmather@maxmind.com>
 - Tina Mueller <TINITA@cpan.org>
 
 # COPYRIGHT AND LICENSE
