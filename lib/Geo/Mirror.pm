@@ -137,10 +137,6 @@ sub _calculate_distance {
 
 1;
 
-=head1 NAME
-
-Geo::Mirror - Find closest Mirror
-
 =head1 SYNOPSIS
 
   use Geo::Mirror;
@@ -161,14 +157,9 @@ The mirror file should be a space separate list of URL, Country, and mirror fres
 The mirror freshness is optional and can be used by user
 request a mirror with a minimum freshness.
 
-=head1 AUTHOR
-
-Copyright (c) 2016, MaxMind LLC, support@maxmind.com
-
-All rights reserved.  This package is free software; you can redistribute it
-and/or modify it under the same terms as Perl itself.
-
 =cut
+
+#ABSTRACT: Geo::Mirror - Find closest Mirror
 
 __DATA__
 af:33:65
