@@ -5909,11 +5909,11 @@ __PP_CODE__
 
 print STDERR $@ if $@;
 1;
+
+
+# ABSTRACT: Look up location and network information by IP Address
+
 __END__
-
-=head1 NAME
-
-Geo::IP - Look up location and network information by IP Address
 
 =head1 SYNOPSIS
 
@@ -6250,32 +6250,9 @@ Is available from GitHub, see
 
 https://github.com/maxmind/geoip-api-perl
 
-=head1 VERSION
-
-1.46
-
 =head1 SEE ALSO
 
 L<GeoIP2> - database reader for the GeoIP2 format.
-
-
-=head1 AUTHOR
-
-Copyright (c) 2016, MaxMind, Inc
-
-All rights reserved.  This package is free software; you can redistribute it
-and/or modify it under the same terms as Perl itself.
-
-
-=head1 COPYRIGHT
-
-Copyright (c) 2016, MaxMind LLC.
-All rights reserved.
-
-=head1 LICENSE
-
-This package is free software; you can redistribute it
-and/or modify it under the same terms as Perl itself.
 
 =cut
 
