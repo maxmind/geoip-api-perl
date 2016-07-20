@@ -28,7 +28,7 @@ our @EXPORT = qw(
 );
 
 BEGIN {
-    $VERSION = '1.45';
+    $VERSION = '1.46';
     eval {
 
         # PERL_DL_NONLAZY must be false, or any errors in loading will just
@@ -6252,7 +6252,7 @@ https://github.com/maxmind/geoip-api-perl
 
 =head1 VERSION
 
-1.45
+1.46
 
 =head1 SEE ALSO
 

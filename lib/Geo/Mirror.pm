@@ -2,7 +2,7 @@ package Geo::Mirror;
 
 use strict;
 
-our $VERSION = '1.45';
+our $VERSION = '1.46';
 
 use constant PI => 3.14159265358979323846;
 
