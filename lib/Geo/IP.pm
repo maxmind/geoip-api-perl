@@ -6126,7 +6126,7 @@ Sets netmask for the last lookup
 
 =item my ( $from, $to ) = $gi->range_by_ip('24.24.24.24');
 
-Returns the start and end of the current network block. The method tries to join several continous netblocks.
+Returns the start and end of the current network block. The method tries to join several continuous netblocks.
 
 =item $api = $gi->api or $api = Geo::IP->api
 
@@ -6137,7 +6137,7 @@ Returns the currently used API.
 
 =item $continent = $gi->continent_code_by_country_code('US');
 
-Returns the continentcode by country code.
+Returns the continent code by country code.
 
 =item $dbe = $gi->database_edition
 
