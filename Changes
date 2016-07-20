@@ -245,7 +245,7 @@ Revision history for Perl extension Geo::IP.
   typemap
 
 
-1.23  October 6th 2004
+1.23  2004-10-06
 
 - Updated test case, removed www.bundesregierung.de
 - Geo::Mirror: fallback to using Geo::IP::PurePerl if Geo::IP is not available
