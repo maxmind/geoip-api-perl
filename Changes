@@ -2,6 +2,8 @@ Revision history for Perl extension Geo::IP.
 
 {{$NEXT}}
 
+1.50     2016-07-21
+
 - MYMETA files are now no longer included in releases.
 - Geo::Mirror is no longer included in this distribution.
 
