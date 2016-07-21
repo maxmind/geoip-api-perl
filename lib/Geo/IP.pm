@@ -28,7 +28,7 @@ our @EXPORT = qw(
 );
 
 BEGIN {
-    $VERSION = '1.45';
+    $VERSION = '1.46';
     eval {
 
         # PERL_DL_NONLAZY must be false, or any errors in loading will just
@@ -165,8 +165,8 @@ BEGIN {
             local $_ = $_[1];
             use bytes;
             s/([\x80-\xff])/my $c = ord($1);
-	       my $p = $c >= 192 ? 1 : 0;
-	       pack ( 'CC' => 0xc2 + $p , $c & ~0x40 ); /ge;
+            my $p = $c >= 192 ? 1 : 0;
+            pack ( 'CC' => 0xc2 + $p , $c & ~0x40 ); /ge;
             return $_;
         };
     }
@@ -5909,11 +5909,10 @@ __PP_CODE__
 
 print STDERR $@ if $@;
 1;
+
+# ABSTRACT: Look up location and network information by IP Address
+
 __END__
-
-=head1 NAME
-
-Geo::IP - Look up location and network information by IP Address
 
 =head1 SYNOPSIS
 
@@ -6126,7 +6125,7 @@ Sets netmask for the last lookup
 
 =item my ( $from, $to ) = $gi->range_by_ip('24.24.24.24');
 
-Returns the start and end of the current network block. The method tries to join several continous netblocks.
+Returns the start and end of the current network block. The method tries to join several continuous netblocks.
 
 =item $api = $gi->api or $api = Geo::IP->api
 
@@ -6137,7 +6136,7 @@ Returns the currently used API.
 
 =item $continent = $gi->continent_code_by_country_code('US');
 
-Returns the continentcode by country code.
+Returns the continent code by country code.
 
 =item $dbe = $gi->database_edition
 
@@ -6250,32 +6249,9 @@ Is available from GitHub, see
 
 https://github.com/maxmind/geoip-api-perl
 
-=head1 VERSION
-
-1.45
-
 =head1 SEE ALSO
 
 L<GeoIP2> - database reader for the GeoIP2 format.
-
-
-=head1 AUTHOR
-
-Copyright (c) 2016, MaxMind, Inc
-
-All rights reserved.  This package is free software; you can redistribute it
-and/or modify it under the same terms as Perl itself.
-
-
-=head1 COPYRIGHT
-
-Copyright (c) 2016, MaxMind LLC.
-All rights reserved.
-
-=head1 LICENSE
-
-This package is free software; you can redistribute it
-and/or modify it under the same terms as Perl itself.
 
 =cut
 

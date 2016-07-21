@@ -1,5 +1,10 @@
 Revision history for Perl extension Geo::IP.
 
+{{$NEXT}}
+
+- MYMETA files are now no longer included in releases.
+- Geo::Mirror is no longer included in this distribution.
+
 1.45 2014-09-29
 
 - Fixed typo in 1.44 release notes.
@@ -241,7 +246,7 @@ Revision history for Perl extension Geo::IP.
   typemap
 
 
-1.23  October 6th 2004
+1.23  2004-10-06
 
 - Updated test case, removed www.bundesregierung.de
 - Geo::Mirror: fallback to using Geo::IP::PurePerl if Geo::IP is not available

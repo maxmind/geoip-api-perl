@@ -26,7 +26,7 @@ eval <<'__PP__' if $pp;
 
 for ( qw: country_code    country_code3  country_name
           region          region_name    city
-          postal_code     dma_code       area_code 
+          postal_code     dma_code       area_code
           continent_code  metro_code                      : ) {
 
   no strict   qw/ refs /;
