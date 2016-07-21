@@ -1,8 +1,6 @@
 requires "DynaLoader" => "0";
 requires "Exporter" => "0";
-requires "Geo::IP::PurePerl" => "0";
 requires "base" => "0";
-requires "constant" => "0";
 requires "strict" => "0";
 requires "vars" => "0";
 
