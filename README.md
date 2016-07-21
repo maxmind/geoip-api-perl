@@ -4,7 +4,7 @@ Geo::IP - Look up location and network information by IP Address
 
 # VERSION
 
-version 1.46
+version 1.50
 
 # SYNOPSIS
 
