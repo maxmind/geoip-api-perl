@@ -5405,27 +5405,11 @@ sub org_by_name {
     return $gi->org_by_addr( $gi->get_ip_address($host) );
 }
 
-sub org_by_name_v6 {
-    my ( $gi, $host ) = @_;
-    return $gi->org_by_addr_v6( $gi->get_ip_address($host) );
-}
-
 #this function returns isp or org of the domain name
 sub org_by_addr {
     my ( $gi, $ip_address ) = @_;
     my $seek_org = $gi->_seek_country( addr_to_num($ip_address) );
 
-    return $gi->_common_org($seek_org);
-}
-
-
-sub org_by_addr_v6 {
-    my ( $gi, $ip_address ) = @_;
-
-    my $addr = $gi->get_ip_address_v6($ip_address);
-    return unless $addr;
-
-    my $seek_org = $gi->_seek_country_v6($addr);
     return $gi->_common_org($seek_org);
 }
 
@@ -5465,10 +5449,6 @@ sub _common_org {
 *isp_by_addr  = \*org_by_addr;
 *name_by_addr = \*org_by_addr;
 *name_by_name = \*org_by_name;
-
-*name_by_addr_v6 = \*org_by_addr_v6;
-*name_by_name_v6 = \*org_by_name_v6;
-
 
 #this function returns the region
 sub region_by_name {
@@ -5888,6 +5868,20 @@ sub id_by_name_v6 {
     return unless $addr;
     return $gi->_seek_country_v6($addr) - GEOIP_COUNTRY_BEGIN;
 }
+
+sub org_by_addr_v6 {
+    my ( $gi, $ip_address ) = @_;
+
+    my $addr = $gi->get_ip_address_v6($ip_address);
+    return unless $addr;
+
+    my $seek_org = $gi->_seek_country_v6($addr);
+    return $gi->_common_org($seek_org);
+}
+
+*name_by_addr_v6 = \*org_by_addr_v6;
+*name_by_name_v6 = \*org_by_addr_v6;
+*org_by_name_v6 = \*org_by_addr_v6;
 
 sub get_ip_address_v6 {
     my ( $gi, $host ) = @_;
