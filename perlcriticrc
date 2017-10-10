@@ -3,6 +3,8 @@ verbose = 11
 
 theme = core + pbp + bugs + maintenance + cosmetic + complexity + security + tests + moose
 
+program-extensions = pl psgi t
+
 exclude = Subroutines::ProhibitCallsToUndeclaredSubs
 
 [BuiltinFunctions::ProhibitStringySplit]
@@ -14,6 +16,12 @@ severity = 3
 [ControlStructures::ProhibitCStyleForLoops]
 severity = 3
 
+[Documentation::RequirePackageMatchesPodName]
+severity = 3
+
+[Freenode::WhileDiamondDefaultAssignment]
+set_themes = core
+
 [InputOutput::RequireCheckedSyscalls]
 functions = :builtins
 exclude_functions = sleep
@@ -24,7 +32,7 @@ modules = Moose Moose::Role MooseX::Role::Parameterized Moose::Util::TypeConstra
 cleaners = namespace::autoclean
 
 [NamingConventions::Capitalization]
-package_exemptions = [A-Z]\w+|minFraud
+package_exemptions = [A-Z]\w+|main
 file_lexical_variables = [A-Z]\w+|[^A-Z]+
 global_variables = :starts_with_upper
 scoped_lexical_variables = [A-Z]\w+|[^A-Z]+
@@ -42,7 +50,6 @@ severity = 3
 
 [Subroutines::ProhibitUnusedPrivateSubroutines]
 private_name_regex = _(?!build)\w+
-skip_when_using = Moo::Role Moose::Role MooseX::Role::Parameterized Role::Tiny Test::Class::Moose::Role
 
 [TestingAndDebugging::ProhibitNoWarnings]
 allow = redefine
@@ -59,10 +66,6 @@ severity = 3
 [Variables::ProhibitPackageVars]
 add_packages = Test::Builder
 
-[TestingAndDebugging::RequireUseStrict]
-
-[TestingAndDebugging::RequireUseWarnings]
-
 [-ControlStructures::ProhibitCascadingIfElse]
 
 [-ErrorHandling::RequireCarping]
@@ -75,7 +78,13 @@ add_packages = Test::Builder
 [-RegularExpressions::RequireExtendedFormatting]
 [-RegularExpressions::RequireLineBoundaryMatching]
 
+# by concensus in standup 2015-05-12 we decided to allow return undef
+# this is mainly so bar can be written to return undef so that
+# foo( bar => bar(), bazz => baz() ) won't cause problems
 [-Subroutines::ProhibitExplicitReturnUndef]
+
+# This incorrectly thinks signatures are prototypes.
+[-Subroutines::ProhibitSubroutinePrototypes]
 
 # http://stackoverflow.com/questions/2275317/why-does-perlcritic-dislike-using-shift-to-populate-subroutine-variables
 [-Subroutines::RequireArgUnpacking]
