@@ -2,6 +2,8 @@ Revision history for Perl extension Geo::IP.
 
 {{$NEXT}}
 
+1.51     2017-10-11
+
 - Added the following missing methods for IPv6 lookups to the pure Perl
   implementation: name_by_addr_v6, name_by_name_v6, org_by_addr_v6, and
   org_by_name_v6. Reported by Earl Killian. GitHub #28.
