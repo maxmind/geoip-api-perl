@@ -2,7 +2,7 @@ package Geo::IP::Record;
 
 use strict;
 
-our $VERSION = 1.50;
+our $VERSION = 1.51;
 
 use Geo::IP;    #
 

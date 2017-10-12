@@ -28,7 +28,7 @@ our @EXPORT = qw(
 );
 
 BEGIN {
-    $VERSION = '1.50';
+    $VERSION = '1.51';
     eval {
 
         # PERL_DL_NONLAZY must be false, or any errors in loading will just
