@@ -27,8 +27,8 @@
 =head1 DESCRIPTION
 
 Geo::IP::Record represents objects containing location information returned by
-the GeoIP Legacy City database.  It works with both the commercial GeoIP
-Legacy City and free GeoLite Legacy City databases.
+the GeoIP Legacy City database.  It works with the commercial GeoIP Legacy City
+database.
 
 =head1 OBJECT METHODS
 
